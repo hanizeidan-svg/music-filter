@@ -18,8 +18,8 @@ class MainWindow(QMainWindow):
         self.populate_audio_devices()
     
     def init_ui(self):
-        self.setWindowTitle("AI Music Separator - Device Selection")
-        self.setGeometry(300, 300, 600, 550)
+        self.setWindowTitle("Audio Transformer - Test Modes")
+        self.setGeometry(300, 300, 600, 600)
         
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -28,50 +28,51 @@ class MainWindow(QMainWindow):
         layout.setContentsMargins(20, 20, 20, 20)
         
         # Title
-        title = QLabel("AI Vocal/Music Separator")
+        title = QLabel("Audio Transformer - Test Modes")
         title.setFont(QFont("Arial", 18, QFont.Bold))
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("color: #2c3e50; margin-bottom: 10px;")
         layout.addWidget(title)
         
         # Processing Mode Selection
-        mode_group = QGroupBox("Processing Mode")
+        mode_group = QGroupBox("🎛️ TRANSFORMATION MODES (TEST EACH ONE)")
         mode_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
         mode_layout = QVBoxLayout(mode_group)
         
         # Radio buttons for mode selection
         self.mode_button_group = QButtonGroup(self)
         
-        self.pass_through_radio = QRadioButton("🔊 PASS-THROUGH MODE (Test Audio Routing)")
-        self.pass_through_radio.setToolTip("Audio passes through unchanged - use to verify device configuration")
-        self.pass_through_radio.setChecked(True)
-        self.mode_button_group.addButton(self.pass_through_radio)
+        modes = [
+            ("🔊 PASS-THROUGH", "pass_through", "Original audio unchanged - test routing"),
+            ("🔉 VOLUME TEST", "volume_test", "50% quieter - VERY OBVIOUS"),
+            ("🔊 VOLUME BOOST", "volume_boost", "200% louder - VERY OBVIOUS"), 
+            ("🤖 ROBOT VOICE", "robot_voice", "Robot effect - VERY OBVIOUS"),
+            ("📻 RADIO EFFECT", "radio_effect", "AM radio effect - VERY OBVIOUS"),
+            ("🎵 AI SEPARATION", "ai_transform", "Vocal/Music separation")
+        ]
         
-        self.transform_radio = QRadioButton("🤖 AI TRANSFORM MODE (Vocal/Music Separation)")
-        self.transform_radio.setToolTip("AI processes audio to separate vocals from music")
-        self.mode_button_group.addButton(self.transform_radio)
+        for text, mode, tooltip in modes:
+            radio = QRadioButton(text)
+            radio.setToolTip(tooltip)
+            radio.mode = mode
+            self.mode_button_group.addButton(radio)
+            mode_layout.addWidget(radio)
         
-        mode_layout.addWidget(self.pass_through_radio)
-        mode_layout.addWidget(self.transform_radio)
-        
-        # Mode description
-        mode_desc = QLabel("Start with PASS-THROUGH to verify audio routing, then switch to AI TRANSFORM")
-        mode_desc.setStyleSheet("color: #6c757d; font-size: 9pt; font-style: italic; padding: 5px;")
-        mode_desc.setWordWrap(True)
-        mode_layout.addWidget(mode_desc)
+        # Set default
+        self.mode_button_group.buttons()[0].setChecked(True)
         
         layout.addWidget(mode_group)
         
         # Device Selection Group
-        device_group = QGroupBox("Audio Device Selection")
+        device_group = QGroupBox("🎧 AUDIO DEVICES")
         device_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
         device_layout = QVBoxLayout(device_group)
         
         # Input Device Selection
         input_layout = QVBoxLayout()
-        input_layout.addWidget(QLabel("INPUT Device (Audio Source):"))
+        input_layout.addWidget(QLabel("INPUT (Audio Source):"))
         self.input_combo = QComboBox()
-        self.input_combo.setToolTip("Select where audio comes FROM (e.g., CABLE Output, Stereo Mix)")
+        self.input_combo.setToolTip("Where audio comes FROM (e.g., CABLE Output)")
         input_layout.addWidget(self.input_combo)
         device_layout.addLayout(input_layout)
         
@@ -79,13 +80,13 @@ class MainWindow(QMainWindow):
         
         # Output Device Selection
         output_layout = QVBoxLayout()
-        output_layout.addWidget(QLabel("OUTPUT Device (Speakers):"))
+        output_layout.addWidget(QLabel("OUTPUT (Speakers):"))
         self.output_combo = QComboBox()
-        self.output_combo.setToolTip("Select where audio goes TO (e.g., your speakers/headphones)")
+        self.output_combo.setToolTip("Where audio goes TO (your speakers/headphones)")
         output_layout.addWidget(self.output_combo)
         device_layout.addLayout(output_layout)
         
-        # Auto-detect virtual cable button
+        # Auto-detect button
         cable_button = QPushButton("Auto-Detect Virtual Cable")
         cable_button.clicked.connect(self.auto_detect_virtual_cable)
         cable_button.setStyleSheet("background-color: #17a2b8; color: white; padding: 5px;")
@@ -93,10 +94,10 @@ class MainWindow(QMainWindow):
         
         layout.addWidget(device_group)
         
-        # Control Group (only visible in transform mode)
-        self.control_group = QGroupBox("AI Separation Control")
-        self.control_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
-        control_layout = QVBoxLayout(self.control_group)
+        # AI Control Group (only for AI mode)
+        self.ai_control_group = QGroupBox("🎵 AI SEPARATION CONTROL")
+        self.ai_control_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
+        ai_layout = QVBoxLayout(self.ai_control_group)
         
         # Slider
         slider_labels = QHBoxLayout()
@@ -105,43 +106,26 @@ class MainWindow(QMainWindow):
         slider_labels.addWidget(QLabel("⚖️ BALANCED"))
         slider_labels.addStretch()
         slider_labels.addWidget(QLabel("🎵 MUSIC"))
-        control_layout.addLayout(slider_labels)
+        ai_layout.addLayout(slider_labels)
         
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0, 100)
         self.slider.setValue(50)
         self.slider.valueChanged.connect(self.on_slider_change)
-        self.slider.setStyleSheet("""
-            QSlider::groove:horizontal {
-                border: 1px solid #999999;
-                height: 8px;
-                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
-                margin: 2px 0;
-            }
-            QSlider::handle:horizontal {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
-                border: 1px solid #5c5c5c;
-                width: 18px;
-                margin: -2px 0;
-                border-radius: 3px;
-            }
-        """)
-        control_layout.addWidget(self.slider)
+        ai_layout.addWidget(self.slider)
         
         # Mode display
         self.mode_label = QLabel("Current: Balanced Mode")
         self.mode_label.setAlignment(Qt.AlignCenter)
         self.mode_label.setStyleSheet("font-weight: bold; font-size: 14pt; color: #f39c12; padding: 5px;")
-        control_layout.addWidget(self.mode_label)
+        ai_layout.addWidget(self.mode_label)
         
-        layout.addWidget(self.control_group)
-        
-        # Initially hide control group for pass-through mode
-        self.control_group.setVisible(False)
+        layout.addWidget(self.ai_control_group)
+        self.ai_control_group.setVisible(False)
         
         # Buttons
         button_layout = QHBoxLayout()
-        self.start_btn = QPushButton("START PROCESSING")
+        self.start_btn = QPushButton("🎵 START PROCESSING")
         self.start_btn.clicked.connect(self.start_processing)
         self.start_btn.setStyleSheet("""
             QPushButton {
@@ -160,7 +144,7 @@ class MainWindow(QMainWindow):
             }
         """)
         
-        self.stop_btn = QPushButton("STOP PROCESSING")
+        self.stop_btn = QPushButton("⏹ STOP PROCESSING")
         self.stop_btn.clicked.connect(self.stop_processing)
         self.stop_btn.setEnabled(False)
         self.stop_btn.setStyleSheet("""
@@ -185,17 +169,18 @@ class MainWindow(QMainWindow):
         layout.addLayout(button_layout)
         
         # Status
-        self.status = QLabel("Select processing mode and devices, then click START")
+        self.status = QLabel("Select a transformation mode and devices, then click START")
         self.status.setAlignment(Qt.AlignCenter)
         self.status.setStyleSheet("padding: 12px; background-color: #f8f9fa; border-radius: 5px; font-size: 11pt;")
         layout.addWidget(self.status)
         
         # Instructions
         instructions = QLabel(
-            "💡 WORKFLOW:\n"
-            "1. Select PASS-THROUGH mode and verify audio routing works\n"
-            "2. Switch to AI TRANSFORM mode for vocal/music separation\n"
-            "3. For virtual cable: INPUT='CABLE Output', OUTPUT=your speakers"
+            "🎯 TEST PROCEDURE:\n"
+            "1. Start with PASS-THROUGH - verify audio works\n"
+            "2. Test VOLUME TEST - should be 50% quieter (OBVIOUS)\n" 
+            "3. Test ROBOT VOICE - should sound robotic (OBVIOUS)\n"
+            "4. Test AI SEPARATION - move slider for vocal/music control"
         )
         instructions.setStyleSheet("color: #6c757d; font-size: 10pt; padding: 10px; background-color: #e9ecef; border-radius: 5px;")
         instructions.setAlignment(Qt.AlignCenter)
@@ -209,12 +194,17 @@ class MainWindow(QMainWindow):
     
     def on_mode_changed(self):
         """Handle processing mode change"""
-        if self.pass_through_radio.isChecked():
-            self.control_group.setVisible(False)
-            self.status.setText("PASS-THROUGH mode selected - audio will pass through unchanged")
+        selected_button = self.mode_button_group.checkedButton()
+        mode = selected_button.mode
+        
+        # Show/hide AI controls
+        if mode == "ai_transform":
+            self.ai_control_group.setVisible(True)
+            self.status.setText("AI SEPARATION mode - use slider to control vocal/music balance")
         else:
-            self.control_group.setVisible(True)
-            self.status.setText("AI TRANSFORM mode selected - use slider to control vocal/music separation")
+            self.ai_control_group.setVisible(False)
+            mode_name = selected_button.text().split(' ')[1]  # Get mode name from button text
+            self.status.setText(f"{mode_name} mode - you should hear obvious audio changes")
     
     def populate_audio_devices(self):
         """Populate audio device dropdowns"""
@@ -228,20 +218,16 @@ class MainWindow(QMainWindow):
             
             # Add devices to appropriate dropdowns
             for device in devices:
-                device_text = f"{device['index']}: {device['name']} "
+                device_text = f"{device['index']}: {device['name']}"
                 
                 if device['max_input_channels'] > 0:
-                    input_text = device_text + f"({device['max_input_channels']} in)"
-                    self.input_combo.addItem(input_text, device['index'])
+                    self.input_combo.addItem(device_text, device['index'])
                 
                 if device['max_output_channels'] > 0:
-                    output_text = device_text + f"({device['max_output_channels']} out)"
-                    self.output_combo.addItem(output_text, device['index'])
+                    self.output_combo.addItem(device_text, device['index'])
             
             # Try to set sensible defaults
             self.auto_detect_virtual_cable()
-            
-            logger.info(f"Loaded {self.input_combo.count()} input devices and {self.output_combo.count()} output devices")
             
         except Exception as e:
             logger.error(f"Error populating audio devices: {e}")
@@ -255,19 +241,17 @@ class MainWindow(QMainWindow):
                 item_text = self.input_combo.itemText(i).lower()
                 if any(cable in item_text for cable in ['cable', 'vb-audio', 'virtual']):
                     self.input_combo.setCurrentIndex(i)
-                    logger.info(f"Auto-selected input: {self.input_combo.itemText(i)}")
                     break
             
-            # Look for speakers in output devices (not virtual cable)
+            # Look for speakers in output devices
             for i in range(self.output_combo.count()):
                 item_text = self.output_combo.itemText(i).lower()
                 if not any(cable in item_text for cable in ['cable', 'vb-audio', 'virtual']):
-                    if any(speaker in item_text for speaker in ['speaker', 'headphone', 'output', 'primary']):
+                    if any(speaker in item_text for speaker in ['speaker', 'headphone', 'output']):
                         self.output_combo.setCurrentIndex(i)
-                        logger.info(f"Auto-selected output: {self.output_combo.itemText(i)}")
                         break
             
-            self.status.setText("Auto-detected virtual cable devices. Adjust if needed.")
+            self.status.setText("Auto-detected devices. Adjust if needed.")
             
         except Exception as e:
             logger.error(f"Auto-detect error: {e}")
@@ -302,10 +286,8 @@ class MainWindow(QMainWindow):
     
     def get_processing_mode(self):
         """Get current processing mode"""
-        if self.transform_radio.isChecked():
-            return "transform"
-        else:
-            return "pass_through"
+        selected_button = self.mode_button_group.checkedButton()
+        return selected_button.mode
     
     def start_processing(self):
         try:
@@ -323,8 +305,8 @@ class MainWindow(QMainWindow):
             self.start_btn.setEnabled(False)
             self.stop_btn.setEnabled(True)
             
-            mode_text = "PASS-THROUGH" if processing_mode == "pass_through" else "AI TRANSFORM"
-            self.status.setText(f"Starting {mode_text} mode...")
+            mode_name = self.mode_button_group.checkedButton().text().split(' ')[1]
+            self.status.setText(f"Starting {mode_name} mode...")
             
             # Force UI update
             QTimer.singleShot(100, lambda: self._actually_start_processing(input_device, output_device, processing_mode))
@@ -347,15 +329,12 @@ class MainWindow(QMainWindow):
             self.audio_processor.start_processing()
             
             # Update UI
-            input_name = self.input_combo.currentText()
-            output_name = self.output_combo.currentText()
-            mode_text = "PASS-THROUGH" if processing_mode == "pass_through" else "AI TRANSFORM"
+            mode_name = self.mode_button_group.checkedButton().text().split(' ')[1]
+            self.status.setText(f"✅ {mode_name} MODE ACTIVE!\nYou should hear obvious audio changes!")
             
             if processing_mode == "pass_through":
-                self.status.setText(f"✅ PASS-THROUGH ACTIVE!\nInput: {input_name}\nOutput: {output_name}\nAudio is passing through unchanged")
                 self.status.setStyleSheet("color: #17a2b8; background-color: #d1ecf1; padding: 12px; border-radius: 5px; font-size: 11pt;")
             else:
-                self.status.setText(f"✅ AI TRANSFORM ACTIVE!\nInput: {input_name}\nOutput: {output_name}\nMove slider for vocal/music separation!")
                 self.status.setStyleSheet("color: green; background-color: #d4edda; padding: 12px; border-radius: 5px; font-size: 11pt;")
             
         except Exception as e:
@@ -367,13 +346,9 @@ class MainWindow(QMainWindow):
         self.status.setText(f"❌ {error_msg}")
         self.status.setStyleSheet("color: red; background-color: #f8d7da; padding: 12px; border-radius: 5px; font-size: 11pt;")
         
-        QMessageBox.critical(self, "Audio Device Error", 
+        QMessageBox.critical(self, "Audio Error", 
                            f"{error_msg}\n\n"
-                           "Please check:\n"
-                           "• Input device can capture audio\n"
-                           "• Output device can play audio\n"
-                           "• Devices support 44100 Hz sample rate\n"
-                           "• No other app is using the devices")
+                           "Check device selection and try again.")
     
     def stop_processing(self):
         try:
@@ -384,10 +359,8 @@ class MainWindow(QMainWindow):
             # Update UI
             self.start_btn.setEnabled(True)
             self.stop_btn.setEnabled(False)
-            self.status.setText("Stopped - Ready to restart with new settings")
+            self.status.setText("Stopped - Ready to test another mode")
             self.status.setStyleSheet("color: #6c757d; background-color: #f8f9fa; padding: 12px; border-radius: 5px; font-size: 11pt;")
-            
-            logger.info("Processing stopped by user")
             
         except Exception as e:
             logger.error(f"Error stopping processing: {e}")

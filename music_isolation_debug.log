@@ -26931,3 +26931,1181 @@ ImportError: Failed to intialize FFmpeg extension. Tried versions: ['6', '5', '4
 2025-11-15 15:15:47,541 - audio_processor - INFO - >>> PASS_THROUGH - Audio level: 0.014
 2025-11-15 15:15:48,310 - audio_processor - INFO - >>> PASS_THROUGH - Audio level: 0.017
 2025-11-15 15:15:48,536 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 15:34:49,962 - root - INFO - Starting Music Isolation Application
+2025-11-15 15:34:50,367 - root - INFO - Application started successfully
+2025-11-15 15:37:15,697 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 6.
+2025-11-15 15:37:15,965 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 6 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-58.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 15:37:15,980 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 5.
+2025-11-15 15:37:15,981 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 5 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-57.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 15:37:15,981 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 4.
+2025-11-15 15:37:15,982 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 4 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-56.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 15:37:15,982 - torchaudio._extension - DEBUG - Failed to initialize ffmpeg bindings
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\__init__.py", line 89, in <module>
+    _FFMPEG_EXT = _init_ffmpeg()
+                  ^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 162, in _init_ffmpeg
+    ext = _find_ffmpeg_extension(ffmpeg_vers, show_error)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 132, in _find_ffmpeg_extension
+    raise ImportError(f"Failed to intialize FFmpeg extension. Tried versions: {ffmpeg_vers}")
+ImportError: Failed to intialize FFmpeg extension. Tried versions: ['6', '5', '4']
+2025-11-15 15:37:16,752 - audio_processor - INFO - Loading AI model...
+2025-11-15 15:37:17,132 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 17:14:24,364 - root - INFO - Starting Music Isolation Application
+2025-11-15 17:14:24,890 - audio_processor - INFO - Loading AI model...
+2025-11-15 17:14:25,365 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 17:14:25,504 - root - INFO - Application started successfully
+2025-11-15 17:15:04,014 - audio_processor - INFO - Loading AI model...
+2025-11-15 17:15:04,391 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 17:15:04,392 - audio_processor - INFO - Devices set - Input: 1, Output: 22
+2025-11-15 17:15:04,392 - audio_processor - INFO - Processing mode set to: custom_lab
+2025-11-15 17:15:04,393 - audio_processor - INFO - Custom parameters updated: {'A': 500, 'B': 500, 'C': 500, 'D': 500, 'E': 500, 'F': 500, 'G': 500, 'H': 500, 'I': 500, 'J': 500, 'K': 500, 'L': 500, 'M': 500, 'N': 500, 'O': 500, 'P': 500}
+2025-11-15 17:15:04,393 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:04,394 - audio_processor - INFO - Starting custom_lab mode
+2025-11-15 17:15:04,396 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 17:15:04,396 - audio_processor - INFO - Output: Speakers (Realtek(R) Audio) (Device 22)
+2025-11-15 17:15:05,155 - audio_processor - INFO - >>> CUSTOM_LAB MODE STARTED!
+2025-11-15 17:15:09,947 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:10,632 - audio_processor - DEBUG - Input: 0.022 | Buffer: 2048
+2025-11-15 17:15:13,332 - audio_processor - DEBUG - Input: 0.052 | Buffer: 1024
+2025-11-15 17:15:22,742 - audio_processor - INFO - Custom parameters updated: {'A': 462}
+2025-11-15 17:15:22,743 - ui_main - INFO - Parameter A changed to 462
+2025-11-15 17:15:22,758 - audio_processor - INFO - Custom parameters updated: {'A': 436}
+2025-11-15 17:15:22,759 - ui_main - INFO - Parameter A changed to 436
+2025-11-15 17:15:22,802 - audio_processor - INFO - Custom parameters updated: {'A': 359}
+2025-11-15 17:15:22,802 - ui_main - INFO - Parameter A changed to 359
+2025-11-15 17:15:22,884 - audio_processor - INFO - Custom parameters updated: {'A': 333}
+2025-11-15 17:15:22,885 - ui_main - INFO - Parameter A changed to 333
+2025-11-15 17:15:23,550 - audio_processor - INFO - Custom parameters updated: {'A': 308}
+2025-11-15 17:15:23,551 - ui_main - INFO - Parameter A changed to 308
+2025-11-15 17:15:23,669 - audio_processor - INFO - Custom parameters updated: {'A': 256}
+2025-11-15 17:15:23,669 - ui_main - INFO - Parameter A changed to 256
+2025-11-15 17:15:24,414 - audio_processor - INFO - Custom parameters updated: {'A': 231}
+2025-11-15 17:15:24,414 - ui_main - INFO - Parameter A changed to 231
+2025-11-15 17:15:24,474 - audio_processor - INFO - Custom parameters updated: {'A': 205}
+2025-11-15 17:15:24,474 - ui_main - INFO - Parameter A changed to 205
+2025-11-15 17:15:24,592 - audio_processor - INFO - Custom parameters updated: {'A': 154}
+2025-11-15 17:15:24,593 - ui_main - INFO - Parameter A changed to 154
+2025-11-15 17:15:24,686 - audio_processor - INFO - Custom parameters updated: {'A': 128}
+2025-11-15 17:15:24,686 - ui_main - INFO - Parameter A changed to 128
+2025-11-15 17:15:24,716 - audio_processor - INFO - Custom parameters updated: {'A': 103}
+2025-11-15 17:15:24,716 - ui_main - INFO - Parameter A changed to 103
+2025-11-15 17:15:24,981 - audio_processor - INFO - Custom parameters updated: {'A': 77}
+2025-11-15 17:15:24,983 - ui_main - INFO - Parameter A changed to 77
+2025-11-15 17:15:25,088 - audio_processor - INFO - Custom parameters updated: {'A': 26}
+2025-11-15 17:15:25,088 - ui_main - INFO - Parameter A changed to 26
+2025-11-15 17:15:25,105 - audio_processor - INFO - Custom parameters updated: {'A': 0}
+2025-11-15 17:15:25,106 - ui_main - INFO - Parameter A changed to 0
+2025-11-15 17:15:26,128 - audio_processor - INFO - Custom parameters updated: {'A': 26}
+2025-11-15 17:15:26,128 - ui_main - INFO - Parameter A changed to 26
+2025-11-15 17:15:26,170 - audio_processor - INFO - Custom parameters updated: {'A': 51}
+2025-11-15 17:15:26,170 - ui_main - INFO - Parameter A changed to 51
+2025-11-15 17:15:26,237 - audio_processor - INFO - Custom parameters updated: {'A': 77}
+2025-11-15 17:15:26,237 - ui_main - INFO - Parameter A changed to 77
+2025-11-15 17:15:26,254 - audio_processor - INFO - Custom parameters updated: {'A': 103}
+2025-11-15 17:15:26,254 - ui_main - INFO - Parameter A changed to 103
+2025-11-15 17:15:26,262 - audio_processor - INFO - Custom parameters updated: {'A': 154}
+2025-11-15 17:15:26,263 - ui_main - INFO - Parameter A changed to 154
+2025-11-15 17:15:26,287 - audio_processor - INFO - Custom parameters updated: {'A': 179}
+2025-11-15 17:15:26,287 - ui_main - INFO - Parameter A changed to 179
+2025-11-15 17:15:26,348 - audio_processor - INFO - Custom parameters updated: {'A': 205}
+2025-11-15 17:15:26,348 - ui_main - INFO - Parameter A changed to 205
+2025-11-15 17:15:26,362 - audio_processor - INFO - Custom parameters updated: {'A': 256}
+2025-11-15 17:15:26,362 - ui_main - INFO - Parameter A changed to 256
+2025-11-15 17:15:26,477 - audio_processor - INFO - Custom parameters updated: {'A': 282}
+2025-11-15 17:15:26,477 - ui_main - INFO - Parameter A changed to 282
+2025-11-15 17:15:26,498 - audio_processor - INFO - Custom parameters updated: {'A': 308}
+2025-11-15 17:15:26,498 - ui_main - INFO - Parameter A changed to 308
+2025-11-15 17:15:26,557 - audio_processor - INFO - Custom parameters updated: {'A': 359}
+2025-11-15 17:15:26,557 - ui_main - INFO - Parameter A changed to 359
+2025-11-15 17:15:26,569 - audio_processor - INFO - Custom parameters updated: {'A': 385}
+2025-11-15 17:15:26,571 - ui_main - INFO - Parameter A changed to 385
+2025-11-15 17:15:26,600 - audio_processor - INFO - Custom parameters updated: {'A': 410}
+2025-11-15 17:15:26,600 - ui_main - INFO - Parameter A changed to 410
+2025-11-15 17:15:26,627 - audio_processor - INFO - Custom parameters updated: {'A': 436}
+2025-11-15 17:15:26,627 - ui_main - INFO - Parameter A changed to 436
+2025-11-15 17:15:26,741 - audio_processor - INFO - Custom parameters updated: {'A': 487}
+2025-11-15 17:15:26,741 - ui_main - INFO - Parameter A changed to 487
+2025-11-15 17:15:26,802 - audio_processor - DEBUG - Input: 0.015 | Buffer: 1024
+2025-11-15 17:15:26,807 - audio_processor - INFO - Custom parameters updated: {'A': 513}
+2025-11-15 17:15:26,807 - ui_main - INFO - Parameter A changed to 513
+2025-11-15 17:15:26,864 - audio_processor - INFO - Custom parameters updated: {'A': 538}
+2025-11-15 17:15:26,864 - ui_main - INFO - Parameter A changed to 538
+2025-11-15 17:15:26,889 - audio_processor - INFO - Custom parameters updated: {'A': 590}
+2025-11-15 17:15:26,889 - ui_main - INFO - Parameter A changed to 590
+2025-11-15 17:15:27,001 - audio_processor - INFO - Custom parameters updated: {'A': 615}
+2025-11-15 17:15:27,001 - ui_main - INFO - Parameter A changed to 615
+2025-11-15 17:15:27,020 - audio_processor - INFO - Custom parameters updated: {'A': 641}
+2025-11-15 17:15:27,020 - ui_main - INFO - Parameter A changed to 641
+2025-11-15 17:15:27,092 - audio_processor - INFO - Custom parameters updated: {'A': 667}
+2025-11-15 17:15:27,092 - ui_main - INFO - Parameter A changed to 667
+2025-11-15 17:15:27,328 - audio_processor - INFO - Custom parameters updated: {'A': 718}
+2025-11-15 17:15:27,329 - ui_main - INFO - Parameter A changed to 718
+2025-11-15 17:15:27,343 - audio_processor - INFO - Custom parameters updated: {'A': 769}
+2025-11-15 17:15:27,343 - ui_main - INFO - Parameter A changed to 769
+2025-11-15 17:15:27,401 - audio_processor - INFO - Custom parameters updated: {'A': 795}
+2025-11-15 17:15:27,401 - ui_main - INFO - Parameter A changed to 795
+2025-11-15 17:15:27,432 - audio_processor - INFO - Custom parameters updated: {'A': 821}
+2025-11-15 17:15:27,432 - ui_main - INFO - Parameter A changed to 821
+2025-11-15 17:15:27,506 - audio_processor - INFO - Custom parameters updated: {'A': 872}
+2025-11-15 17:15:27,507 - ui_main - INFO - Parameter A changed to 872
+2025-11-15 17:15:27,530 - audio_processor - INFO - Custom parameters updated: {'A': 897}
+2025-11-15 17:15:27,530 - ui_main - INFO - Parameter A changed to 897
+2025-11-15 17:15:28,137 - audio_processor - INFO - Custom parameters updated: {'A': 923}
+2025-11-15 17:15:28,139 - ui_main - INFO - Parameter A changed to 923
+2025-11-15 17:15:28,147 - audio_processor - INFO - Custom parameters updated: {'A': 974}
+2025-11-15 17:15:28,147 - ui_main - INFO - Parameter A changed to 974
+2025-11-15 17:15:28,173 - audio_processor - INFO - Custom parameters updated: {'A': 1000}
+2025-11-15 17:15:28,173 - ui_main - INFO - Parameter A changed to 1000
+2025-11-15 17:15:28,701 - audio_processor - DEBUG - Input: 0.055 | Buffer: 1024
+2025-11-15 17:15:28,791 - audio_processor - DEBUG - Input: 0.078 | Buffer: 3072
+2025-11-15 17:15:29,264 - audio_processor - INFO - Custom parameters updated: {'A': 974}
+2025-11-15 17:15:29,264 - ui_main - INFO - Parameter A changed to 974
+2025-11-15 17:15:29,273 - audio_processor - INFO - Custom parameters updated: {'A': 897}
+2025-11-15 17:15:29,275 - ui_main - INFO - Parameter A changed to 897
+2025-11-15 17:15:29,290 - audio_processor - INFO - Custom parameters updated: {'A': 846}
+2025-11-15 17:15:29,290 - ui_main - INFO - Parameter A changed to 846
+2025-11-15 17:15:29,307 - audio_processor - INFO - Custom parameters updated: {'A': 821}
+2025-11-15 17:15:29,307 - ui_main - INFO - Parameter A changed to 821
+2025-11-15 17:15:29,444 - audio_processor - INFO - Custom parameters updated: {'A': 795}
+2025-11-15 17:15:29,445 - ui_main - INFO - Parameter A changed to 795
+2025-11-15 17:15:29,493 - audio_processor - INFO - Custom parameters updated: {'A': 744}
+2025-11-15 17:15:29,493 - ui_main - INFO - Parameter A changed to 744
+2025-11-15 17:15:29,520 - audio_processor - INFO - Custom parameters updated: {'A': 718}
+2025-11-15 17:15:29,520 - ui_main - INFO - Parameter A changed to 718
+2025-11-15 17:15:29,911 - audio_processor - DEBUG - Input: 0.054 | Buffer: 2048
+2025-11-15 17:15:31,166 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:32,742 - audio_processor - DEBUG - Input: 0.047 | Buffer: 1024
+2025-11-15 17:15:33,302 - audio_processor - DEBUG - Input: 0.034 | Buffer: 1024
+2025-11-15 17:15:33,419 - audio_processor - INFO - Custom parameters updated: {'A': 692}
+2025-11-15 17:15:33,419 - ui_main - INFO - Parameter A changed to 692
+2025-11-15 17:15:33,422 - audio_processor - INFO - Custom parameters updated: {'A': 667}
+2025-11-15 17:15:33,422 - ui_main - INFO - Parameter A changed to 667
+2025-11-15 17:15:33,432 - audio_processor - INFO - Custom parameters updated: {'A': 615}
+2025-11-15 17:15:33,432 - ui_main - INFO - Parameter A changed to 615
+2025-11-15 17:15:33,442 - audio_processor - INFO - Custom parameters updated: {'A': 590}
+2025-11-15 17:15:33,442 - ui_main - INFO - Parameter A changed to 590
+2025-11-15 17:15:33,450 - audio_processor - INFO - Custom parameters updated: {'A': 564}
+2025-11-15 17:15:33,450 - ui_main - INFO - Parameter A changed to 564
+2025-11-15 17:15:33,452 - audio_processor - INFO - Custom parameters updated: {'A': 538}
+2025-11-15 17:15:33,452 - ui_main - INFO - Parameter A changed to 538
+2025-11-15 17:15:33,477 - audio_processor - INFO - Custom parameters updated: {'A': 487}
+2025-11-15 17:15:33,477 - ui_main - INFO - Parameter A changed to 487
+2025-11-15 17:15:33,493 - audio_processor - INFO - Custom parameters updated: {'A': 462}
+2025-11-15 17:15:33,493 - ui_main - INFO - Parameter A changed to 462
+2025-11-15 17:15:33,507 - audio_processor - INFO - Custom parameters updated: {'A': 436}
+2025-11-15 17:15:33,507 - ui_main - INFO - Parameter A changed to 436
+2025-11-15 17:15:33,521 - audio_processor - INFO - Custom parameters updated: {'A': 385}
+2025-11-15 17:15:33,521 - ui_main - INFO - Parameter A changed to 385
+2025-11-15 17:15:33,534 - audio_processor - INFO - Custom parameters updated: {'A': 359}
+2025-11-15 17:15:33,534 - ui_main - INFO - Parameter A changed to 359
+2025-11-15 17:15:33,550 - audio_processor - INFO - Custom parameters updated: {'A': 333}
+2025-11-15 17:15:33,550 - ui_main - INFO - Parameter A changed to 333
+2025-11-15 17:15:33,563 - audio_processor - INFO - Custom parameters updated: {'A': 282}
+2025-11-15 17:15:33,563 - ui_main - INFO - Parameter A changed to 282
+2025-11-15 17:15:33,595 - audio_processor - INFO - Custom parameters updated: {'A': 231}
+2025-11-15 17:15:33,595 - ui_main - INFO - Parameter A changed to 231
+2025-11-15 17:15:33,617 - audio_processor - INFO - Custom parameters updated: {'A': 205}
+2025-11-15 17:15:33,617 - ui_main - INFO - Parameter A changed to 205
+2025-11-15 17:15:33,657 - audio_processor - INFO - Custom parameters updated: {'A': 179}
+2025-11-15 17:15:33,659 - ui_main - INFO - Parameter A changed to 179
+2025-11-15 17:15:33,671 - audio_processor - INFO - Custom parameters updated: {'A': 128}
+2025-11-15 17:15:33,673 - ui_main - INFO - Parameter A changed to 128
+2025-11-15 17:15:34,551 - audio_processor - DEBUG - Input: 0.027 | Buffer: 2048
+2025-11-15 17:15:35,243 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:38,642 - audio_processor - DEBUG - Input: 0.027 | Buffer: 2048
+2025-11-15 17:15:38,727 - audio_processor - INFO - Custom parameters updated: {'A': 154}
+2025-11-15 17:15:38,727 - ui_main - INFO - Parameter A changed to 154
+2025-11-15 17:15:38,787 - audio_processor - INFO - Custom parameters updated: {'A': 179}
+2025-11-15 17:15:38,787 - ui_main - INFO - Parameter A changed to 179
+2025-11-15 17:15:38,824 - audio_processor - INFO - Custom parameters updated: {'A': 205}
+2025-11-15 17:15:38,825 - ui_main - INFO - Parameter A changed to 205
+2025-11-15 17:15:38,882 - audio_processor - INFO - Custom parameters updated: {'A': 256}
+2025-11-15 17:15:38,882 - ui_main - INFO - Parameter A changed to 256
+2025-11-15 17:15:38,896 - audio_processor - INFO - Custom parameters updated: {'A': 282}
+2025-11-15 17:15:38,896 - ui_main - INFO - Parameter A changed to 282
+2025-11-15 17:15:38,998 - audio_processor - INFO - Custom parameters updated: {'A': 308}
+2025-11-15 17:15:38,998 - ui_main - INFO - Parameter A changed to 308
+2025-11-15 17:15:39,112 - audio_processor - INFO - Custom parameters updated: {'A': 333}
+2025-11-15 17:15:39,112 - ui_main - INFO - Parameter A changed to 333
+2025-11-15 17:15:39,201 - audio_processor - DEBUG - Input: 0.096 | Buffer: 2048
+2025-11-15 17:15:39,414 - audio_processor - INFO - Custom parameters updated: {'A': 385}
+2025-11-15 17:15:39,416 - ui_main - INFO - Parameter A changed to 385
+2025-11-15 17:15:39,425 - audio_processor - INFO - Custom parameters updated: {'A': 436}
+2025-11-15 17:15:39,425 - ui_main - INFO - Parameter A changed to 436
+2025-11-15 17:15:39,444 - audio_processor - INFO - Custom parameters updated: {'A': 462}
+2025-11-15 17:15:39,444 - ui_main - INFO - Parameter A changed to 462
+2025-11-15 17:15:39,464 - audio_processor - INFO - Custom parameters updated: {'A': 487}
+2025-11-15 17:15:39,464 - ui_main - INFO - Parameter A changed to 487
+2025-11-15 17:15:40,519 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:40,822 - audio_processor - DEBUG - Input: 0.013 | Buffer: 2048
+2025-11-15 17:15:41,972 - audio_processor - INFO - Custom parameters updated: {'A': 513}
+2025-11-15 17:15:41,973 - ui_main - INFO - Parameter A changed to 513
+2025-11-15 17:15:42,018 - audio_processor - INFO - Custom parameters updated: {'A': 538}
+2025-11-15 17:15:42,018 - ui_main - INFO - Parameter A changed to 538
+2025-11-15 17:15:42,030 - audio_processor - INFO - Custom parameters updated: {'A': 564}
+2025-11-15 17:15:42,030 - ui_main - INFO - Parameter A changed to 564
+2025-11-15 17:15:42,033 - audio_processor - INFO - Custom parameters updated: {'A': 615}
+2025-11-15 17:15:42,033 - ui_main - INFO - Parameter A changed to 615
+2025-11-15 17:15:42,038 - audio_processor - INFO - Custom parameters updated: {'A': 667}
+2025-11-15 17:15:42,038 - ui_main - INFO - Parameter A changed to 667
+2025-11-15 17:15:42,041 - audio_processor - INFO - Custom parameters updated: {'A': 692}
+2025-11-15 17:15:42,041 - ui_main - INFO - Parameter A changed to 692
+2025-11-15 17:15:42,047 - audio_processor - INFO - Custom parameters updated: {'A': 718}
+2025-11-15 17:15:42,049 - ui_main - INFO - Parameter A changed to 718
+2025-11-15 17:15:42,052 - audio_processor - INFO - Custom parameters updated: {'A': 769}
+2025-11-15 17:15:42,052 - ui_main - INFO - Parameter A changed to 769
+2025-11-15 17:15:42,056 - audio_processor - INFO - Custom parameters updated: {'A': 795}
+2025-11-15 17:15:42,056 - ui_main - INFO - Parameter A changed to 795
+2025-11-15 17:15:42,061 - audio_processor - INFO - Custom parameters updated: {'A': 821}
+2025-11-15 17:15:42,063 - ui_main - INFO - Parameter A changed to 821
+2025-11-15 17:15:42,066 - audio_processor - INFO - Custom parameters updated: {'A': 872}
+2025-11-15 17:15:42,066 - ui_main - INFO - Parameter A changed to 872
+2025-11-15 17:15:42,067 - audio_processor - INFO - Custom parameters updated: {'A': 923}
+2025-11-15 17:15:42,069 - ui_main - INFO - Parameter A changed to 923
+2025-11-15 17:15:42,082 - audio_processor - INFO - Custom parameters updated: {'A': 974}
+2025-11-15 17:15:42,082 - ui_main - INFO - Parameter A changed to 974
+2025-11-15 17:15:42,084 - audio_processor - INFO - Custom parameters updated: {'A': 1000}
+2025-11-15 17:15:42,084 - ui_main - INFO - Parameter A changed to 1000
+2025-11-15 17:15:42,122 - audio_processor - DEBUG - Input: 0.076 | Buffer: 2048
+2025-11-15 17:15:42,995 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:46,046 - audio_processor - INFO - Custom parameters updated: {'A': 949}
+2025-11-15 17:15:46,047 - ui_main - INFO - Parameter A changed to 949
+2025-11-15 17:15:46,109 - audio_processor - INFO - Custom parameters updated: {'A': 923}
+2025-11-15 17:15:46,109 - ui_main - INFO - Parameter A changed to 923
+2025-11-15 17:15:46,124 - audio_processor - INFO - Custom parameters updated: {'A': 897}
+2025-11-15 17:15:46,124 - ui_main - INFO - Parameter A changed to 897
+2025-11-15 17:15:46,170 - audio_processor - INFO - Custom parameters updated: {'A': 846}
+2025-11-15 17:15:46,170 - ui_main - INFO - Parameter A changed to 846
+2025-11-15 17:15:46,190 - audio_processor - INFO - Custom parameters updated: {'A': 821}
+2025-11-15 17:15:46,190 - ui_main - INFO - Parameter A changed to 821
+2025-11-15 17:15:46,203 - audio_processor - INFO - Custom parameters updated: {'A': 795}
+2025-11-15 17:15:46,205 - ui_main - INFO - Parameter A changed to 795
+2025-11-15 17:15:46,218 - audio_processor - INFO - Custom parameters updated: {'A': 744}
+2025-11-15 17:15:46,218 - ui_main - INFO - Parameter A changed to 744
+2025-11-15 17:15:46,233 - audio_processor - INFO - Custom parameters updated: {'A': 718}
+2025-11-15 17:15:46,233 - ui_main - INFO - Parameter A changed to 718
+2025-11-15 17:15:46,284 - audio_processor - INFO - Custom parameters updated: {'A': 692}
+2025-11-15 17:15:46,284 - ui_main - INFO - Parameter A changed to 692
+2025-11-15 17:15:46,340 - audio_processor - INFO - Custom parameters updated: {'A': 667}
+2025-11-15 17:15:46,340 - ui_main - INFO - Parameter A changed to 667
+2025-11-15 17:15:46,417 - audio_processor - INFO - Custom parameters updated: {'A': 615}
+2025-11-15 17:15:46,417 - ui_main - INFO - Parameter A changed to 615
+2025-11-15 17:15:46,442 - audio_processor - INFO - Custom parameters updated: {'A': 590}
+2025-11-15 17:15:46,442 - ui_main - INFO - Parameter A changed to 590
+2025-11-15 17:15:46,467 - audio_processor - INFO - Custom parameters updated: {'A': 564}
+2025-11-15 17:15:46,467 - ui_main - INFO - Parameter A changed to 564
+2025-11-15 17:15:46,514 - audio_processor - INFO - Custom parameters updated: {'A': 513}
+2025-11-15 17:15:46,514 - ui_main - INFO - Parameter A changed to 513
+2025-11-15 17:15:47,174 - audio_processor - INFO - Custom parameters updated: {'A': 462}
+2025-11-15 17:15:47,174 - ui_main - INFO - Parameter A changed to 462
+2025-11-15 17:15:47,232 - audio_processor - DEBUG - Input: 0.036 | Buffer: 2048
+2025-11-15 17:15:48,528 - audio_processor - INFO - Custom parameters updated: {'A': 513}
+2025-11-15 17:15:48,528 - ui_main - INFO - Parameter A changed to 513
+2025-11-15 17:15:49,537 - audio_processor - INFO - Custom parameters updated: {'A': 487}
+2025-11-15 17:15:49,539 - ui_main - INFO - Parameter A changed to 487
+2025-11-15 17:15:49,542 - audio_processor - INFO - Custom parameters updated: {'A': 462}
+2025-11-15 17:15:49,542 - ui_main - INFO - Parameter A changed to 462
+2025-11-15 17:15:49,557 - audio_processor - INFO - Custom parameters updated: {'A': 410}
+2025-11-15 17:15:49,557 - ui_main - INFO - Parameter A changed to 410
+2025-11-15 17:15:49,557 - audio_processor - INFO - Custom parameters updated: {'A': 385}
+2025-11-15 17:15:49,557 - ui_main - INFO - Parameter A changed to 385
+2025-11-15 17:15:49,570 - audio_processor - INFO - Custom parameters updated: {'A': 359}
+2025-11-15 17:15:49,570 - ui_main - INFO - Parameter A changed to 359
+2025-11-15 17:15:49,572 - audio_processor - INFO - Custom parameters updated: {'A': 308}
+2025-11-15 17:15:49,572 - ui_main - INFO - Parameter A changed to 308
+2025-11-15 17:15:49,584 - audio_processor - INFO - Custom parameters updated: {'A': 282}
+2025-11-15 17:15:49,584 - ui_main - INFO - Parameter A changed to 282
+2025-11-15 17:15:49,600 - audio_processor - INFO - Custom parameters updated: {'A': 256}
+2025-11-15 17:15:49,600 - ui_main - INFO - Parameter A changed to 256
+2025-11-15 17:15:49,677 - audio_processor - INFO - Custom parameters updated: {'A': 231}
+2025-11-15 17:15:49,677 - ui_main - INFO - Parameter A changed to 231
+2025-11-15 17:15:49,682 - audio_processor - INFO - Custom parameters updated: {'A': 179}
+2025-11-15 17:15:49,682 - ui_main - INFO - Parameter A changed to 179
+2025-11-15 17:15:49,702 - audio_processor - INFO - Custom parameters updated: {'A': 154}
+2025-11-15 17:15:49,702 - ui_main - INFO - Parameter A changed to 154
+2025-11-15 17:15:49,708 - audio_processor - INFO - Custom parameters updated: {'A': 128}
+2025-11-15 17:15:49,709 - ui_main - INFO - Parameter A changed to 128
+2025-11-15 17:15:49,758 - audio_processor - INFO - Custom parameters updated: {'A': 77}
+2025-11-15 17:15:49,758 - ui_main - INFO - Parameter A changed to 77
+2025-11-15 17:15:49,907 - audio_processor - INFO - Custom parameters updated: {'A': 51}
+2025-11-15 17:15:49,909 - ui_main - INFO - Parameter A changed to 51
+2025-11-15 17:15:49,910 - audio_processor - INFO - Custom parameters updated: {'A': 26}
+2025-11-15 17:15:49,910 - ui_main - INFO - Parameter A changed to 26
+2025-11-15 17:15:49,920 - audio_processor - INFO - Custom parameters updated: {'A': 0}
+2025-11-15 17:15:49,920 - ui_main - INFO - Parameter A changed to 0
+2025-11-15 17:15:51,560 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:52,292 - audio_processor - DEBUG - Input: 0.062 | Buffer: 1024
+2025-11-15 17:15:53,195 - audio_processor - INFO - Custom parameters updated: {'A': 51}
+2025-11-15 17:15:53,195 - ui_main - INFO - Parameter A changed to 51
+2025-11-15 17:15:53,239 - audio_processor - INFO - Custom parameters updated: {'A': 77}
+2025-11-15 17:15:53,239 - ui_main - INFO - Parameter A changed to 77
+2025-11-15 17:15:53,319 - audio_processor - INFO - Custom parameters updated: {'A': 103}
+2025-11-15 17:15:53,319 - ui_main - INFO - Parameter A changed to 103
+2025-11-15 17:15:53,360 - audio_processor - INFO - Custom parameters updated: {'A': 128}
+2025-11-15 17:15:53,361 - ui_main - INFO - Parameter A changed to 128
+2025-11-15 17:15:53,552 - audio_processor - DEBUG - Input: 0.092 | Buffer: 2048
+2025-11-15 17:15:53,681 - audio_processor - DEBUG - Input: 0.047 | Buffer: 2048
+2025-11-15 17:15:54,557 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:15:57,032 - audio_processor - DEBUG - Input: 0.018 | Buffer: 2048
+2025-11-15 17:15:58,382 - audio_processor - DEBUG - Input: 0.016 | Buffer: 1024
+2025-11-15 17:15:59,261 - audio_processor - DEBUG - Input: 0.113 | Buffer: 1024
+2025-11-15 17:15:59,301 - audio_processor - DEBUG - Input: 0.027 | Buffer: 3072
+2025-11-15 17:16:00,231 - audio_processor - DEBUG - Input: 0.085 | Buffer: 1024
+2025-11-15 17:16:01,491 - audio_processor - DEBUG - Input: 0.103 | Buffer: 2048
+2025-11-15 17:16:01,573 - audio_processor - INFO - Custom parameters updated: {'A': 77}
+2025-11-15 17:16:01,575 - ui_main - INFO - Parameter A changed to 77
+2025-11-15 17:16:01,581 - audio_processor - DEBUG - Input: 0.090 | Buffer: 1024
+2025-11-15 17:16:01,584 - audio_processor - INFO - Custom parameters updated: {'A': 26}
+2025-11-15 17:16:01,584 - ui_main - INFO - Parameter A changed to 26
+2025-11-15 17:16:01,594 - audio_processor - INFO - Custom parameters updated: {'A': 0}
+2025-11-15 17:16:01,594 - ui_main - INFO - Parameter A changed to 0
+2025-11-15 17:16:01,722 - audio_processor - DEBUG - Input: 0.110 | Buffer: 1024
+2025-11-15 17:16:02,545 - audio_processor - INFO - Custom function compiled: x * A/500.0
+2025-11-15 17:16:16,492 - audio_processor - DEBUG - Input: 0.067 | Buffer: 2048
+2025-11-15 17:16:42,861 - audio_processor - DEBUG - Input: 0.017 | Buffer: 2048
+2025-11-15 17:17:25,810 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/100)
+2025-11-15 17:17:28,982 - audio_processor - DEBUG - Input: 0.046 | Buffer: 2048
+2025-11-15 17:17:33,343 - audio_processor - DEBUG - Input: 0.061 | Buffer: 2048
+2025-11-15 17:17:33,862 - audio_processor - DEBUG - Input: 0.063 | Buffer: 2048
+2025-11-15 17:17:34,601 - audio_processor - DEBUG - Input: 0.036 | Buffer: 1024
+2025-11-15 17:17:38,361 - audio_processor - DEBUG - Input: 0.071 | Buffer: 1024
+2025-11-15 17:17:40,541 - audio_processor - DEBUG - Input: 0.071 | Buffer: 2048
+2025-11-15 17:17:41,577 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/200)
+2025-11-15 17:17:44,911 - audio_processor - DEBUG - Input: 0.051 | Buffer: 2048
+2025-11-15 17:17:47,001 - audio_processor - DEBUG - Input: 0.011 | Buffer: 2048
+2025-11-15 17:17:49,742 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/50)
+2025-11-15 17:17:50,201 - audio_processor - DEBUG - Input: 0.065 | Buffer: 2048
+2025-11-15 17:17:52,661 - audio_processor - DEBUG - Input: 0.072 | Buffer: 2048
+2025-11-15 17:17:53,222 - audio_processor - DEBUG - Input: 0.029 | Buffer: 2048
+2025-11-15 17:17:54,573 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/5)
+2025-11-15 17:17:55,731 - audio_processor - DEBUG - Input: 0.072 | Buffer: 1024
+2025-11-15 17:17:56,471 - audio_processor - DEBUG - Input: 0.083 | Buffer: 1024
+2025-11-15 17:17:59,442 - audio_processor - DEBUG - Input: 0.070 | Buffer: 2048
+2025-11-15 17:18:00,371 - audio_processor - DEBUG - Input: 0.017 | Buffer: 2048
+2025-11-15 17:18:00,882 - audio_processor - DEBUG - Input: 0.027 | Buffer: 3072
+2025-11-15 17:18:04,892 - audio_processor - INFO - Custom parameters updated: {'B': 487}
+2025-11-15 17:18:04,892 - ui_main - INFO - Parameter B changed to 487
+2025-11-15 17:18:04,967 - audio_processor - INFO - Custom parameters updated: {'B': 436}
+2025-11-15 17:18:04,968 - ui_main - INFO - Parameter B changed to 436
+2025-11-15 17:18:04,994 - audio_processor - INFO - Custom parameters updated: {'B': 385}
+2025-11-15 17:18:04,994 - ui_main - INFO - Parameter B changed to 385
+2025-11-15 17:18:05,023 - audio_processor - INFO - Custom parameters updated: {'B': 333}
+2025-11-15 17:18:05,023 - ui_main - INFO - Parameter B changed to 333
+2025-11-15 17:18:06,579 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/5)
+2025-11-15 17:18:09,564 - audio_processor - INFO - Custom parameters updated: {'B': 308}
+2025-11-15 17:18:09,564 - ui_main - INFO - Parameter B changed to 308
+2025-11-15 17:18:09,582 - audio_processor - INFO - Custom parameters updated: {'B': 282}
+2025-11-15 17:18:09,582 - ui_main - INFO - Parameter B changed to 282
+2025-11-15 17:18:09,583 - audio_processor - INFO - Custom parameters updated: {'B': 231}
+2025-11-15 17:18:09,583 - ui_main - INFO - Parameter B changed to 231
+2025-11-15 17:18:10,675 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/5)
+2025-11-15 17:18:14,292 - audio_processor - INFO - Custom parameters updated: {'B': 241}
+2025-11-15 17:18:14,293 - ui_main - INFO - Parameter B changed to 241
+2025-11-15 17:18:14,803 - audio_processor - INFO - Custom parameters updated: {'B': 251}
+2025-11-15 17:18:14,803 - ui_main - INFO - Parameter B changed to 251
+2025-11-15 17:18:14,866 - audio_processor - INFO - Custom parameters updated: {'B': 261}
+2025-11-15 17:18:14,866 - ui_main - INFO - Parameter B changed to 261
+2025-11-15 17:18:14,929 - audio_processor - INFO - Custom parameters updated: {'B': 271}
+2025-11-15 17:18:14,929 - ui_main - INFO - Parameter B changed to 271
+2025-11-15 17:18:15,866 - audio_processor - INFO - Custom parameters updated: {'B': 282}
+2025-11-15 17:18:15,866 - ui_main - INFO - Parameter B changed to 282
+2025-11-15 17:18:15,894 - audio_processor - INFO - Custom parameters updated: {'B': 308}
+2025-11-15 17:18:15,895 - ui_main - INFO - Parameter B changed to 308
+2025-11-15 17:18:15,904 - audio_processor - INFO - Custom parameters updated: {'B': 359}
+2025-11-15 17:18:15,904 - ui_main - INFO - Parameter B changed to 359
+2025-11-15 17:18:15,914 - audio_processor - INFO - Custom parameters updated: {'B': 385}
+2025-11-15 17:18:15,914 - ui_main - INFO - Parameter B changed to 385
+2025-11-15 17:18:15,925 - audio_processor - INFO - Custom parameters updated: {'B': 436}
+2025-11-15 17:18:15,927 - ui_main - INFO - Parameter B changed to 436
+2025-11-15 17:18:15,933 - audio_processor - INFO - Custom parameters updated: {'B': 462}
+2025-11-15 17:18:15,933 - ui_main - INFO - Parameter B changed to 462
+2025-11-15 17:18:15,950 - audio_processor - INFO - Custom parameters updated: {'B': 487}
+2025-11-15 17:18:15,950 - ui_main - INFO - Parameter B changed to 487
+2025-11-15 17:18:15,952 - audio_processor - INFO - Custom parameters updated: {'B': 513}
+2025-11-15 17:18:15,952 - ui_main - INFO - Parameter B changed to 513
+2025-11-15 17:18:15,968 - audio_processor - INFO - Custom parameters updated: {'B': 564}
+2025-11-15 17:18:15,968 - ui_main - INFO - Parameter B changed to 564
+2025-11-15 17:18:15,998 - audio_processor - INFO - Custom parameters updated: {'B': 590}
+2025-11-15 17:18:15,998 - ui_main - INFO - Parameter B changed to 590
+2025-11-15 17:18:16,138 - audio_processor - INFO - Custom parameters updated: {'B': 615}
+2025-11-15 17:18:16,138 - ui_main - INFO - Parameter B changed to 615
+2025-11-15 17:18:16,205 - audio_processor - INFO - Custom parameters updated: {'B': 641}
+2025-11-15 17:18:16,207 - ui_main - INFO - Parameter B changed to 641
+2025-11-15 17:18:16,218 - audio_processor - INFO - Custom parameters updated: {'B': 692}
+2025-11-15 17:18:16,219 - ui_main - INFO - Parameter B changed to 692
+2025-11-15 17:18:16,232 - audio_processor - INFO - Custom parameters updated: {'B': 718}
+2025-11-15 17:18:16,232 - ui_main - INFO - Parameter B changed to 718
+2025-11-15 17:18:16,242 - audio_processor - INFO - Custom parameters updated: {'B': 744}
+2025-11-15 17:18:16,242 - ui_main - INFO - Parameter B changed to 744
+2025-11-15 17:18:16,255 - audio_processor - INFO - Custom parameters updated: {'B': 795}
+2025-11-15 17:18:16,257 - ui_main - INFO - Parameter B changed to 795
+2025-11-15 17:18:16,260 - audio_processor - INFO - Custom parameters updated: {'B': 821}
+2025-11-15 17:18:16,260 - ui_main - INFO - Parameter B changed to 821
+2025-11-15 17:18:16,276 - audio_processor - INFO - Custom parameters updated: {'B': 897}
+2025-11-15 17:18:16,277 - ui_main - INFO - Parameter B changed to 897
+2025-11-15 17:18:16,294 - audio_processor - INFO - Custom parameters updated: {'B': 949}
+2025-11-15 17:18:16,294 - ui_main - INFO - Parameter B changed to 949
+2025-11-15 17:18:16,305 - audio_processor - INFO - Custom parameters updated: {'B': 1000}
+2025-11-15 17:18:16,307 - ui_main - INFO - Parameter B changed to 1000
+2025-11-15 17:18:17,091 - audio_processor - DEBUG - Input: 0.059 | Buffer: 1024
+2025-11-15 17:18:17,181 - audio_processor - DEBUG - Input: 0.015 | Buffer: 3072
+2025-11-15 17:18:17,493 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/5)
+2025-11-15 17:18:17,932 - audio_processor - DEBUG - Input: 0.071 | Buffer: 1024
+2025-11-15 17:18:24,101 - audio_processor - DEBUG - Input: 0.074 | Buffer: 2048
+2025-11-15 17:18:25,626 - audio_processor - INFO - Custom parameters updated: {'B': 974}
+2025-11-15 17:18:25,626 - ui_main - INFO - Parameter B changed to 974
+2025-11-15 17:18:25,633 - audio_processor - INFO - Custom parameters updated: {'B': 949}
+2025-11-15 17:18:25,633 - ui_main - INFO - Parameter B changed to 949
+2025-11-15 17:18:25,644 - audio_processor - INFO - Custom parameters updated: {'B': 923}
+2025-11-15 17:18:25,644 - ui_main - INFO - Parameter B changed to 923
+2025-11-15 17:18:25,649 - audio_processor - INFO - Custom parameters updated: {'B': 897}
+2025-11-15 17:18:25,649 - ui_main - INFO - Parameter B changed to 897
+2025-11-15 17:18:25,653 - audio_processor - INFO - Custom parameters updated: {'B': 846}
+2025-11-15 17:18:25,653 - ui_main - INFO - Parameter B changed to 846
+2025-11-15 17:18:25,666 - audio_processor - INFO - Custom parameters updated: {'B': 821}
+2025-11-15 17:18:25,666 - ui_main - INFO - Parameter B changed to 821
+2025-11-15 17:18:25,677 - audio_processor - INFO - Custom parameters updated: {'B': 795}
+2025-11-15 17:18:25,677 - ui_main - INFO - Parameter B changed to 795
+2025-11-15 17:18:25,691 - audio_processor - INFO - Custom parameters updated: {'B': 744}
+2025-11-15 17:18:25,691 - ui_main - INFO - Parameter B changed to 744
+2025-11-15 17:18:25,699 - audio_processor - INFO - Custom parameters updated: {'B': 718}
+2025-11-15 17:18:25,699 - ui_main - INFO - Parameter B changed to 718
+2025-11-15 17:18:25,720 - audio_processor - INFO - Custom parameters updated: {'B': 692}
+2025-11-15 17:18:25,720 - ui_main - INFO - Parameter B changed to 692
+2025-11-15 17:18:25,803 - audio_processor - INFO - Custom parameters updated: {'B': 641}
+2025-11-15 17:18:25,803 - ui_main - INFO - Parameter B changed to 641
+2025-11-15 17:18:25,812 - audio_processor - INFO - Custom parameters updated: {'B': 615}
+2025-11-15 17:18:25,812 - ui_main - INFO - Parameter B changed to 615
+2025-11-15 17:18:25,838 - audio_processor - INFO - Custom parameters updated: {'B': 590}
+2025-11-15 17:18:25,838 - ui_main - INFO - Parameter B changed to 590
+2025-11-15 17:18:25,858 - audio_processor - INFO - Custom parameters updated: {'B': 538}
+2025-11-15 17:18:25,858 - ui_main - INFO - Parameter B changed to 538
+2025-11-15 17:18:25,872 - audio_processor - INFO - Custom parameters updated: {'B': 513}
+2025-11-15 17:18:25,872 - ui_main - INFO - Parameter B changed to 513
+2025-11-15 17:18:25,890 - audio_processor - INFO - Custom parameters updated: {'B': 487}
+2025-11-15 17:18:25,890 - ui_main - INFO - Parameter B changed to 487
+2025-11-15 17:18:25,956 - audio_processor - INFO - Custom parameters updated: {'B': 410}
+2025-11-15 17:18:25,957 - ui_main - INFO - Parameter B changed to 410
+2025-11-15 17:18:26,030 - audio_processor - INFO - Custom parameters updated: {'B': 359}
+2025-11-15 17:18:26,030 - ui_main - INFO - Parameter B changed to 359
+2025-11-15 17:18:26,192 - audio_processor - DEBUG - Input: 0.089 | Buffer: 3072
+2025-11-15 17:18:26,645 - audio_processor - INFO - Custom parameters updated: {'B': 333}
+2025-11-15 17:18:26,645 - ui_main - INFO - Parameter B changed to 333
+2025-11-15 17:18:26,660 - audio_processor - INFO - Custom parameters updated: {'B': 308}
+2025-11-15 17:18:26,660 - ui_main - INFO - Parameter B changed to 308
+2025-11-15 17:18:26,666 - audio_processor - INFO - Custom parameters updated: {'B': 256}
+2025-11-15 17:18:26,666 - ui_main - INFO - Parameter B changed to 256
+2025-11-15 17:18:26,681 - audio_processor - INFO - Custom parameters updated: {'B': 231}
+2025-11-15 17:18:26,683 - ui_main - INFO - Parameter B changed to 231
+2025-11-15 17:18:26,687 - audio_processor - INFO - Custom parameters updated: {'B': 205}
+2025-11-15 17:18:26,687 - ui_main - INFO - Parameter B changed to 205
+2025-11-15 17:18:26,704 - audio_processor - INFO - Custom parameters updated: {'B': 154}
+2025-11-15 17:18:26,704 - ui_main - INFO - Parameter B changed to 154
+2025-11-15 17:18:26,713 - audio_processor - INFO - Custom parameters updated: {'B': 128}
+2025-11-15 17:18:26,713 - ui_main - INFO - Parameter B changed to 128
+2025-11-15 17:18:28,535 - audio_processor - INFO - Custom function compiled: x * np.sin(x * B/5)
+2025-11-15 17:18:28,791 - audio_processor - DEBUG - Input: 0.048 | Buffer: 2048
+2025-11-15 17:18:31,952 - audio_processor - DEBUG - Input: 0.062 | Buffer: 1024
+2025-11-15 17:18:39,521 - audio_processor - DEBUG - Input: 0.041 | Buffer: 1024
+2025-11-15 17:18:41,152 - audio_processor - DEBUG - Input: 0.044 | Buffer: 2048
+2025-11-15 17:18:42,591 - audio_processor - DEBUG - Input: 0.068 | Buffer: 1024
+2025-11-15 17:18:44,351 - audio_processor - DEBUG - Input: 0.082 | Buffer: 2048
+2025-11-15 17:18:48,351 - audio_processor - DEBUG - Input: 0.020 | Buffer: 2048
+2025-11-15 17:19:07,657 - audio_processor - INFO - Custom function compiled: np.tanh(x * C/100)
+2025-11-15 17:19:11,191 - audio_processor - DEBUG - Input: 0.013 | Buffer: 2048
+2025-11-15 17:19:11,942 - audio_processor - DEBUG - Input: 0.029 | Buffer: 2048
+2025-11-15 17:19:16,021 - audio_processor - INFO - Custom function compiled: np.tanh(x * C/100)
+2025-11-15 17:19:17,832 - audio_processor - DEBUG - Input: 0.058 | Buffer: 2048
+2025-11-15 17:19:20,201 - audio_processor - DEBUG - Input: 0.097 | Buffer: 3072
+2025-11-15 17:19:21,692 - audio_processor - DEBUG - Input: 0.096 | Buffer: 2048
+2025-11-15 17:19:23,370 - audio_processor - INFO - Custom function compiled: np.tanh(x * C/10)
+2025-11-15 17:19:24,611 - audio_processor - DEBUG - Input: 0.011 | Buffer: 2048
+2025-11-15 17:19:27,491 - audio_processor - DEBUG - Input: 0.083 | Buffer: 2048
+2025-11-15 17:19:31,510 - audio_processor - INFO - Custom function compiled: np.tanh(x * C/50)
+2025-11-15 17:19:34,092 - audio_processor - DEBUG - Input: 0.091 | Buffer: 1024
+2025-11-15 17:19:34,372 - audio_processor - DEBUG - Input: 0.031 | Buffer: 2048
+2025-11-15 17:19:37,661 - audio_processor - DEBUG - Input: 0.037 | Buffer: 2048
+2025-11-15 17:19:37,761 - audio_processor - DEBUG - Input: 0.057 | Buffer: 2048
+2025-11-15 17:19:38,221 - audio_processor - DEBUG - Input: 0.025 | Buffer: 2048
+2025-11-15 17:19:40,502 - audio_processor - DEBUG - Input: 0.057 | Buffer: 2048
+2025-11-15 17:19:42,032 - audio_processor - DEBUG - Input: 0.073 | Buffer: 2048
+2025-11-15 17:19:43,141 - audio_processor - DEBUG - Input: 0.066 | Buffer: 3072
+2025-11-15 17:19:48,621 - audio_processor - DEBUG - Input: 0.088 | Buffer: 2048
+2025-11-15 17:19:52,571 - audio_processor - DEBUG - Input: 0.061 | Buffer: 1024
+2025-11-15 17:19:53,131 - audio_processor - DEBUG - Input: 0.034 | Buffer: 1024
+2025-11-15 17:19:55,167 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:19:55,732 - audio_processor - DEBUG - Input: 0.038 | Buffer: 2048
+2025-11-15 17:19:56,982 - audio_processor - DEBUG - Input: 0.023 | Buffer: 2048
+2025-11-15 17:19:57,907 - audio_processor - INFO - Custom parameters updated: {'B': 154}
+2025-11-15 17:19:57,907 - ui_main - INFO - Parameter B changed to 154
+2025-11-15 17:19:57,921 - audio_processor - INFO - Custom parameters updated: {'B': 205}
+2025-11-15 17:19:57,921 - ui_main - INFO - Parameter B changed to 205
+2025-11-15 17:19:57,925 - audio_processor - INFO - Custom parameters updated: {'B': 256}
+2025-11-15 17:19:57,925 - ui_main - INFO - Parameter B changed to 256
+2025-11-15 17:19:57,931 - audio_processor - INFO - Custom parameters updated: {'B': 308}
+2025-11-15 17:19:57,931 - ui_main - INFO - Parameter B changed to 308
+2025-11-15 17:19:57,939 - audio_processor - INFO - Custom parameters updated: {'B': 333}
+2025-11-15 17:19:57,939 - ui_main - INFO - Parameter B changed to 333
+2025-11-15 17:19:57,956 - audio_processor - INFO - Custom parameters updated: {'B': 385}
+2025-11-15 17:19:57,956 - ui_main - INFO - Parameter B changed to 385
+2025-11-15 17:19:57,957 - audio_processor - INFO - Custom parameters updated: {'B': 410}
+2025-11-15 17:19:57,957 - ui_main - INFO - Parameter B changed to 410
+2025-11-15 17:19:57,967 - audio_processor - INFO - Custom parameters updated: {'B': 436}
+2025-11-15 17:19:57,967 - ui_main - INFO - Parameter B changed to 436
+2025-11-15 17:19:57,988 - audio_processor - INFO - Custom parameters updated: {'B': 462}
+2025-11-15 17:19:57,988 - ui_main - INFO - Parameter B changed to 462
+2025-11-15 17:19:58,192 - audio_processor - DEBUG - Input: 0.047 | Buffer: 2048
+2025-11-15 17:19:58,928 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:19:59,262 - audio_processor - DEBUG - Input: 0.018 | Buffer: 1024
+2025-11-15 17:19:59,942 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:01,243 - audio_processor - INFO - Custom parameters updated: {'C': 462}
+2025-11-15 17:20:01,245 - ui_main - INFO - Parameter C changed to 462
+2025-11-15 17:20:01,267 - audio_processor - INFO - Custom parameters updated: {'C': 410}
+2025-11-15 17:20:01,268 - ui_main - INFO - Parameter C changed to 410
+2025-11-15 17:20:01,288 - audio_processor - INFO - Custom parameters updated: {'C': 359}
+2025-11-15 17:20:01,288 - ui_main - INFO - Parameter C changed to 359
+2025-11-15 17:20:01,314 - audio_processor - INFO - Custom parameters updated: {'C': 282}
+2025-11-15 17:20:01,315 - ui_main - INFO - Parameter C changed to 282
+2025-11-15 17:20:01,399 - audio_processor - INFO - Custom parameters updated: {'C': 231}
+2025-11-15 17:20:01,400 - ui_main - INFO - Parameter C changed to 231
+2025-11-15 17:20:02,515 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:04,225 - audio_processor - INFO - Custom parameters updated: {'C': 256}
+2025-11-15 17:20:04,225 - ui_main - INFO - Parameter C changed to 256
+2025-11-15 17:20:04,298 - audio_processor - INFO - Custom parameters updated: {'C': 282}
+2025-11-15 17:20:04,298 - ui_main - INFO - Parameter C changed to 282
+2025-11-15 17:20:04,299 - audio_processor - INFO - Custom parameters updated: {'C': 308}
+2025-11-15 17:20:04,300 - ui_main - INFO - Parameter C changed to 308
+2025-11-15 17:20:04,310 - audio_processor - INFO - Custom parameters updated: {'C': 359}
+2025-11-15 17:20:04,310 - ui_main - INFO - Parameter C changed to 359
+2025-11-15 17:20:04,317 - audio_processor - INFO - Custom parameters updated: {'C': 410}
+2025-11-15 17:20:04,318 - ui_main - INFO - Parameter C changed to 410
+2025-11-15 17:20:04,321 - audio_processor - INFO - Custom parameters updated: {'C': 436}
+2025-11-15 17:20:04,322 - ui_main - INFO - Parameter C changed to 436
+2025-11-15 17:20:04,324 - audio_processor - INFO - Custom parameters updated: {'C': 462}
+2025-11-15 17:20:04,324 - ui_main - INFO - Parameter C changed to 462
+2025-11-15 17:20:04,334 - audio_processor - INFO - Custom parameters updated: {'C': 487}
+2025-11-15 17:20:04,334 - ui_main - INFO - Parameter C changed to 487
+2025-11-15 17:20:04,337 - audio_processor - INFO - Custom parameters updated: {'C': 538}
+2025-11-15 17:20:04,337 - ui_main - INFO - Parameter C changed to 538
+2025-11-15 17:20:04,344 - audio_processor - INFO - Custom parameters updated: {'C': 564}
+2025-11-15 17:20:04,344 - ui_main - INFO - Parameter C changed to 564
+2025-11-15 17:20:04,347 - audio_processor - INFO - Custom parameters updated: {'C': 590}
+2025-11-15 17:20:04,347 - ui_main - INFO - Parameter C changed to 590
+2025-11-15 17:20:04,354 - audio_processor - INFO - Custom parameters updated: {'C': 641}
+2025-11-15 17:20:04,354 - ui_main - INFO - Parameter C changed to 641
+2025-11-15 17:20:04,363 - audio_processor - INFO - Custom parameters updated: {'C': 667}
+2025-11-15 17:20:04,363 - ui_main - INFO - Parameter C changed to 667
+2025-11-15 17:20:04,375 - audio_processor - INFO - Custom parameters updated: {'C': 692}
+2025-11-15 17:20:04,375 - ui_main - INFO - Parameter C changed to 692
+2025-11-15 17:20:04,650 - audio_processor - INFO - Custom parameters updated: {'C': 718}
+2025-11-15 17:20:04,650 - ui_main - INFO - Parameter C changed to 718
+2025-11-15 17:20:04,652 - audio_processor - INFO - Custom parameters updated: {'C': 769}
+2025-11-15 17:20:04,652 - ui_main - INFO - Parameter C changed to 769
+2025-11-15 17:20:04,833 - audio_processor - INFO - Custom parameters updated: {'C': 795}
+2025-11-15 17:20:04,835 - ui_main - INFO - Parameter C changed to 795
+2025-11-15 17:20:04,844 - audio_processor - INFO - Custom parameters updated: {'C': 821}
+2025-11-15 17:20:04,844 - ui_main - INFO - Parameter C changed to 821
+2025-11-15 17:20:04,856 - audio_processor - INFO - Custom parameters updated: {'C': 872}
+2025-11-15 17:20:04,856 - ui_main - INFO - Parameter C changed to 872
+2025-11-15 17:20:05,711 - audio_processor - DEBUG - Input: 0.017 | Buffer: 3072
+2025-11-15 17:20:05,805 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:07,478 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:07,481 - audio_processor - DEBUG - Input: 0.025 | Buffer: 1024
+2025-11-15 17:20:07,902 - audio_processor - DEBUG - Input: 0.048 | Buffer: 2048
+2025-11-15 17:20:09,004 - audio_processor - INFO - Custom parameters updated: {'C': 846}
+2025-11-15 17:20:09,004 - ui_main - INFO - Parameter C changed to 846
+2025-11-15 17:20:09,006 - audio_processor - INFO - Custom parameters updated: {'C': 795}
+2025-11-15 17:20:09,006 - ui_main - INFO - Parameter C changed to 795
+2025-11-15 17:20:09,056 - audio_processor - INFO - Custom parameters updated: {'C': 769}
+2025-11-15 17:20:09,056 - ui_main - INFO - Parameter C changed to 769
+2025-11-15 17:20:09,074 - audio_processor - INFO - Custom parameters updated: {'C': 744}
+2025-11-15 17:20:09,074 - ui_main - INFO - Parameter C changed to 744
+2025-11-15 17:20:09,123 - audio_processor - INFO - Custom parameters updated: {'C': 692}
+2025-11-15 17:20:09,123 - ui_main - INFO - Parameter C changed to 692
+2025-11-15 17:20:09,133 - audio_processor - INFO - Custom parameters updated: {'C': 667}
+2025-11-15 17:20:09,133 - ui_main - INFO - Parameter C changed to 667
+2025-11-15 17:20:09,150 - audio_processor - INFO - Custom parameters updated: {'C': 641}
+2025-11-15 17:20:09,150 - ui_main - INFO - Parameter C changed to 641
+2025-11-15 17:20:09,177 - audio_processor - INFO - Custom parameters updated: {'C': 615}
+2025-11-15 17:20:09,178 - ui_main - INFO - Parameter C changed to 615
+2025-11-15 17:20:09,202 - audio_processor - INFO - Custom parameters updated: {'C': 564}
+2025-11-15 17:20:09,202 - ui_main - INFO - Parameter C changed to 564
+2025-11-15 17:20:09,230 - audio_processor - INFO - Custom parameters updated: {'C': 538}
+2025-11-15 17:20:09,231 - ui_main - INFO - Parameter C changed to 538
+2025-11-15 17:20:09,441 - audio_processor - INFO - Custom parameters updated: {'C': 513}
+2025-11-15 17:20:09,441 - ui_main - INFO - Parameter C changed to 513
+2025-11-15 17:20:09,457 - audio_processor - INFO - Custom parameters updated: {'C': 462}
+2025-11-15 17:20:09,457 - ui_main - INFO - Parameter C changed to 462
+2025-11-15 17:20:09,528 - audio_processor - INFO - Custom parameters updated: {'C': 436}
+2025-11-15 17:20:09,528 - ui_main - INFO - Parameter C changed to 436
+2025-11-15 17:20:09,644 - audio_processor - INFO - Custom parameters updated: {'C': 410}
+2025-11-15 17:20:09,644 - ui_main - INFO - Parameter C changed to 410
+2025-11-15 17:20:09,662 - audio_processor - INFO - Custom parameters updated: {'C': 359}
+2025-11-15 17:20:09,662 - ui_main - INFO - Parameter C changed to 359
+2025-11-15 17:20:09,731 - audio_processor - INFO - Custom parameters updated: {'C': 333}
+2025-11-15 17:20:09,731 - ui_main - INFO - Parameter C changed to 333
+2025-11-15 17:20:09,971 - audio_processor - INFO - Custom parameters updated: {'C': 282}
+2025-11-15 17:20:09,972 - ui_main - INFO - Parameter C changed to 282
+2025-11-15 17:20:10,025 - audio_processor - INFO - Custom parameters updated: {'C': 231}
+2025-11-15 17:20:10,026 - ui_main - INFO - Parameter C changed to 231
+2025-11-15 17:20:12,262 - audio_processor - INFO - Custom parameters updated: {'B': 487}
+2025-11-15 17:20:12,263 - ui_main - INFO - Parameter B changed to 487
+2025-11-15 17:20:12,309 - audio_processor - INFO - Custom parameters updated: {'B': 462}
+2025-11-15 17:20:12,309 - ui_main - INFO - Parameter B changed to 462
+2025-11-15 17:20:12,320 - audio_processor - INFO - Custom parameters updated: {'B': 436}
+2025-11-15 17:20:12,320 - ui_main - INFO - Parameter B changed to 436
+2025-11-15 17:20:12,340 - audio_processor - INFO - Custom parameters updated: {'B': 410}
+2025-11-15 17:20:12,340 - ui_main - INFO - Parameter B changed to 410
+2025-11-15 17:20:12,351 - audio_processor - INFO - Custom parameters updated: {'B': 359}
+2025-11-15 17:20:12,351 - ui_main - INFO - Parameter B changed to 359
+2025-11-15 17:20:12,384 - audio_processor - INFO - Custom parameters updated: {'B': 333}
+2025-11-15 17:20:12,384 - ui_main - INFO - Parameter B changed to 333
+2025-11-15 17:20:12,491 - audio_processor - INFO - Custom parameters updated: {'B': 308}
+2025-11-15 17:20:12,492 - ui_main - INFO - Parameter B changed to 308
+2025-11-15 17:20:12,539 - audio_processor - INFO - Custom parameters updated: {'B': 256}
+2025-11-15 17:20:12,541 - ui_main - INFO - Parameter B changed to 256
+2025-11-15 17:20:13,689 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:18,804 - audio_processor - INFO - Custom parameters updated: {'C': 282}
+2025-11-15 17:20:18,804 - ui_main - INFO - Parameter C changed to 282
+2025-11-15 17:20:18,820 - audio_processor - INFO - Custom parameters updated: {'C': 308}
+2025-11-15 17:20:18,821 - ui_main - INFO - Parameter C changed to 308
+2025-11-15 17:20:18,822 - audio_processor - INFO - Custom parameters updated: {'C': 333}
+2025-11-15 17:20:18,824 - ui_main - INFO - Parameter C changed to 333
+2025-11-15 17:20:18,833 - audio_processor - INFO - Custom parameters updated: {'C': 359}
+2025-11-15 17:20:18,835 - ui_main - INFO - Parameter C changed to 359
+2025-11-15 17:20:18,836 - audio_processor - INFO - Custom parameters updated: {'C': 410}
+2025-11-15 17:20:18,837 - ui_main - INFO - Parameter C changed to 410
+2025-11-15 17:20:18,844 - audio_processor - INFO - Custom parameters updated: {'C': 436}
+2025-11-15 17:20:18,844 - ui_main - INFO - Parameter C changed to 436
+2025-11-15 17:20:18,850 - audio_processor - INFO - Custom parameters updated: {'C': 462}
+2025-11-15 17:20:18,850 - ui_main - INFO - Parameter C changed to 462
+2025-11-15 17:20:19,832 - audio_processor - DEBUG - Input: 0.038 | Buffer: 1024
+2025-11-15 17:20:20,623 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:21,042 - audio_processor - DEBUG - Input: 0.077 | Buffer: 1024
+2025-11-15 17:20:23,312 - audio_processor - DEBUG - Input: 0.074 | Buffer: 3072
+2025-11-15 17:20:25,732 - audio_processor - DEBUG - Input: 0.100 | Buffer: 1024
+2025-11-15 17:20:26,221 - audio_processor - INFO - Custom parameters updated: {'A': 26}
+2025-11-15 17:20:26,221 - ui_main - INFO - Parameter A changed to 26
+2025-11-15 17:20:26,230 - audio_processor - INFO - Custom parameters updated: {'A': 103}
+2025-11-15 17:20:26,230 - ui_main - INFO - Parameter A changed to 103
+2025-11-15 17:20:26,316 - audio_processor - INFO - Custom parameters updated: {'A': 179}
+2025-11-15 17:20:26,318 - ui_main - INFO - Parameter A changed to 179
+2025-11-15 17:20:26,382 - audio_processor - DEBUG - Input: 0.069 | Buffer: 1024
+2025-11-15 17:20:26,842 - audio_processor - DEBUG - Input: 0.014 | Buffer: 3072
+2025-11-15 17:20:27,661 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:28,792 - audio_processor - INFO - Custom parameters updated: {'B': 282}
+2025-11-15 17:20:28,792 - ui_main - INFO - Parameter B changed to 282
+2025-11-15 17:20:28,794 - audio_processor - INFO - Custom parameters updated: {'B': 333}
+2025-11-15 17:20:28,794 - ui_main - INFO - Parameter B changed to 333
+2025-11-15 17:20:28,812 - audio_processor - INFO - Custom parameters updated: {'B': 385}
+2025-11-15 17:20:28,812 - ui_main - INFO - Parameter B changed to 385
+2025-11-15 17:20:28,825 - audio_processor - INFO - Custom parameters updated: {'B': 436}
+2025-11-15 17:20:28,825 - ui_main - INFO - Parameter B changed to 436
+2025-11-15 17:20:28,856 - audio_processor - INFO - Custom parameters updated: {'B': 462}
+2025-11-15 17:20:28,856 - ui_main - INFO - Parameter B changed to 462
+2025-11-15 17:20:29,065 - audio_processor - INFO - Custom parameters updated: {'B': 487}
+2025-11-15 17:20:29,067 - ui_main - INFO - Parameter B changed to 487
+2025-11-15 17:20:29,983 - audio_processor - INFO - Custom function compiled: np.tanh(B*x * C/50)
+2025-11-15 17:20:30,051 - audio_processor - DEBUG - Input: 0.014 | Buffer: 1024
+2025-11-15 17:20:32,321 - audio_processor - DEBUG - Input: 0.017 | Buffer: 2048
+2025-11-15 17:20:46,334 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 17:21:21,440 - audio_processor - INFO - Loading AI model...
+2025-11-15 17:21:21,744 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 17:21:21,745 - audio_processor - INFO - Devices set - Input: 1, Output: 22
+2025-11-15 17:21:21,745 - audio_processor - INFO - Processing mode set to: custom_lab
+2025-11-15 17:21:21,745 - audio_processor - INFO - Custom parameters updated: {'A': 179, 'B': 487, 'C': 462, 'D': 500, 'E': 500, 'F': 500, 'G': 500, 'H': 500, 'I': 500, 'J': 500, 'K': 500, 'L': 500, 'M': 500, 'N': 500, 'O': 500, 'P': 500}
+2025-11-15 17:21:21,746 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:21,747 - audio_processor - INFO - Starting custom_lab mode
+2025-11-15 17:21:21,747 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 17:21:21,747 - audio_processor - INFO - Output: Speakers (Realtek(R) Audio) (Device 22)
+2025-11-15 17:21:22,489 - audio_processor - INFO - >>> CUSTOM_LAB MODE STARTED!
+2025-11-15 17:21:28,462 - audio_processor - INFO - Custom parameters updated: {'F': 474}
+2025-11-15 17:21:28,463 - ui_main - INFO - Parameter F changed to 474
+2025-11-15 17:21:28,494 - audio_processor - INFO - Custom parameters updated: {'F': 421}
+2025-11-15 17:21:28,494 - ui_main - INFO - Parameter F changed to 421
+2025-11-15 17:21:28,582 - audio_processor - INFO - Custom parameters updated: {'F': 368}
+2025-11-15 17:21:28,582 - ui_main - INFO - Parameter F changed to 368
+2025-11-15 17:21:28,586 - audio_processor - INFO - Custom parameters updated: {'F': 342}
+2025-11-15 17:21:28,586 - ui_main - INFO - Parameter F changed to 342
+2025-11-15 17:21:28,627 - audio_processor - INFO - Custom parameters updated: {'F': 316}
+2025-11-15 17:21:28,627 - ui_main - INFO - Parameter F changed to 316
+2025-11-15 17:21:28,637 - audio_processor - INFO - Custom parameters updated: {'F': 289}
+2025-11-15 17:21:28,637 - ui_main - INFO - Parameter F changed to 289
+2025-11-15 17:21:29,858 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:31,402 - audio_processor - DEBUG - Input: 0.085 | Buffer: 1024
+2025-11-15 17:21:31,802 - audio_processor - INFO - Custom parameters updated: {'F': 263}
+2025-11-15 17:21:31,803 - ui_main - INFO - Parameter F changed to 263
+2025-11-15 17:21:31,810 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:21:31,811 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:21:31,837 - audio_processor - INFO - Custom parameters updated: {'F': 211}
+2025-11-15 17:21:31,837 - ui_main - INFO - Parameter F changed to 211
+2025-11-15 17:21:32,047 - audio_processor - INFO - Custom parameters updated: {'F': 158}
+2025-11-15 17:21:32,048 - ui_main - INFO - Parameter F changed to 158
+2025-11-15 17:21:32,064 - audio_processor - INFO - Custom parameters updated: {'F': 132}
+2025-11-15 17:21:32,064 - ui_main - INFO - Parameter F changed to 132
+2025-11-15 17:21:33,211 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:33,631 - audio_processor - DEBUG - Input: 0.023 | Buffer: 1024
+2025-11-15 17:21:35,175 - audio_processor - INFO - Custom parameters updated: {'F': 184}
+2025-11-15 17:21:35,176 - ui_main - INFO - Parameter F changed to 184
+2025-11-15 17:21:35,181 - audio_processor - INFO - Custom parameters updated: {'F': 211}
+2025-11-15 17:21:35,181 - ui_main - INFO - Parameter F changed to 211
+2025-11-15 17:21:35,191 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:21:35,191 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:21:35,197 - audio_processor - INFO - Custom parameters updated: {'F': 263}
+2025-11-15 17:21:35,197 - ui_main - INFO - Parameter F changed to 263
+2025-11-15 17:21:35,205 - audio_processor - INFO - Custom parameters updated: {'F': 316}
+2025-11-15 17:21:35,205 - ui_main - INFO - Parameter F changed to 316
+2025-11-15 17:21:35,212 - audio_processor - INFO - Custom parameters updated: {'F': 342}
+2025-11-15 17:21:35,214 - ui_main - INFO - Parameter F changed to 342
+2025-11-15 17:21:35,224 - audio_processor - INFO - Custom parameters updated: {'F': 368}
+2025-11-15 17:21:35,224 - ui_main - INFO - Parameter F changed to 368
+2025-11-15 17:21:35,229 - audio_processor - INFO - Custom parameters updated: {'F': 421}
+2025-11-15 17:21:35,229 - ui_main - INFO - Parameter F changed to 421
+2025-11-15 17:21:35,230 - audio_processor - INFO - Custom parameters updated: {'F': 447}
+2025-11-15 17:21:35,230 - ui_main - INFO - Parameter F changed to 447
+2025-11-15 17:21:35,244 - audio_processor - INFO - Custom parameters updated: {'F': 474}
+2025-11-15 17:21:35,244 - ui_main - INFO - Parameter F changed to 474
+2025-11-15 17:21:35,252 - audio_processor - INFO - Custom parameters updated: {'F': 500}
+2025-11-15 17:21:35,252 - ui_main - INFO - Parameter F changed to 500
+2025-11-15 17:21:35,259 - audio_processor - INFO - Custom parameters updated: {'F': 553}
+2025-11-15 17:21:35,259 - ui_main - INFO - Parameter F changed to 553
+2025-11-15 17:21:35,272 - audio_processor - INFO - Custom parameters updated: {'F': 579}
+2025-11-15 17:21:35,272 - ui_main - INFO - Parameter F changed to 579
+2025-11-15 17:21:35,281 - audio_processor - INFO - Custom parameters updated: {'F': 605}
+2025-11-15 17:21:35,281 - ui_main - INFO - Parameter F changed to 605
+2025-11-15 17:21:35,283 - audio_processor - INFO - Custom parameters updated: {'F': 658}
+2025-11-15 17:21:35,283 - ui_main - INFO - Parameter F changed to 658
+2025-11-15 17:21:35,291 - audio_processor - INFO - Custom parameters updated: {'F': 684}
+2025-11-15 17:21:35,291 - ui_main - INFO - Parameter F changed to 684
+2025-11-15 17:21:35,304 - audio_processor - INFO - Custom parameters updated: {'F': 737}
+2025-11-15 17:21:35,304 - ui_main - INFO - Parameter F changed to 737
+2025-11-15 17:21:35,314 - audio_processor - INFO - Custom parameters updated: {'F': 789}
+2025-11-15 17:21:35,314 - ui_main - INFO - Parameter F changed to 789
+2025-11-15 17:21:35,328 - audio_processor - INFO - Custom parameters updated: {'F': 842}
+2025-11-15 17:21:35,328 - ui_main - INFO - Parameter F changed to 842
+2025-11-15 17:21:35,334 - audio_processor - INFO - Custom parameters updated: {'F': 868}
+2025-11-15 17:21:35,334 - ui_main - INFO - Parameter F changed to 868
+2025-11-15 17:21:35,415 - audio_processor - INFO - Custom parameters updated: {'F': 921}
+2025-11-15 17:21:35,415 - ui_main - INFO - Parameter F changed to 921
+2025-11-15 17:21:35,433 - audio_processor - INFO - Custom parameters updated: {'F': 974}
+2025-11-15 17:21:35,433 - ui_main - INFO - Parameter F changed to 974
+2025-11-15 17:21:35,455 - audio_processor - INFO - Custom parameters updated: {'F': 1000}
+2025-11-15 17:21:35,455 - ui_main - INFO - Parameter F changed to 1000
+2025-11-15 17:21:36,269 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:38,986 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:39,991 - audio_processor - DEBUG - Input: 0.049 | Buffer: 2048
+2025-11-15 17:21:40,529 - audio_processor - INFO - Custom parameters updated: {'F': 974}
+2025-11-15 17:21:40,529 - ui_main - INFO - Parameter F changed to 974
+2025-11-15 17:21:40,539 - audio_processor - INFO - Custom parameters updated: {'F': 921}
+2025-11-15 17:21:40,539 - ui_main - INFO - Parameter F changed to 921
+2025-11-15 17:21:40,545 - audio_processor - INFO - Custom parameters updated: {'F': 895}
+2025-11-15 17:21:40,545 - ui_main - INFO - Parameter F changed to 895
+2025-11-15 17:21:40,551 - audio_processor - INFO - Custom parameters updated: {'F': 868}
+2025-11-15 17:21:40,551 - ui_main - INFO - Parameter F changed to 868
+2025-11-15 17:21:40,563 - audio_processor - INFO - Custom parameters updated: {'F': 816}
+2025-11-15 17:21:40,564 - ui_main - INFO - Parameter F changed to 816
+2025-11-15 17:21:40,566 - audio_processor - INFO - Custom parameters updated: {'F': 789}
+2025-11-15 17:21:40,566 - ui_main - INFO - Parameter F changed to 789
+2025-11-15 17:21:40,576 - audio_processor - INFO - Custom parameters updated: {'F': 737}
+2025-11-15 17:21:40,576 - ui_main - INFO - Parameter F changed to 737
+2025-11-15 17:21:40,585 - audio_processor - INFO - Custom parameters updated: {'F': 711}
+2025-11-15 17:21:40,586 - ui_main - INFO - Parameter F changed to 711
+2025-11-15 17:21:40,591 - audio_processor - INFO - Custom parameters updated: {'F': 658}
+2025-11-15 17:21:40,591 - ui_main - INFO - Parameter F changed to 658
+2025-11-15 17:21:40,609 - audio_processor - INFO - Custom parameters updated: {'F': 632}
+2025-11-15 17:21:40,609 - ui_main - INFO - Parameter F changed to 632
+2025-11-15 17:21:40,621 - audio_processor - INFO - Custom parameters updated: {'F': 605}
+2025-11-15 17:21:40,621 - ui_main - INFO - Parameter F changed to 605
+2025-11-15 17:21:40,634 - audio_processor - INFO - Custom parameters updated: {'F': 579}
+2025-11-15 17:21:40,634 - ui_main - INFO - Parameter F changed to 579
+2025-11-15 17:21:40,635 - audio_processor - INFO - Custom parameters updated: {'F': 526}
+2025-11-15 17:21:40,636 - ui_main - INFO - Parameter F changed to 526
+2025-11-15 17:21:40,649 - audio_processor - INFO - Custom parameters updated: {'F': 500}
+2025-11-15 17:21:40,650 - ui_main - INFO - Parameter F changed to 500
+2025-11-15 17:21:40,659 - audio_processor - INFO - Custom parameters updated: {'F': 474}
+2025-11-15 17:21:40,659 - ui_main - INFO - Parameter F changed to 474
+2025-11-15 17:21:40,671 - audio_processor - INFO - Custom parameters updated: {'F': 421}
+2025-11-15 17:21:40,671 - ui_main - INFO - Parameter F changed to 421
+2025-11-15 17:21:40,685 - audio_processor - INFO - Custom parameters updated: {'F': 395}
+2025-11-15 17:21:40,686 - ui_main - INFO - Parameter F changed to 395
+2025-11-15 17:21:40,705 - audio_processor - INFO - Custom parameters updated: {'F': 368}
+2025-11-15 17:21:40,705 - ui_main - INFO - Parameter F changed to 368
+2025-11-15 17:21:40,730 - audio_processor - INFO - Custom parameters updated: {'F': 342}
+2025-11-15 17:21:40,730 - ui_main - INFO - Parameter F changed to 342
+2025-11-15 17:21:40,748 - audio_processor - INFO - Custom parameters updated: {'F': 289}
+2025-11-15 17:21:40,748 - ui_main - INFO - Parameter F changed to 289
+2025-11-15 17:21:40,771 - audio_processor - INFO - Custom parameters updated: {'F': 263}
+2025-11-15 17:21:40,772 - ui_main - INFO - Parameter F changed to 263
+2025-11-15 17:21:40,786 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:21:40,786 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:21:40,802 - audio_processor - INFO - Custom parameters updated: {'F': 184}
+2025-11-15 17:21:40,802 - ui_main - INFO - Parameter F changed to 184
+2025-11-15 17:21:40,837 - audio_processor - INFO - Custom parameters updated: {'F': 132}
+2025-11-15 17:21:40,837 - ui_main - INFO - Parameter F changed to 132
+2025-11-15 17:21:40,859 - audio_processor - INFO - Custom parameters updated: {'F': 79}
+2025-11-15 17:21:40,861 - ui_main - INFO - Parameter F changed to 79
+2025-11-15 17:21:41,011 - audio_processor - DEBUG - Input: 0.037 | Buffer: 3072
+2025-11-15 17:21:41,391 - audio_processor - DEBUG - Input: 0.030 | Buffer: 1024
+2025-11-15 17:21:41,431 - audio_processor - DEBUG - Input: 0.084 | Buffer: 2048
+2025-11-15 17:21:41,481 - audio_processor - DEBUG - Input: 0.083 | Buffer: 2048
+2025-11-15 17:21:42,508 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:44,492 - audio_processor - INFO - Custom parameters updated: {'F': 105}
+2025-11-15 17:21:44,494 - ui_main - INFO - Parameter F changed to 105
+2025-11-15 17:21:44,497 - audio_processor - INFO - Custom parameters updated: {'F': 132}
+2025-11-15 17:21:44,497 - ui_main - INFO - Parameter F changed to 132
+2025-11-15 17:21:44,540 - audio_processor - INFO - Custom parameters updated: {'F': 158}
+2025-11-15 17:21:44,540 - ui_main - INFO - Parameter F changed to 158
+2025-11-15 17:21:44,553 - audio_processor - INFO - Custom parameters updated: {'F': 211}
+2025-11-15 17:21:44,553 - ui_main - INFO - Parameter F changed to 211
+2025-11-15 17:21:44,631 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:21:44,632 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:21:44,648 - audio_processor - INFO - Custom parameters updated: {'F': 289}
+2025-11-15 17:21:44,648 - ui_main - INFO - Parameter F changed to 289
+2025-11-15 17:21:44,678 - audio_processor - INFO - Custom parameters updated: {'F': 316}
+2025-11-15 17:21:44,678 - ui_main - INFO - Parameter F changed to 316
+2025-11-15 17:21:44,680 - audio_processor - INFO - Custom parameters updated: {'F': 368}
+2025-11-15 17:21:44,680 - ui_main - INFO - Parameter F changed to 368
+2025-11-15 17:21:44,699 - audio_processor - INFO - Custom parameters updated: {'F': 395}
+2025-11-15 17:21:44,699 - ui_main - INFO - Parameter F changed to 395
+2025-11-15 17:21:44,713 - audio_processor - INFO - Custom parameters updated: {'F': 421}
+2025-11-15 17:21:44,713 - ui_main - INFO - Parameter F changed to 421
+2025-11-15 17:21:44,739 - audio_processor - INFO - Custom parameters updated: {'F': 447}
+2025-11-15 17:21:44,740 - ui_main - INFO - Parameter F changed to 447
+2025-11-15 17:21:44,753 - audio_processor - INFO - Custom parameters updated: {'F': 500}
+2025-11-15 17:21:44,753 - ui_main - INFO - Parameter F changed to 500
+2025-11-15 17:21:44,791 - audio_processor - INFO - Custom parameters updated: {'F': 526}
+2025-11-15 17:21:44,791 - ui_main - INFO - Parameter F changed to 526
+2025-11-15 17:21:44,871 - audio_processor - DEBUG - Input: 0.035 | Buffer: 1024
+2025-11-15 17:21:45,662 - audio_processor - DEBUG - Input: 0.045 | Buffer: 2048
+2025-11-15 17:21:46,452 - audio_processor - DEBUG - Input: 0.045 | Buffer: 1024
+2025-11-15 17:21:50,744 - audio_processor - INFO - Custom function compiled: x * (1 + np.sin(x * F/1000) * 0.5)
+2025-11-15 17:21:54,532 - audio_processor - DEBUG - Input: 0.043 | Buffer: 1024
+2025-11-15 17:21:54,902 - audio_processor - DEBUG - Input: 0.013 | Buffer: 1024
+2025-11-15 17:21:55,091 - audio_processor - DEBUG - Input: 0.049 | Buffer: 2048
+2025-11-15 17:21:58,292 - audio_processor - DEBUG - Input: 0.068 | Buffer: 2048
+2025-11-15 17:22:00,102 - audio_processor - DEBUG - Input: 0.093 | Buffer: 1024
+2025-11-15 17:22:06,407 - audio_processor - INFO - Custom function compiled: x * F / 1000
+2025-11-15 17:22:06,701 - audio_processor - DEBUG - Input: 0.044 | Buffer: 1024
+2025-11-15 17:22:07,351 - audio_processor - DEBUG - Input: 0.071 | Buffer: 1024
+2025-11-15 17:22:07,721 - audio_processor - DEBUG - Input: 0.065 | Buffer: 2048
+2025-11-15 17:22:08,596 - audio_processor - INFO - Custom parameters updated: {'F': 474}
+2025-11-15 17:22:08,596 - ui_main - INFO - Parameter F changed to 474
+2025-11-15 17:22:08,763 - audio_processor - INFO - Custom parameters updated: {'F': 447}
+2025-11-15 17:22:08,763 - ui_main - INFO - Parameter F changed to 447
+2025-11-15 17:22:08,867 - audio_processor - INFO - Custom parameters updated: {'F': 421}
+2025-11-15 17:22:08,868 - ui_main - INFO - Parameter F changed to 421
+2025-11-15 17:22:08,885 - audio_processor - INFO - Custom parameters updated: {'F': 395}
+2025-11-15 17:22:08,885 - ui_main - INFO - Parameter F changed to 395
+2025-11-15 17:22:08,906 - audio_processor - INFO - Custom parameters updated: {'F': 342}
+2025-11-15 17:22:08,906 - ui_main - INFO - Parameter F changed to 342
+2025-11-15 17:22:09,197 - audio_processor - INFO - Custom parameters updated: {'F': 316}
+2025-11-15 17:22:09,199 - ui_main - INFO - Parameter F changed to 316
+2025-11-15 17:22:09,223 - audio_processor - INFO - Custom parameters updated: {'F': 263}
+2025-11-15 17:22:09,224 - ui_main - INFO - Parameter F changed to 263
+2025-11-15 17:22:09,237 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:22:09,237 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:22:09,851 - audio_processor - DEBUG - Input: 0.011 | Buffer: 3072
+2025-11-15 17:22:10,252 - audio_processor - INFO - Custom function compiled: x * F / 1000
+2025-11-15 17:22:11,571 - audio_processor - DEBUG - Input: 0.038 | Buffer: 2048
+2025-11-15 17:22:12,799 - audio_processor - INFO - Custom parameters updated: {'F': 211}
+2025-11-15 17:22:12,799 - ui_main - INFO - Parameter F changed to 211
+2025-11-15 17:22:12,915 - audio_processor - INFO - Custom parameters updated: {'F': 158}
+2025-11-15 17:22:12,915 - ui_main - INFO - Parameter F changed to 158
+2025-11-15 17:22:14,247 - audio_processor - INFO - Custom function compiled: x * F / 1000
+2025-11-15 17:22:14,731 - audio_processor - DEBUG - Input: 0.040 | Buffer: 1024
+2025-11-15 17:22:16,650 - audio_processor - INFO - Custom parameters updated: {'F': 184}
+2025-11-15 17:22:16,652 - ui_main - INFO - Parameter F changed to 184
+2025-11-15 17:22:16,661 - audio_processor - INFO - Custom parameters updated: {'F': 211}
+2025-11-15 17:22:16,661 - ui_main - INFO - Parameter F changed to 211
+2025-11-15 17:22:16,665 - audio_processor - INFO - Custom parameters updated: {'F': 237}
+2025-11-15 17:22:16,666 - ui_main - INFO - Parameter F changed to 237
+2025-11-15 17:22:16,675 - audio_processor - INFO - Custom parameters updated: {'F': 289}
+2025-11-15 17:22:16,676 - ui_main - INFO - Parameter F changed to 289
+2025-11-15 17:22:16,682 - audio_processor - INFO - Custom parameters updated: {'F': 342}
+2025-11-15 17:22:16,684 - ui_main - INFO - Parameter F changed to 342
+2025-11-15 17:22:16,685 - audio_processor - INFO - Custom parameters updated: {'F': 368}
+2025-11-15 17:22:16,685 - ui_main - INFO - Parameter F changed to 368
+2025-11-15 17:22:16,685 - audio_processor - INFO - Custom parameters updated: {'F': 395}
+2025-11-15 17:22:16,685 - ui_main - INFO - Parameter F changed to 395
+2025-11-15 17:22:16,693 - audio_processor - INFO - Custom parameters updated: {'F': 447}
+2025-11-15 17:22:16,693 - ui_main - INFO - Parameter F changed to 447
+2025-11-15 17:22:16,697 - audio_processor - INFO - Custom parameters updated: {'F': 500}
+2025-11-15 17:22:16,697 - ui_main - INFO - Parameter F changed to 500
+2025-11-15 17:22:16,702 - audio_processor - INFO - Custom parameters updated: {'F': 579}
+2025-11-15 17:22:16,704 - ui_main - INFO - Parameter F changed to 579
+2025-11-15 17:22:16,707 - audio_processor - INFO - Custom parameters updated: {'F': 632}
+2025-11-15 17:22:16,707 - ui_main - INFO - Parameter F changed to 632
+2025-11-15 17:22:16,712 - audio_processor - INFO - Custom parameters updated: {'F': 684}
+2025-11-15 17:22:16,712 - ui_main - INFO - Parameter F changed to 684
+2025-11-15 17:22:16,717 - audio_processor - INFO - Custom parameters updated: {'F': 737}
+2025-11-15 17:22:16,717 - ui_main - INFO - Parameter F changed to 737
+2025-11-15 17:22:16,719 - audio_processor - INFO - Custom parameters updated: {'F': 789}
+2025-11-15 17:22:16,720 - ui_main - INFO - Parameter F changed to 789
+2025-11-15 17:22:16,721 - audio_processor - INFO - Custom parameters updated: {'F': 816}
+2025-11-15 17:22:16,721 - ui_main - INFO - Parameter F changed to 816
+2025-11-15 17:22:16,731 - audio_processor - INFO - Custom parameters updated: {'F': 868}
+2025-11-15 17:22:16,731 - ui_main - INFO - Parameter F changed to 868
+2025-11-15 17:22:16,757 - audio_processor - INFO - Custom parameters updated: {'F': 921}
+2025-11-15 17:22:16,757 - ui_main - INFO - Parameter F changed to 921
+2025-11-15 17:22:16,779 - audio_processor - INFO - Custom parameters updated: {'F': 974}
+2025-11-15 17:22:16,780 - ui_main - INFO - Parameter F changed to 974
+2025-11-15 17:22:16,799 - audio_processor - INFO - Custom parameters updated: {'F': 1000}
+2025-11-15 17:22:16,800 - ui_main - INFO - Parameter F changed to 1000
+2025-11-15 17:22:16,912 - audio_processor - DEBUG - Input: 0.062 | Buffer: 2048
+2025-11-15 17:22:17,826 - audio_processor - INFO - Custom function compiled: x * F / 1000
+2025-11-15 17:22:18,121 - audio_processor - DEBUG - Input: 0.027 | Buffer: 1024
+2025-11-15 17:22:18,311 - audio_processor - DEBUG - Input: 0.084 | Buffer: 2048
+2025-11-15 17:22:18,823 - audio_processor - DEBUG - Input: 0.052 | Buffer: 1024
+2025-11-15 17:22:26,768 - audio_processor - INFO - Custom function compiled: x * F / 1000
+2025-11-15 17:22:48,964 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:22:52,813 - audio_processor - DEBUG - Input: 0.097 | Buffer: 1024
+2025-11-15 17:22:53,578 - audio_processor - INFO - Custom parameters updated: {'E': 526}
+2025-11-15 17:22:53,579 - ui_main - INFO - Parameter E changed to 526
+2025-11-15 17:22:53,595 - audio_processor - INFO - Custom parameters updated: {'E': 553}
+2025-11-15 17:22:53,596 - ui_main - INFO - Parameter E changed to 553
+2025-11-15 17:22:53,609 - audio_processor - INFO - Custom parameters updated: {'E': 579}
+2025-11-15 17:22:53,609 - ui_main - INFO - Parameter E changed to 579
+2025-11-15 17:22:53,642 - audio_processor - INFO - Custom parameters updated: {'E': 632}
+2025-11-15 17:22:53,642 - ui_main - INFO - Parameter E changed to 632
+2025-11-15 17:22:53,653 - audio_processor - INFO - Custom parameters updated: {'E': 658}
+2025-11-15 17:22:53,653 - ui_main - INFO - Parameter E changed to 658
+2025-11-15 17:22:53,730 - audio_processor - INFO - Custom parameters updated: {'E': 684}
+2025-11-15 17:22:53,730 - ui_main - INFO - Parameter E changed to 684
+2025-11-15 17:22:53,819 - audio_processor - INFO - Custom parameters updated: {'E': 737}
+2025-11-15 17:22:53,820 - ui_main - INFO - Parameter E changed to 737
+2025-11-15 17:22:53,832 - audio_processor - INFO - Custom parameters updated: {'E': 763}
+2025-11-15 17:22:53,832 - ui_main - INFO - Parameter E changed to 763
+2025-11-15 17:22:55,164 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:22:56,926 - audio_processor - INFO - Custom parameters updated: {'E': 789}
+2025-11-15 17:22:56,928 - ui_main - INFO - Parameter E changed to 789
+2025-11-15 17:22:57,039 - audio_processor - INFO - Custom parameters updated: {'E': 868}
+2025-11-15 17:22:57,040 - ui_main - INFO - Parameter E changed to 868
+2025-11-15 17:22:57,047 - audio_processor - INFO - Custom parameters updated: {'E': 921}
+2025-11-15 17:22:57,047 - ui_main - INFO - Parameter E changed to 921
+2025-11-15 17:22:57,049 - audio_processor - INFO - Custom parameters updated: {'E': 947}
+2025-11-15 17:22:57,049 - ui_main - INFO - Parameter E changed to 947
+2025-11-15 17:22:57,054 - audio_processor - INFO - Custom parameters updated: {'E': 974}
+2025-11-15 17:22:57,056 - ui_main - INFO - Parameter E changed to 974
+2025-11-15 17:22:57,061 - audio_processor - INFO - Custom parameters updated: {'E': 1000}
+2025-11-15 17:22:57,061 - ui_main - INFO - Parameter E changed to 1000
+2025-11-15 17:22:57,552 - audio_processor - DEBUG - Input: 0.015 | Buffer: 1024
+2025-11-15 17:22:57,864 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:00,101 - audio_processor - DEBUG - Input: 0.023 | Buffer: 2048
+2025-11-15 17:23:04,574 - audio_processor - INFO - Custom parameters updated: {'G': 526}
+2025-11-15 17:23:04,576 - ui_main - INFO - Parameter G changed to 526
+2025-11-15 17:23:04,591 - audio_processor - INFO - Custom parameters updated: {'G': 579}
+2025-11-15 17:23:04,591 - ui_main - INFO - Parameter G changed to 579
+2025-11-15 17:23:04,675 - audio_processor - INFO - Custom parameters updated: {'G': 605}
+2025-11-15 17:23:04,675 - ui_main - INFO - Parameter G changed to 605
+2025-11-15 17:23:04,679 - audio_processor - INFO - Custom parameters updated: {'G': 632}
+2025-11-15 17:23:04,679 - ui_main - INFO - Parameter G changed to 632
+2025-11-15 17:23:04,705 - audio_processor - INFO - Custom parameters updated: {'G': 684}
+2025-11-15 17:23:04,705 - ui_main - INFO - Parameter G changed to 684
+2025-11-15 17:23:04,724 - audio_processor - INFO - Custom parameters updated: {'G': 711}
+2025-11-15 17:23:04,724 - ui_main - INFO - Parameter G changed to 711
+2025-11-15 17:23:04,749 - audio_processor - INFO - Custom parameters updated: {'G': 737}
+2025-11-15 17:23:04,749 - ui_main - INFO - Parameter G changed to 737
+2025-11-15 17:23:05,632 - audio_processor - DEBUG - Input: 0.031 | Buffer: 1024
+2025-11-15 17:23:05,812 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:07,404 - audio_processor - INFO - Custom parameters updated: {'G': 747}
+2025-11-15 17:23:07,404 - ui_main - INFO - Parameter G changed to 747
+2025-11-15 17:23:07,893 - audio_processor - INFO - Custom parameters updated: {'G': 757}
+2025-11-15 17:23:07,893 - ui_main - INFO - Parameter G changed to 757
+2025-11-15 17:23:07,956 - audio_processor - INFO - Custom parameters updated: {'G': 767}
+2025-11-15 17:23:07,956 - ui_main - INFO - Parameter G changed to 767
+2025-11-15 17:23:08,018 - audio_processor - INFO - Custom parameters updated: {'G': 777}
+2025-11-15 17:23:08,018 - ui_main - INFO - Parameter G changed to 777
+2025-11-15 17:23:08,083 - audio_processor - INFO - Custom parameters updated: {'G': 787}
+2025-11-15 17:23:08,083 - ui_main - INFO - Parameter G changed to 787
+2025-11-15 17:23:08,092 - audio_processor - DEBUG - Input: 0.034 | Buffer: 2048
+2025-11-15 17:23:09,466 - audio_processor - INFO - Custom parameters updated: {'G': 737}
+2025-11-15 17:23:09,466 - ui_main - INFO - Parameter G changed to 737
+2025-11-15 17:23:09,494 - audio_processor - INFO - Custom parameters updated: {'G': 684}
+2025-11-15 17:23:09,496 - ui_main - INFO - Parameter G changed to 684
+2025-11-15 17:23:09,502 - audio_processor - INFO - Custom parameters updated: {'G': 632}
+2025-11-15 17:23:09,502 - ui_main - INFO - Parameter G changed to 632
+2025-11-15 17:23:09,577 - audio_processor - INFO - Custom parameters updated: {'G': 579}
+2025-11-15 17:23:09,578 - ui_main - INFO - Parameter G changed to 579
+2025-11-15 17:23:09,612 - audio_processor - INFO - Custom parameters updated: {'G': 553}
+2025-11-15 17:23:09,612 - ui_main - INFO - Parameter G changed to 553
+2025-11-15 17:23:09,637 - audio_processor - INFO - Custom parameters updated: {'G': 500}
+2025-11-15 17:23:09,637 - ui_main - INFO - Parameter G changed to 500
+2025-11-15 17:23:09,654 - audio_processor - INFO - Custom parameters updated: {'G': 474}
+2025-11-15 17:23:09,656 - ui_main - INFO - Parameter G changed to 474
+2025-11-15 17:23:09,945 - audio_processor - INFO - Custom parameters updated: {'G': 447}
+2025-11-15 17:23:09,945 - ui_main - INFO - Parameter G changed to 447
+2025-11-15 17:23:09,979 - audio_processor - INFO - Custom parameters updated: {'G': 395}
+2025-11-15 17:23:09,979 - ui_main - INFO - Parameter G changed to 395
+2025-11-15 17:23:09,992 - audio_processor - INFO - Custom parameters updated: {'G': 316}
+2025-11-15 17:23:09,994 - ui_main - INFO - Parameter G changed to 316
+2025-11-15 17:23:10,014 - audio_processor - INFO - Custom parameters updated: {'G': 289}
+2025-11-15 17:23:10,014 - ui_main - INFO - Parameter G changed to 289
+2025-11-15 17:23:10,029 - audio_processor - INFO - Custom parameters updated: {'G': 263}
+2025-11-15 17:23:10,029 - ui_main - INFO - Parameter G changed to 263
+2025-11-15 17:23:10,072 - audio_processor - INFO - Custom parameters updated: {'G': 211}
+2025-11-15 17:23:10,072 - ui_main - INFO - Parameter G changed to 211
+2025-11-15 17:23:10,089 - audio_processor - INFO - Custom parameters updated: {'G': 184}
+2025-11-15 17:23:10,089 - ui_main - INFO - Parameter G changed to 184
+2025-11-15 17:23:10,203 - audio_processor - INFO - Custom parameters updated: {'G': 158}
+2025-11-15 17:23:10,203 - ui_main - INFO - Parameter G changed to 158
+2025-11-15 17:23:10,773 - audio_processor - INFO - Custom parameters updated: {'G': 105}
+2025-11-15 17:23:10,773 - ui_main - INFO - Parameter G changed to 105
+2025-11-15 17:23:10,861 - audio_processor - INFO - Custom parameters updated: {'G': 79}
+2025-11-15 17:23:10,862 - ui_main - INFO - Parameter G changed to 79
+2025-11-15 17:23:12,392 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:12,781 - audio_processor - DEBUG - Input: 0.025 | Buffer: 1024
+2025-11-15 17:23:17,223 - audio_processor - INFO - Custom parameters updated: {'G': 105}
+2025-11-15 17:23:17,223 - ui_main - INFO - Parameter G changed to 105
+2025-11-15 17:23:17,277 - audio_processor - INFO - Custom parameters updated: {'G': 132}
+2025-11-15 17:23:17,277 - ui_main - INFO - Parameter G changed to 132
+2025-11-15 17:23:17,280 - audio_processor - INFO - Custom parameters updated: {'G': 184}
+2025-11-15 17:23:17,280 - ui_main - INFO - Parameter G changed to 184
+2025-11-15 17:23:17,299 - audio_processor - INFO - Custom parameters updated: {'G': 237}
+2025-11-15 17:23:17,300 - ui_main - INFO - Parameter G changed to 237
+2025-11-15 17:23:17,348 - audio_processor - INFO - Custom parameters updated: {'G': 263}
+2025-11-15 17:23:17,348 - ui_main - INFO - Parameter G changed to 263
+2025-11-15 17:23:17,363 - audio_processor - INFO - Custom parameters updated: {'G': 316}
+2025-11-15 17:23:17,364 - ui_main - INFO - Parameter G changed to 316
+2025-11-15 17:23:17,390 - audio_processor - INFO - Custom parameters updated: {'G': 368}
+2025-11-15 17:23:17,392 - ui_main - INFO - Parameter G changed to 368
+2025-11-15 17:23:17,519 - audio_processor - INFO - Custom parameters updated: {'G': 421}
+2025-11-15 17:23:17,520 - ui_main - INFO - Parameter G changed to 421
+2025-11-15 17:23:17,548 - audio_processor - INFO - Custom parameters updated: {'G': 447}
+2025-11-15 17:23:17,548 - ui_main - INFO - Parameter G changed to 447
+2025-11-15 17:23:17,565 - audio_processor - INFO - Custom parameters updated: {'G': 474}
+2025-11-15 17:23:17,565 - ui_main - INFO - Parameter G changed to 474
+2025-11-15 17:23:17,830 - audio_processor - INFO - Custom parameters updated: {'G': 500}
+2025-11-15 17:23:17,832 - ui_main - INFO - Parameter G changed to 500
+2025-11-15 17:23:17,839 - audio_processor - INFO - Custom parameters updated: {'G': 553}
+2025-11-15 17:23:17,840 - ui_main - INFO - Parameter G changed to 553
+2025-11-15 17:23:17,858 - audio_processor - INFO - Custom parameters updated: {'G': 605}
+2025-11-15 17:23:17,858 - ui_main - INFO - Parameter G changed to 605
+2025-11-15 17:23:17,865 - audio_processor - INFO - Custom parameters updated: {'G': 658}
+2025-11-15 17:23:17,865 - ui_main - INFO - Parameter G changed to 658
+2025-11-15 17:23:17,874 - audio_processor - INFO - Custom parameters updated: {'G': 684}
+2025-11-15 17:23:17,876 - ui_main - INFO - Parameter G changed to 684
+2025-11-15 17:23:17,882 - audio_processor - INFO - Custom parameters updated: {'G': 737}
+2025-11-15 17:23:17,884 - ui_main - INFO - Parameter G changed to 737
+2025-11-15 17:23:17,893 - audio_processor - INFO - Custom parameters updated: {'G': 763}
+2025-11-15 17:23:17,893 - ui_main - INFO - Parameter G changed to 763
+2025-11-15 17:23:17,920 - audio_processor - INFO - Custom parameters updated: {'G': 789}
+2025-11-15 17:23:17,920 - ui_main - INFO - Parameter G changed to 789
+2025-11-15 17:23:17,944 - audio_processor - INFO - Custom parameters updated: {'G': 842}
+2025-11-15 17:23:17,946 - ui_main - INFO - Parameter G changed to 842
+2025-11-15 17:23:18,006 - audio_processor - INFO - Custom parameters updated: {'G': 868}
+2025-11-15 17:23:18,008 - ui_main - INFO - Parameter G changed to 868
+2025-11-15 17:23:18,026 - audio_processor - INFO - Custom parameters updated: {'G': 921}
+2025-11-15 17:23:18,026 - ui_main - INFO - Parameter G changed to 921
+2025-11-15 17:23:18,124 - audio_processor - INFO - Custom parameters updated: {'G': 974}
+2025-11-15 17:23:18,124 - ui_main - INFO - Parameter G changed to 974
+2025-11-15 17:23:18,133 - audio_processor - INFO - Custom parameters updated: {'G': 1000}
+2025-11-15 17:23:18,133 - ui_main - INFO - Parameter G changed to 1000
+2025-11-15 17:23:18,821 - audio_processor - DEBUG - Input: 0.033 | Buffer: 1024
+2025-11-15 17:23:19,327 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:22,302 - audio_processor - DEBUG - Input: 0.120 | Buffer: 1024
+2025-11-15 17:23:22,957 - audio_processor - INFO - Custom parameters updated: {'G': 974}
+2025-11-15 17:23:22,957 - ui_main - INFO - Parameter G changed to 974
+2025-11-15 17:23:22,961 - audio_processor - INFO - Custom parameters updated: {'G': 921}
+2025-11-15 17:23:22,961 - ui_main - INFO - Parameter G changed to 921
+2025-11-15 17:23:22,971 - audio_processor - INFO - Custom parameters updated: {'G': 842}
+2025-11-15 17:23:22,971 - ui_main - INFO - Parameter G changed to 842
+2025-11-15 17:23:22,984 - audio_processor - INFO - Custom parameters updated: {'G': 789}
+2025-11-15 17:23:22,986 - ui_main - INFO - Parameter G changed to 789
+2025-11-15 17:23:22,990 - audio_processor - INFO - Custom parameters updated: {'G': 737}
+2025-11-15 17:23:22,990 - ui_main - INFO - Parameter G changed to 737
+2025-11-15 17:23:22,996 - audio_processor - INFO - Custom parameters updated: {'G': 711}
+2025-11-15 17:23:22,996 - ui_main - INFO - Parameter G changed to 711
+2025-11-15 17:23:23,009 - audio_processor - INFO - Custom parameters updated: {'G': 684}
+2025-11-15 17:23:23,009 - ui_main - INFO - Parameter G changed to 684
+2025-11-15 17:23:23,010 - audio_processor - INFO - Custom parameters updated: {'G': 632}
+2025-11-15 17:23:23,010 - ui_main - INFO - Parameter G changed to 632
+2025-11-15 17:23:23,022 - audio_processor - INFO - Custom parameters updated: {'G': 605}
+2025-11-15 17:23:23,024 - ui_main - INFO - Parameter G changed to 605
+2025-11-15 17:23:23,049 - audio_processor - INFO - Custom parameters updated: {'G': 579}
+2025-11-15 17:23:23,049 - ui_main - INFO - Parameter G changed to 579
+2025-11-15 17:23:23,059 - audio_processor - INFO - Custom parameters updated: {'G': 526}
+2025-11-15 17:23:23,059 - ui_main - INFO - Parameter G changed to 526
+2025-11-15 17:23:23,079 - audio_processor - INFO - Custom parameters updated: {'G': 500}
+2025-11-15 17:23:23,079 - ui_main - INFO - Parameter G changed to 500
+2025-11-15 17:23:23,085 - audio_processor - INFO - Custom parameters updated: {'G': 474}
+2025-11-15 17:23:23,085 - ui_main - INFO - Parameter G changed to 474
+2025-11-15 17:23:23,095 - audio_processor - INFO - Custom parameters updated: {'G': 447}
+2025-11-15 17:23:23,095 - ui_main - INFO - Parameter G changed to 447
+2025-11-15 17:23:23,108 - audio_processor - INFO - Custom parameters updated: {'G': 395}
+2025-11-15 17:23:23,108 - ui_main - INFO - Parameter G changed to 395
+2025-11-15 17:23:23,113 - audio_processor - INFO - Custom parameters updated: {'G': 368}
+2025-11-15 17:23:23,113 - ui_main - INFO - Parameter G changed to 368
+2025-11-15 17:23:23,130 - audio_processor - INFO - Custom parameters updated: {'G': 289}
+2025-11-15 17:23:23,130 - ui_main - INFO - Parameter G changed to 289
+2025-11-15 17:23:23,161 - audio_processor - INFO - Custom parameters updated: {'G': 237}
+2025-11-15 17:23:23,161 - ui_main - INFO - Parameter G changed to 237
+2025-11-15 17:23:23,178 - audio_processor - INFO - Custom parameters updated: {'G': 184}
+2025-11-15 17:23:23,178 - ui_main - INFO - Parameter G changed to 184
+2025-11-15 17:23:23,189 - audio_processor - INFO - Custom parameters updated: {'G': 132}
+2025-11-15 17:23:23,189 - ui_main - INFO - Parameter G changed to 132
+2025-11-15 17:23:23,274 - audio_processor - INFO - Custom parameters updated: {'G': 105}
+2025-11-15 17:23:23,274 - ui_main - INFO - Parameter G changed to 105
+2025-11-15 17:23:23,289 - audio_processor - INFO - Custom parameters updated: {'G': 79}
+2025-11-15 17:23:23,290 - ui_main - INFO - Parameter G changed to 79
+2025-11-15 17:23:23,303 - audio_processor - INFO - Custom parameters updated: {'G': 26}
+2025-11-15 17:23:23,303 - ui_main - INFO - Parameter G changed to 26
+2025-11-15 17:23:23,321 - audio_processor - INFO - Custom parameters updated: {'G': 0}
+2025-11-15 17:23:23,321 - ui_main - INFO - Parameter G changed to 0
+2025-11-15 17:23:25,749 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:27,017 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:28,622 - audio_processor - DEBUG - Input: 0.027 | Buffer: 1024
+2025-11-15 17:23:28,767 - audio_processor - INFO - Custom parameters updated: {'G': 26}
+2025-11-15 17:23:28,767 - ui_main - INFO - Parameter G changed to 26
+2025-11-15 17:23:28,856 - audio_processor - INFO - Custom parameters updated: {'G': 53}
+2025-11-15 17:23:28,856 - ui_main - INFO - Parameter G changed to 53
+2025-11-15 17:23:28,866 - audio_processor - INFO - Custom parameters updated: {'G': 105}
+2025-11-15 17:23:28,866 - ui_main - INFO - Parameter G changed to 105
+2025-11-15 17:23:28,885 - audio_processor - INFO - Custom parameters updated: {'G': 132}
+2025-11-15 17:23:28,885 - ui_main - INFO - Parameter G changed to 132
+2025-11-15 17:23:28,887 - audio_processor - INFO - Custom parameters updated: {'G': 158}
+2025-11-15 17:23:28,887 - ui_main - INFO - Parameter G changed to 158
+2025-11-15 17:23:28,914 - audio_processor - INFO - Custom parameters updated: {'G': 211}
+2025-11-15 17:23:28,914 - ui_main - INFO - Parameter G changed to 211
+2025-11-15 17:23:28,940 - audio_processor - INFO - Custom parameters updated: {'G': 237}
+2025-11-15 17:23:28,940 - ui_main - INFO - Parameter G changed to 237
+2025-11-15 17:23:29,017 - audio_processor - INFO - Custom parameters updated: {'G': 289}
+2025-11-15 17:23:29,018 - ui_main - INFO - Parameter G changed to 289
+2025-11-15 17:23:29,037 - audio_processor - INFO - Custom parameters updated: {'G': 316}
+2025-11-15 17:23:29,037 - ui_main - INFO - Parameter G changed to 316
+2025-11-15 17:23:29,093 - audio_processor - INFO - Custom parameters updated: {'G': 368}
+2025-11-15 17:23:29,093 - ui_main - INFO - Parameter G changed to 368
+2025-11-15 17:23:30,375 - audio_processor - INFO - Custom function compiled: x * np.exp(-x**2 * G/100000)
+2025-11-15 17:23:32,191 - audio_processor - DEBUG - Input: 0.018 | Buffer: 1024
+2025-11-15 17:23:33,674 - audio_processor - INFO - >>> Processing stopped

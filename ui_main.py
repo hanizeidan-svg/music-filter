@@ -1,8 +1,9 @@
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                             QSlider, QLabel, QPushButton, QComboBox, QGroupBox,
-                            QMessageBox, QFrame, QRadioButton, QButtonGroup)
+                            QMessageBox, QFrame, QRadioButton, QButtonGroup,
+                            QTextEdit, QScrollArea, QGridLayout, QSplitter)
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPalette, QColor
 import sounddevice as sd
 import logging
 
@@ -10,122 +11,122 @@ from audio_processor import AudioProcessor
 
 logger = logging.getLogger(__name__)
 
+class ParameterSlider(QWidget):
+    def __init__(self, param_name, initial_value=500, parent=None):
+        super().__init__(parent)
+        self.param_name = param_name
+        self.init_ui(initial_value)
+    
+    def init_ui(self, initial_value):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(2, 2, 2, 2)
+        
+        # Parameter label
+        self.label = QLabel(f"{self.param_name}: {initial_value}")
+        self.label.setAlignment(Qt.AlignCenter)
+        self.label.setStyleSheet("font-weight: bold; font-size: 9pt;")
+        layout.addWidget(self.label)
+        
+        # Slider
+        self.slider = QSlider(Qt.Vertical)
+        self.slider.setRange(0, 1000)
+        self.slider.setValue(initial_value)
+        self.slider.setTickPosition(QSlider.TicksBothSides)
+        self.slider.setTickInterval(100)
+        self.slider.valueChanged.connect(self.on_slider_changed)
+        layout.addWidget(self.slider)
+    
+    def on_slider_changed(self, value):
+        self.label.setText(f"{self.param_name}: {value}")
+        if hasattr(self, 'callback'):
+            self.callback(self.param_name, value)
+    
+    def set_callback(self, callback):
+        self.callback = callback
+    
+    def get_value(self):
+        return self.slider.value()
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.audio_processor = None
+        self.param_sliders = {}
         self.init_ui()
         self.populate_audio_devices()
     
     def init_ui(self):
-        self.setWindowTitle("Audio Transformer - Test Modes")
-        self.setGeometry(300, 300, 600, 600)
+        self.setWindowTitle("Audio Processing Lab - Custom Transformations")
+        self.setGeometry(100, 100, 1200, 800)
         
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        layout = QVBoxLayout(central_widget)
-        layout.setSpacing(10)
-        layout.setContentsMargins(20, 20, 20, 20)
+        
+        # Main splitter
+        main_splitter = QSplitter(Qt.Horizontal)
+        
+        # Left panel - Controls
+        left_panel = QWidget()
+        left_layout = QVBoxLayout(left_panel)
         
         # Title
-        title = QLabel("Audio Transformer - Test Modes")
-        title.setFont(QFont("Arial", 18, QFont.Bold))
+        title = QLabel("🎛️ Audio Processing Lab")
+        title.setFont(QFont("Arial", 20, QFont.Bold))
         title.setAlignment(Qt.AlignCenter)
-        title.setStyleSheet("color: #2c3e50; margin-bottom: 10px;")
-        layout.addWidget(title)
+        title.setStyleSheet("color: #2c3e50; margin: 10px;")
+        left_layout.addWidget(title)
         
-        # Processing Mode Selection
-        mode_group = QGroupBox("🎛️ TRANSFORMATION MODES (TEST EACH ONE)")
-        mode_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
+        # Processing Mode
+        mode_group = QGroupBox("Processing Mode")
         mode_layout = QVBoxLayout(mode_group)
         
-        # Radio buttons for mode selection
         self.mode_button_group = QButtonGroup(self)
         
         modes = [
-            ("🔊 PASS-THROUGH", "pass_through", "Original audio unchanged - test routing"),
-            ("🔉 VOLUME TEST", "volume_test", "50% quieter - VERY OBVIOUS"),
-            ("🔊 VOLUME BOOST", "volume_boost", "200% louder - VERY OBVIOUS"), 
-            ("🤖 ROBOT VOICE", "robot_voice", "Robot effect - VERY OBVIOUS"),
-            ("📻 RADIO EFFECT", "radio_effect", "AM radio effect - VERY OBVIOUS"),
-            ("🎵 AI SEPARATION", "ai_transform", "Vocal/Music separation")
+            ("🔊 PASS-THROUGH", "pass_through", "Audio passes through unchanged"),
+            ("🤖 AI TRANSFORM", "ai_transform", "AI vocal/music separation (uses parameter A)"),
+            ("🔬 CUSTOM LAB", "custom_lab", "Custom function transformation")
         ]
         
         for text, mode, tooltip in modes:
             radio = QRadioButton(text)
             radio.setToolTip(tooltip)
-            radio.mode = mode
+            if mode == "custom_lab":
+                radio.setChecked(True)
             self.mode_button_group.addButton(radio)
             mode_layout.addWidget(radio)
         
-        # Set default
-        self.mode_button_group.buttons()[0].setChecked(True)
+        left_layout.addWidget(mode_group)
         
-        layout.addWidget(mode_group)
-        
-        # Device Selection Group
-        device_group = QGroupBox("🎧 AUDIO DEVICES")
-        device_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
+        # Device Selection
+        device_group = QGroupBox("Audio Devices")
         device_layout = QVBoxLayout(device_group)
         
-        # Input Device Selection
-        input_layout = QVBoxLayout()
-        input_layout.addWidget(QLabel("INPUT (Audio Source):"))
+        # Input Device
+        device_layout.addWidget(QLabel("INPUT Device:"))
         self.input_combo = QComboBox()
-        self.input_combo.setToolTip("Where audio comes FROM (e.g., CABLE Output)")
-        input_layout.addWidget(self.input_combo)
-        device_layout.addLayout(input_layout)
+        self.input_combo.setToolTip("Audio source (e.g., CABLE Output)")
+        device_layout.addWidget(self.input_combo)
         
         device_layout.addWidget(QLabel(""))  # Spacer
         
-        # Output Device Selection
-        output_layout = QVBoxLayout()
-        output_layout.addWidget(QLabel("OUTPUT (Speakers):"))
+        # Output Device
+        device_layout.addWidget(QLabel("OUTPUT Device:"))
         self.output_combo = QComboBox()
-        self.output_combo.setToolTip("Where audio goes TO (your speakers/headphones)")
-        output_layout.addWidget(self.output_combo)
-        device_layout.addLayout(output_layout)
+        self.output_combo.setToolTip("Audio output (e.g., your speakers)")
+        device_layout.addWidget(self.output_combo)
         
         # Auto-detect button
-        cable_button = QPushButton("Auto-Detect Virtual Cable")
-        cable_button.clicked.connect(self.auto_detect_virtual_cable)
-        cable_button.setStyleSheet("background-color: #17a2b8; color: white; padding: 5px;")
-        device_layout.addWidget(cable_button)
+        cable_btn = QPushButton("Auto-Detect Virtual Cable")
+        cable_btn.clicked.connect(self.auto_detect_virtual_cable)
+        cable_btn.setStyleSheet("background-color: #17a2b8; color: white; padding: 5px;")
+        device_layout.addWidget(cable_btn)
         
-        layout.addWidget(device_group)
+        left_layout.addWidget(device_group)
         
-        # AI Control Group (only for AI mode)
-        self.ai_control_group = QGroupBox("🎵 AI SEPARATION CONTROL")
-        self.ai_control_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
-        ai_layout = QVBoxLayout(self.ai_control_group)
-        
-        # Slider
-        slider_labels = QHBoxLayout()
-        slider_labels.addWidget(QLabel("🎤 VOCALS"))
-        slider_labels.addStretch()
-        slider_labels.addWidget(QLabel("⚖️ BALANCED"))
-        slider_labels.addStretch()
-        slider_labels.addWidget(QLabel("🎵 MUSIC"))
-        ai_layout.addLayout(slider_labels)
-        
-        self.slider = QSlider(Qt.Horizontal)
-        self.slider.setRange(0, 100)
-        self.slider.setValue(50)
-        self.slider.valueChanged.connect(self.on_slider_change)
-        ai_layout.addWidget(self.slider)
-        
-        # Mode display
-        self.mode_label = QLabel("Current: Balanced Mode")
-        self.mode_label.setAlignment(Qt.AlignCenter)
-        self.mode_label.setStyleSheet("font-weight: bold; font-size: 14pt; color: #f39c12; padding: 5px;")
-        ai_layout.addWidget(self.mode_label)
-        
-        layout.addWidget(self.ai_control_group)
-        self.ai_control_group.setVisible(False)
-        
-        # Buttons
+        # Control Buttons
         button_layout = QHBoxLayout()
-        self.start_btn = QPushButton("🎵 START PROCESSING")
+        self.start_btn = QPushButton("START PROCESSING")
         self.start_btn.clicked.connect(self.start_processing)
         self.start_btn.setStyleSheet("""
             QPushButton {
@@ -136,15 +137,11 @@ class MainWindow(QMainWindow):
                 border-radius: 6px;
                 font-size: 12pt;
             }
-            QPushButton:hover {
-                background-color: #218838;
-            }
-            QPushButton:disabled {
-                background-color: #6c757d;
-            }
+            QPushButton:hover { background-color: #218838; }
+            QPushButton:disabled { background-color: #6c757d; }
         """)
         
-        self.stop_btn = QPushButton("⏹ STOP PROCESSING")
+        self.stop_btn = QPushButton("STOP")
         self.stop_btn.clicked.connect(self.stop_processing)
         self.stop_btn.setEnabled(False)
         self.stop_btn.setStyleSheet("""
@@ -156,55 +153,108 @@ class MainWindow(QMainWindow):
                 border-radius: 6px;
                 font-size: 12pt;
             }
-            QPushButton:hover {
-                background-color: #c82333;
-            }
-            QPushButton:disabled {
-                background-color: #6c757d;
-            }
+            QPushButton:hover { background-color: #c82333; }
+            QPushButton:disabled { background-color: #6c757d; }
         """)
         
         button_layout.addWidget(self.start_btn)
         button_layout.addWidget(self.stop_btn)
-        layout.addLayout(button_layout)
+        left_layout.addLayout(button_layout)
         
         # Status
-        self.status = QLabel("Select a transformation mode and devices, then click START")
+        self.status = QLabel("Ready to start - Select CUSTOM LAB mode for transformations")
         self.status.setAlignment(Qt.AlignCenter)
-        self.status.setStyleSheet("padding: 12px; background-color: #f8f9fa; border-radius: 5px; font-size: 11pt;")
-        layout.addWidget(self.status)
+        self.status.setStyleSheet("padding: 10px; background-color: #f8f9fa; border-radius: 5px; font-size: 10pt;")
+        left_layout.addWidget(self.status)
         
-        # Instructions
-        instructions = QLabel(
-            "🎯 TEST PROCEDURE:\n"
-            "1. Start with PASS-THROUGH - verify audio works\n"
-            "2. Test VOLUME TEST - should be 50% quieter (OBVIOUS)\n" 
-            "3. Test ROBOT VOICE - should sound robotic (OBVIOUS)\n"
-            "4. Test AI SEPARATION - move slider for vocal/music control"
+        left_layout.addStretch()
+        
+        # Right panel - Custom Lab
+        right_panel = QWidget()
+        right_layout = QVBoxLayout(right_panel)
+        
+        # Custom Function Editor
+        function_group = QGroupBox("Custom Function Editor")
+        function_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
+        function_layout = QVBoxLayout(function_group)
+        
+        # Function description
+        desc = QLabel("Use 'x' for audio data, parameters A-P (0-1000). Examples:")
+        desc.setStyleSheet("color: #6c757d; font-size: 9pt;")
+        function_layout.addWidget(desc)
+        
+        # Example functions
+        examples = QLabel(
+            "x * A/1000.0 | np.sin(x * B/100) | x * np.sin(x * C/10) | x + (x**3 * D/100000)"
         )
-        instructions.setStyleSheet("color: #6c757d; font-size: 10pt; padding: 10px; background-color: #e9ecef; border-radius: 5px;")
-        instructions.setAlignment(Qt.AlignCenter)
-        instructions.setWordWrap(True)
-        layout.addWidget(instructions)
+        examples.setStyleSheet("color: #17a2b8; font-size: 9pt; font-family: monospace; background-color: #f8f9fa; padding: 5px;")
+        examples.setWordWrap(True)
+        function_layout.addWidget(examples)
         
-        layout.addStretch()
+        # Function text area
+        self.function_edit = QTextEdit()
+        self.function_edit.setPlainText("x * A/500.0")  # Default function
+        self.function_edit.setStyleSheet("font-family: 'Courier New'; font-size: 10pt;")
+        self.function_edit.setMaximumHeight(100)
+        function_layout.addWidget(self.function_edit)
         
-        # Connect mode change signal
+        # Apply function button
+        apply_btn = QPushButton("Apply Function")
+        apply_btn.clicked.connect(self.apply_custom_function)
+        apply_btn.setStyleSheet("background-color: #6f42c1; color: white; font-weight: bold; padding: 8px;")
+        function_layout.addWidget(apply_btn)
+        
+        right_layout.addWidget(function_group)
+        
+        # Parameters Grid
+        params_group = QGroupBox("Parameters A-P (0-1000)")
+        params_layout = QGridLayout(params_group)
+        
+        # Create 16 parameter sliders
+        for i in range(16):
+            param_name = chr(65 + i)  # A-P
+            slider = ParameterSlider(param_name)
+            slider.set_callback(self.on_parameter_changed)
+            self.param_sliders[param_name] = slider
+            params_layout.addWidget(slider, i // 4, i % 4)
+        
+        right_layout.addWidget(params_group)
+        
+        # Add panels to splitter
+        main_splitter.addWidget(left_panel)
+        main_splitter.addWidget(right_panel)
+        main_splitter.setSizes([400, 800])
+        
+        # Main layout
+        main_layout = QVBoxLayout(central_widget)
+        main_layout.addWidget(main_splitter)
+        
+        # Connect signals
         self.mode_button_group.buttonClicked.connect(self.on_mode_changed)
     
     def on_mode_changed(self):
         """Handle processing mode change"""
-        selected_button = self.mode_button_group.checkedButton()
-        mode = selected_button.mode
-        
-        # Show/hide AI controls
-        if mode == "ai_transform":
-            self.ai_control_group.setVisible(True)
-            self.status.setText("AI SEPARATION mode - use slider to control vocal/music balance")
+        mode = self.get_processing_mode()
+        if mode == "custom_lab":
+            self.status.setText("CUSTOM LAB mode - Use function editor and parameters A-P")
+        elif mode == "ai_transform":
+            self.status.setText("AI TRANSFORM mode - Uses parameter A for vocal/music balance")
         else:
-            self.ai_control_group.setVisible(False)
-            mode_name = selected_button.text().split(' ')[1]  # Get mode name from button text
-            self.status.setText(f"{mode_name} mode - you should hear obvious audio changes")
+            self.status.setText("PASS-THROUGH mode - Audio unchanged")
+    
+    def on_parameter_changed(self, param_name, value):
+        """Handle parameter slider changes"""
+        if self.audio_processor and self.audio_processor.is_processing:
+            params = {param_name: value}
+            self.audio_processor.set_custom_parameters(params)
+            logger.info(f"Parameter {param_name} changed to {value}")
+    
+    def apply_custom_function(self):
+        """Apply the custom function from the editor"""
+        function_code = self.function_edit.toPlainText()
+        if self.audio_processor:
+            self.audio_processor.set_custom_function(function_code)
+            self.status.setText(f"Function applied: {function_code}")
     
     def populate_audio_devices(self):
         """Populate audio device dropdowns"""
@@ -216,7 +266,6 @@ class MainWindow(QMainWindow):
             self.input_combo.clear()
             self.output_combo.clear()
             
-            # Add devices to appropriate dropdowns
             for device in devices:
                 device_text = f"{device['index']}: {device['name']}"
                 
@@ -226,28 +275,25 @@ class MainWindow(QMainWindow):
                 if device['max_output_channels'] > 0:
                     self.output_combo.addItem(device_text, device['index'])
             
-            # Try to set sensible defaults
             self.auto_detect_virtual_cable()
             
         except Exception as e:
-            logger.error(f"Error populating audio devices: {e}")
-            self.status.setText(f"Error loading audio devices: {e}")
+            self.status.setText(f"Error loading devices: {e}")
     
     def auto_detect_virtual_cable(self):
-        """Try to auto-detect virtual cable devices"""
+        """Auto-detect virtual cable devices"""
         try:
-            # Look for virtual cable in input devices
+            # Find virtual cable input
             for i in range(self.input_combo.count()):
-                item_text = self.input_combo.itemText(i).lower()
-                if any(cable in item_text for cable in ['cable', 'vb-audio', 'virtual']):
+                if any(cable in self.input_combo.itemText(i).lower() for cable in ['cable', 'vb-audio']):
                     self.input_combo.setCurrentIndex(i)
                     break
             
-            # Look for speakers in output devices
+            # Find speakers output
             for i in range(self.output_combo.count()):
-                item_text = self.output_combo.itemText(i).lower()
-                if not any(cable in item_text for cable in ['cable', 'vb-audio', 'virtual']):
-                    if any(speaker in item_text for speaker in ['speaker', 'headphone', 'output']):
+                text = self.output_combo.itemText(i).lower()
+                if not any(cable in text for cable in ['cable', 'vb-audio']):
+                    if any(speaker in text for speaker in ['speaker', 'headphone', 'output']):
                         self.output_combo.setCurrentIndex(i)
                         break
             
@@ -256,86 +302,65 @@ class MainWindow(QMainWindow):
         except Exception as e:
             logger.error(f"Auto-detect error: {e}")
     
-    def on_slider_change(self, value):
-        ratio = value / 100.0
-        
-        # Update mode label
-        if value < 20:
-            self.mode_label.setText("🎤 VOCAL MODE")
-            self.mode_label.setStyleSheet("font-weight: bold; font-size: 14pt; color: #e74c3c; padding: 5px;")
-        elif value > 80:
-            self.mode_label.setText("🎵 MUSIC MODE")
-            self.mode_label.setStyleSheet("font-weight: bold; font-size: 14pt; color: #3498db; padding: 5px;")
-        else:
-            self.mode_label.setText("⚖️ BALANCED MODE")
-            self.mode_label.setStyleSheet("font-weight: bold; font-size: 14pt; color: #f39c12; padding: 5px;")
-        
-        # Update audio processor
-        if self.audio_processor:
-            self.audio_processor.set_music_ratio(ratio)
-    
-    def get_selected_devices(self):
-        """Get currently selected input and output devices"""
-        if self.input_combo.currentIndex() == -1 or self.output_combo.currentIndex() == -1:
-            return None, None
-        
-        input_device = self.input_combo.currentData()
-        output_device = self.output_combo.currentData()
-        
-        return input_device, output_device
-    
     def get_processing_mode(self):
         """Get current processing mode"""
-        selected_button = self.mode_button_group.checkedButton()
-        return selected_button.mode
+        buttons = self.mode_button_group.buttons()
+        for btn in buttons:
+            if btn.isChecked():
+                if "PASS-THROUGH" in btn.text():
+                    return "pass_through"
+                elif "AI TRANSFORM" in btn.text():
+                    return "ai_transform"
+                else:
+                    return "custom_lab"
+        return "custom_lab"
+    
+    def get_selected_devices(self):
+        """Get selected input and output devices"""
+        if self.input_combo.currentIndex() == -1 or self.output_combo.currentIndex() == -1:
+            return None, None
+        return self.input_combo.currentData(), self.output_combo.currentData()
     
     def start_processing(self):
         try:
             from audio_processor import AudioProcessor
             
-            # Get selected devices
             input_device, output_device = self.get_selected_devices()
             if input_device is None or output_device is None:
                 self._handle_error("Please select both input and output devices")
                 return
             
-            # Get processing mode
             processing_mode = self.get_processing_mode()
             
             self.start_btn.setEnabled(False)
             self.stop_btn.setEnabled(True)
+            self.status.setText(f"Starting {processing_mode} mode...")
             
-            mode_name = self.mode_button_group.checkedButton().text().split(' ')[1]
-            self.status.setText(f"Starting {mode_name} mode...")
-            
-            # Force UI update
-            QTimer.singleShot(100, lambda: self._actually_start_processing(input_device, output_device, processing_mode))
+            QTimer.singleShot(100, lambda: self._actually_start_processing(
+                input_device, output_device, processing_mode))
             
         except Exception as e:
             self._handle_error(f"Startup failed: {e}")
     
     def _actually_start_processing(self, input_device, output_device, processing_mode):
         try:
-            # Initialize audio processor
             self.audio_processor = AudioProcessor()
-            
-            # Set the selected devices
             self.audio_processor.set_devices(input_device, output_device)
-            
-            # Set processing mode
             self.audio_processor.set_processing_mode(processing_mode)
             
-            # Start processing
+            # Set initial parameters
+            initial_params = {name: slider.get_value() for name, slider in self.param_sliders.items()}
+            self.audio_processor.set_custom_parameters(initial_params)
+            
+            # Set custom function if in lab mode
+            if processing_mode == "custom_lab":
+                self.audio_processor.set_custom_function(self.function_edit.toPlainText())
+            
             self.audio_processor.start_processing()
             
-            # Update UI
-            mode_name = self.mode_button_group.checkedButton().text().split(' ')[1]
-            self.status.setText(f"✅ {mode_name} MODE ACTIVE!\nYou should hear obvious audio changes!")
-            
-            if processing_mode == "pass_through":
-                self.status.setStyleSheet("color: #17a2b8; background-color: #d1ecf1; padding: 12px; border-radius: 5px; font-size: 11pt;")
-            else:
-                self.status.setStyleSheet("color: green; background-color: #d4edda; padding: 12px; border-radius: 5px; font-size: 11pt;")
+            mode_display = processing_mode.replace('_', ' ').upper()
+            self.status.setText(f"✅ {mode_display} ACTIVE! Processing audio...")
+            self.status.setStyleSheet("color: green; background-color: #d4edda; padding: 10px; border-radius: 5px;")
             
         except Exception as e:
             self._handle_error(f"Processing failed: {e}")
@@ -344,11 +369,9 @@ class MainWindow(QMainWindow):
         self.start_btn.setEnabled(True)
         self.stop_btn.setEnabled(False)
         self.status.setText(f"❌ {error_msg}")
-        self.status.setStyleSheet("color: red; background-color: #f8d7da; padding: 12px; border-radius: 5px; font-size: 11pt;")
+        self.status.setStyleSheet("color: red; background-color: #f8d7da; padding: 10px; border-radius: 5px;")
         
-        QMessageBox.critical(self, "Audio Error", 
-                           f"{error_msg}\n\n"
-                           "Check device selection and try again.")
+        QMessageBox.critical(self, "Error", error_msg)
     
     def stop_processing(self):
         try:
@@ -356,14 +379,13 @@ class MainWindow(QMainWindow):
                 self.audio_processor.stop_processing()
                 self.audio_processor = None
             
-            # Update UI
             self.start_btn.setEnabled(True)
             self.stop_btn.setEnabled(False)
-            self.status.setText("Stopped - Ready to test another mode")
-            self.status.setStyleSheet("color: #6c757d; background-color: #f8f9fa; padding: 12px; border-radius: 5px; font-size: 11pt;")
+            self.status.setText("Stopped - Ready for new configuration")
+            self.status.setStyleSheet("color: #6c757d; background-color: #f8f9fa; padding: 10px; border-radius: 5px;")
             
         except Exception as e:
-            logger.error(f"Error stopping processing: {e}")
+            logger.error(f"Error stopping: {e}")
 
     def closeEvent(self, event):
         self.stop_processing()

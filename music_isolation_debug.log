@@ -2247,3 +2247,238 @@ ImportError: Failed to intialize FFmpeg extension. Tried versions: ['6', '5', '4
 2025-11-14 13:06:01,681 - audio_processor - INFO - AI Separation - Vocals: 0.036, Music: 0.001
 2025-11-14 13:06:01,681 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.2) - BOOSTED VOLUME
 2025-11-14 13:06:01,682 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.035, Processed: 0.056
+2025-11-15 08:18:20,672 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:18:20,692 - ui_main - INFO - Found 58 input devices and 49 output devices
+2025-11-15 08:18:21,072 - root - INFO - Application started successfully
+2025-11-15 08:18:57,210 - ui_main - INFO - Application closing...
+2025-11-15 08:18:57,210 - ui_main - INFO - Audio processing stopped by user
+2025-11-15 08:20:20,007 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:20:20,329 - root - INFO - Application started successfully
+2025-11-15 08:20:39,067 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 6.
+2025-11-15 08:20:39,337 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 6 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-58.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 08:20:39,350 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 5.
+2025-11-15 08:20:39,350 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 5 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-57.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 08:20:39,351 - torchaudio._extension.utils - DEBUG - Attempting to load FFmpeg version 4.
+2025-11-15 08:20:39,351 - torchaudio._extension.utils - DEBUG - Failed to load FFmpeg 4 extension.
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 128, in _find_ffmpeg_extension
+    return _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 113, in _find_versionsed_ffmpeg_extension
+    _try_access_avutil(ffmpeg_ver)
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 89, in _try_access_avutil
+    torchaudio.lib._torchaudio.find_avutil(libavutil)
+RuntimeError: error in LoadLibrary for avutil-56.dll. WinError 126: The specified module could not be found.
+
+2025-11-15 08:20:39,353 - torchaudio._extension - DEBUG - Failed to initialize ffmpeg bindings
+Traceback (most recent call last):
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\__init__.py", line 89, in <module>
+    _FFMPEG_EXT = _init_ffmpeg()
+                  ^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 162, in _init_ffmpeg
+    ext = _find_ffmpeg_extension(ffmpeg_vers, show_error)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\work\audio-processing\music-filter\venv\Lib\site-packages\torchaudio\_extension\utils.py", line 132, in _find_ffmpeg_extension
+    raise ImportError(f"Failed to intialize FFmpeg extension. Tried versions: {ffmpeg_vers}")
+ImportError: Failed to intialize FFmpeg extension. Tried versions: ['6', '5', '4']
+2025-11-15 08:20:39,505 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:20:39,916 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:20:40,147 - audio_processor - INFO - >>> REAL-TIME AI PROCESSING STARTED!
+2025-11-15 08:20:40,148 - audio_processor - INFO - >>> Play music and move slider to hear vocal/music separation!
+2025-11-15 08:20:41,197 - audio_processor - INFO - >>> APPLYING AI SEPARATION...
+2025-11-15 08:20:46,448 - audio_processor - INFO - AI Separation - Vocals: 0.000, Music: 0.000
+2025-11-15 08:20:46,449 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.5) - BOOSTED VOLUME
+2025-11-15 08:20:46,449 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.001, Processed: 0.000
+2025-11-15 08:20:46,568 - audio_processor - DEBUG - Input overflow
+2025-11-15 08:20:46,568 - audio_processor - DEBUG - Output underflow
+2025-11-15 08:20:46,568 - audio_processor - INFO - >>> APPLYING AI SEPARATION...
+2025-11-15 08:20:50,931 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:20:50,948 - audio_processor - INFO - AI Separation - Vocals: 0.000, Music: 0.000
+2025-11-15 08:20:50,950 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.5) - BOOSTED VOLUME
+2025-11-15 08:20:50,950 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.001, Processed: 0.000
+2025-11-15 08:22:40,065 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:22:40,082 - ui_main - INFO - Found 58 input devices and 49 output devices
+2025-11-15 08:22:40,434 - root - INFO - Application started successfully
+2025-11-15 08:22:48,034 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:22:48,386 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:22:48,485 - audio_processor - INFO - >>> REAL-TIME AI PROCESSING STARTED!
+2025-11-15 08:22:48,485 - audio_processor - INFO - >>> Play music and move slider to hear vocal/music separation!
+2025-11-15 08:22:49,544 - audio_processor - INFO - >>> APPLYING AI SEPARATION...
+2025-11-15 08:22:53,957 - audio_processor - INFO - AI Separation - Vocals: 0.000, Music: 0.000
+2025-11-15 08:22:53,958 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.5) - BOOSTED VOLUME
+2025-11-15 08:22:53,958 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.002, Processed: 0.000
+2025-11-15 08:22:54,075 - audio_processor - DEBUG - Input overflow
+2025-11-15 08:22:54,075 - audio_processor - DEBUG - Output underflow
+2025-11-15 08:22:54,075 - audio_processor - INFO - >>> APPLYING AI SEPARATION...
+2025-11-15 08:22:58,145 - audio_processor - INFO - AI Separation - Vocals: 0.000, Music: 0.000
+2025-11-15 08:22:58,145 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.5) - BOOSTED VOLUME
+2025-11-15 08:22:58,146 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.002, Processed: 0.000
+2025-11-15 08:22:58,255 - audio_processor - DEBUG - Input overflow
+2025-11-15 08:22:58,255 - audio_processor - DEBUG - Output underflow
+2025-11-15 08:22:58,255 - audio_processor - INFO - >>> APPLYING AI SEPARATION...
+2025-11-15 08:23:02,542 - audio_processor - INFO - AI Separation - Vocals: 0.000, Music: 0.000
+2025-11-15 08:23:02,544 - audio_processor - INFO - >>> BALANCED MODE (ratio: 0.5) - BOOSTED VOLUME
+2025-11-15 08:23:02,544 - audio_processor - INFO - >>> AI Processing Complete - Original: 0.002, Processed: 0.000
+2025-11-15 08:23:02,650 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:23:02,651 - ui_main - INFO - Audio processing stopped by user
+2025-11-15 08:23:07,585 - ui_main - INFO - Application closing...
+2025-11-15 08:23:07,585 - ui_main - INFO - Audio processing stopped by user
+2025-11-15 08:24:47,347 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:24:47,365 - ui_main - INFO - Found 58 input devices and 49 output devices
+2025-11-15 08:24:47,698 - root - INFO - Application started successfully
+2025-11-15 08:24:59,385 - ui_main - INFO - Application closing...
+2025-11-15 08:24:59,385 - ui_main - INFO - Audio processing stopped by user
+2025-11-15 08:39:26,870 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:39:27,217 - root - INFO - Application started successfully
+2025-11-15 08:39:40,009 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:39:40,358 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found virtual cable input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found speakers: CABLE Input (VB-Audio Virtual C (Device 12)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found virtual cable input: CABLE Output (VB-Audio Virtual Cable) (Device 24)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found speakers: CABLE Input (VB-Audio Virtual Cable) (Device 35)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found speakers: CABLE Input (VB-Audio Virtual Cable) (Device 55)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found virtual cable input: CABLE Output (VB-Audio Virtual Cable) (Device 63)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Found virtual cable input: CABLE Output (VB-Audio Point) (Device 79)
+2025-11-15 08:39:40,360 - audio_processor - INFO - Audio routing: Virtual Cable 79 -> Speakers 55
+2025-11-15 08:39:40,362 - audio_processor - ERROR - Error starting audio streams: Error opening OutputStream: Invalid sample rate [PaErrorCode -9997]
+2025-11-15 08:39:40,364 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:48:54,372 - root - INFO - Starting Music Isolation Application
+2025-11-15 08:48:54,389 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:48:54,789 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:48:54,791 - ui_main - INFO - Auto-selected input: 1: CABLE Output (VB-Audio Virtual  (2 in)
+2025-11-15 08:48:54,792 - ui_main - INFO - Auto-selected output: 11: Microsoft Sound Mapper - Output (2 out)
+2025-11-15 08:48:54,792 - ui_main - INFO - Loaded 58 input devices and 49 output devices
+2025-11-15 08:48:55,195 - root - INFO - Application started successfully
+2025-11-15 08:49:49,736 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:49:50,090 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:49:50,091 - audio_processor - INFO - Devices set - Input: 1, Output: 11
+2025-11-15 08:49:50,092 - audio_processor - INFO - Starting streams - Input: CABLE Output (VB-Audio Virtual , Output: Microsoft Sound Mapper - Output
+2025-11-15 08:49:50,125 - audio_processor - INFO - >>> AUDIO PROCESSING STARTED!
+2025-11-15 08:49:50,127 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 08:49:50,127 - audio_processor - INFO - >>> Output: Microsoft Sound Mapper - Output (Device 11)
+2025-11-15 08:49:50,127 - audio_processor - INFO - >>> Play audio on input device and move the slider!
+2025-11-15 08:49:50,167 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 08:50:04,863 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:50:04,864 - ui_main - INFO - Processing stopped by user
+2025-11-15 08:51:12,823 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:51:13,145 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:51:13,145 - audio_processor - INFO - Devices set - Input: 79, Output: 11
+2025-11-15 08:51:13,146 - audio_processor - INFO - Starting streams - Input: CABLE Output (VB-Audio Point), Output: Microsoft Sound Mapper - Output
+2025-11-15 08:51:13,158 - audio_processor - INFO - >>> AUDIO PROCESSING STARTED!
+2025-11-15 08:51:13,159 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Point) (Device 79)
+2025-11-15 08:51:13,159 - audio_processor - INFO - >>> Output: Microsoft Sound Mapper - Output (Device 11)
+2025-11-15 08:51:13,159 - audio_processor - INFO - >>> Play audio on input device and move the slider!
+2025-11-15 08:51:13,234 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 08:51:19,647 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:51:19,647 - ui_main - INFO - Processing stopped by user
+2025-11-15 08:54:45,740 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:54:46,071 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:54:46,072 - audio_processor - INFO - Devices set - Input: 63, Output: 57
+2025-11-15 08:54:46,074 - audio_processor - INFO - Starting streams - Input: CABLE Output (VB-Audio Virtual Cable), Output: Speakers (Realtek(R) Audio)
+2025-11-15 08:54:46,075 - audio_processor - ERROR - Error starting audio streams: Error opening InputStream: Invalid sample rate [PaErrorCode -9997]
+2025-11-15 08:54:46,075 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 08:56:31,666 - audio_processor - INFO - Loading AI model...
+2025-11-15 08:56:32,001 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 08:56:32,003 - audio_processor - INFO - Devices set - Input: 63, Output: 57
+2025-11-15 08:56:32,004 - audio_processor - INFO - Starting streams - Input: CABLE Output (VB-Audio Virtual Cable), Output: Speakers (Realtek(R) Audio)
+2025-11-15 08:56:32,006 - audio_processor - ERROR - Error starting audio streams: Error opening InputStream: Invalid sample rate [PaErrorCode -9997]
+2025-11-15 08:56:32,006 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:03:45,289 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:03:45,291 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:04:15,171 - root - INFO - Starting Music Isolation Application
+2025-11-15 09:04:15,191 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:04:15,581 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:04:15,584 - ui_main - INFO - Auto-selected input: 1: CABLE Output (VB-Audio Virtual  (2 in)
+2025-11-15 09:04:15,584 - ui_main - INFO - Auto-selected output: 11: Microsoft Sound Mapper - Output (2 out)
+2025-11-15 09:04:15,584 - ui_main - INFO - Loaded 58 input devices and 49 output devices
+2025-11-15 09:04:16,028 - root - INFO - Application started successfully
+2025-11-15 09:04:44,639 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:04:44,993 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:04:44,995 - audio_processor - INFO - Devices set - Input: 1, Output: 11
+2025-11-15 09:04:44,995 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:04:44,997 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH, Input: CABLE Output (VB-Audio Virtual , Output: Microsoft Sound Mapper - Output
+2025-11-15 09:04:45,029 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED!
+2025-11-15 09:04:45,030 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:04:45,030 - audio_processor - INFO - >>> Output: Microsoft Sound Mapper - Output (Device 11)
+2025-11-15 09:04:45,030 - audio_processor - INFO - >>> Audio is passing through unchanged - verify routing works
+2025-11-15 09:05:22,097 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:05:22,098 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:05:29,338 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:05:29,660 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:05:29,660 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:05:29,660 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:05:29,661 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH, Input: CABLE Output (VB-Audio Virtual , Output: Speakers 1 (Realtek HD Audio output with SST)
+2025-11-15 09:05:30,378 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED!
+2025-11-15 09:05:30,379 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:05:30,379 - audio_processor - INFO - >>> Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:05:30,379 - audio_processor - INFO - >>> Audio is passing through unchanged - verify routing works
+2025-11-15 09:05:32,674 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:05:32,674 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:05:35,074 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:05:35,408 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:05:35,408 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:05:35,408 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:05:35,409 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH, Input: CABLE Output (VB-Audio Virtual , Output: Speakers 1 (Realtek HD Audio output with SST)
+2025-11-15 09:05:35,510 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED!
+2025-11-15 09:05:35,510 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:05:35,510 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:05:35,510 - audio_processor - INFO - >>> Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:05:35,510 - audio_processor - INFO - >>> Audio is passing through unchanged - verify routing works
+2025-11-15 09:05:35,523 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:05:35,870 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:05:45,201 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:05:45,202 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:06:14,975 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:06:15,320 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:06:15,320 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:06:15,320 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:06:15,321 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH, Input: CABLE Output (VB-Audio Virtual , Output: Speakers 1 (Realtek HD Audio output with SST)
+2025-11-15 09:06:16,046 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED!
+2025-11-15 09:06:16,046 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:06:16,046 - audio_processor - INFO - >>> Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:06:16,046 - audio_processor - INFO - >>> Audio is passing through unchanged - verify routing works
+2025-11-15 09:06:39,666 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:06:39,667 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:07:04,728 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:07:05,048 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:07:05,048 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:07:05,048 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:07:05,050 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM, Input: CABLE Output (VB-Audio Virtual , Output: Speakers 1 (Realtek HD Audio output with SST)
+2025-11-15 09:07:05,778 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED!
+2025-11-15 09:07:05,778 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:07:05,780 - audio_processor - INFO - >>> Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:07:05,780 - audio_processor - INFO - >>> Play audio and move slider for AI separation!
+2025-11-15 09:07:19,270 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:07:19,271 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:07:34,753 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:07:35,097 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:07:35,099 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:07:35,099 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:07:35,100 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM, Input: CABLE Output (VB-Audio Virtual , Output: Speakers 1 (Realtek HD Audio output with SST)
+2025-11-15 09:07:35,687 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED!
+2025-11-15 09:07:35,688 - audio_processor - INFO - >>> Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:07:35,688 - audio_processor - INFO - >>> Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:07:35,688 - audio_processor - INFO - >>> Play audio and move slider for AI separation!
+2025-11-15 09:07:45,561 - audio_processor - INFO - >>> SWITCHED TO VOCAL MODE
+2025-11-15 09:08:46,178 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:08:46,179 - ui_main - INFO - Processing stopped by user

@@ -7,6 +7,8 @@ import logging
 import os
 import time
 import warnings
+import threading
+from queue import Queue
 
 # Suppress all warnings
 warnings.filterwarnings("ignore")
@@ -24,16 +26,24 @@ class AudioProcessor:
         self.is_processing = False
         self.output_stream = None
         self.input_stream = None
-        self.audio_buffer = np.array([], dtype=np.float32)
-        self.last_processed_time = 0
-        self.processing_interval = 1.0
         
-        # Manual device selection - will be set by UI
+        # Manual device selection
         self.input_device = None
         self.output_device = None
         
         # Processing mode
-        self.processing_mode = "transform"  # "transform" or "pass_through"
+        self.processing_mode = "transform"
+        
+        # Audio buffers and synchronization
+        self.audio_buffer = np.array([], dtype=np.float32)
+        self.processed_buffer = np.array([], dtype=np.float32)
+        self.buffer_lock = threading.Lock()
+        self.last_ai_time = 0
+        self.ai_processing_interval = 2.0  # Process AI every 2 seconds
+        
+        # For real-time processing
+        self.current_output_chunk = None
+        self.output_position = 0
         
         self.load_model()
     
@@ -87,17 +97,17 @@ class AudioProcessor:
             return np.column_stack((audio_data, audio_data))
         return audio_data
     
-    def demucs_separation(self, audio_data):
-        """Apply Demucs AI separation to audio data"""
-        if self.model is None or len(audio_data) < 1000:
-            return audio_data, audio_data
+    def apply_ai_separation(self, audio_chunk):
+        """Apply AI separation to an audio chunk - SIMPLIFIED AND FIXED"""
+        if self.model is None or len(audio_chunk) < 1000:
+            return audio_chunk
         
         try:
-            # Ensure we have the right chunk size
-            if len(audio_data) > self.chunk_size:
-                process_data = audio_data[:self.chunk_size]
-            else:
-                process_data = audio_data
+            logger.info(f">>> AI Processing {len(audio_chunk)} samples...")
+            
+            # Ensure proper length for Demucs
+            target_length = min(len(audio_chunk), self.chunk_size)
+            process_data = audio_chunk[:target_length]
             
             # Convert to stereo
             stereo_audio = self.ensure_stereo(process_data)
@@ -114,88 +124,81 @@ class AudioProcessor:
             vocals = sources[0, 3].numpy()  # vocals source
             music = (sources[0, 0] + sources[0, 1] + sources[0, 2]).numpy() / 3.0  # combine instruments
             
-            # Convert back to [samples, channels] and to mono
-            vocals = np.mean(vocals.T, axis=1)
-            music = np.mean(music.T, axis=1)
+            # Convert back to mono
+            vocals_mono = np.mean(vocals.T, axis=1)
+            music_mono = np.mean(music.T, axis=1)
             
-            logger.info(f"AI Separation - Vocals: {np.max(np.abs(vocals)):.3f}, Music: {np.max(np.abs(music)):.3f}")
+            logger.info(f"AI Results - Vocals: {np.max(np.abs(vocals_mono)):.3f}, Music: {np.max(np.abs(music_mono)):.3f}")
             
-            return vocals, music
-            
-        except Exception as e:
-            logger.error(f"AI processing error: {e}")
-            return audio_data, audio_data
-    
-    def process_audio_chunk(self, audio_data):
-        """Main audio processing - either AI transformation or pass-through"""
-        if self.processing_mode == "pass_through":
-            # Simple pass-through - no processing
-            return audio_data
-        
-        # AI Transformation mode
-        current_time = time.time()
-        
-        # Check if we should process with AI
-        should_process_ai = (
-            len(audio_data) >= self.chunk_size and 
-            (current_time - self.last_processed_time) >= self.processing_interval
-        )
-        
-        if not should_process_ai:
-            # Return original audio while waiting for AI processing
-            return audio_data
-        
-        try:
-            logger.info(">>> APPLYING AI SEPARATION...")
-            
-            # Get AI-separated vocals and music
-            vocals, music = self.demucs_separation(audio_data)
-            
-            # Mix based on current ratio with STRONG separation and VOLUME BOOST
+            # Apply STRONG separation based on ratio
             if self.music_ratio < 0.1:
-                # VOCAL MODE: 95% vocals, 5% music + VOLUME BOOST
-                result = (vocals * 0.95 + music * 0.05) * 2.0  # 2x volume boost
-                logger.info(">>> VOCAL EMPHASIS MODE")
+                # VOCAL MODE: 98% vocals, 2% music
+                result = vocals_mono * 0.98 + music_mono * 0.02
+                logger.info(">>> STRONG VOCAL EMPHASIS APPLIED")
             elif self.music_ratio > 0.9:
-                # MUSIC MODE: 5% vocals, 95% music + VOLUME BOOST
-                result = (vocals * 0.05 + music * 0.95) * 2.0  # 2x volume boost
-                logger.info(">>> MUSIC EMPHASIS MODE")
+                # MUSIC MODE: 2% vocals, 98% music
+                result = vocals_mono * 0.02 + music_mono * 0.98
+                logger.info(">>> STRONG MUSIC EMPHASIS APPLIED")
             else:
-                # BALANCED: Smooth transition + VOLUME BOOST
-                result = ((vocals * (1 - self.music_ratio)) + (music * self.music_ratio)) * 1.5  # 1.5x volume boost
-                logger.info(f">>> BALANCED MODE (ratio: {self.music_ratio:.1f})")
+                # BALANCED: Linear mix
+                result = (vocals_mono * (1 - self.music_ratio)) + (music_mono * self.music_ratio)
+                logger.info(f">>> BALANCED MIX (ratio: {self.music_ratio:.1f})")
             
-            # Ensure proper length
-            if len(result) > len(audio_data):
-                result = result[:len(audio_data)]
-            elif len(result) < len(audio_data):
-                # Pad with original audio if AI output is shorter
-                padded = np.zeros_like(audio_data)
-                padded[:len(result)] = result
-                result = padded
+            # Volume normalization
+            original_level = np.max(np.abs(process_data))
+            processed_level = np.max(np.abs(result))
             
-            # Prevent clipping
-            max_val = np.max(np.abs(result))
-            if max_val > 1.0:
-                result = result / max_val
-                logger.info(">>> Normalized to prevent clipping")
+            if processed_level > 0:
+                # Maintain similar volume level
+                result = result * (original_level / processed_level) * 0.8
             
-            # Update timing
-            self.last_processed_time = current_time
-            
-            # Log the effect
-            original_max = np.max(np.abs(audio_data))
-            processed_max = np.max(np.abs(result))
-            logger.info(f">>> AI Processing Complete - Original: {original_max:.3f}, Processed: {processed_max:.3f}")
+            logger.info(f">>> Volume - Original: {original_level:.3f}, Processed: {np.max(np.abs(result)):.3f}")
             
             return result
             
         except Exception as e:
-            logger.error(f"Processing error: {e}")
-            return audio_data
+            logger.error(f"AI processing error: {e}")
+            return audio_chunk
+    
+    def process_audio_realtime(self):
+        """Main processing loop - called from input callback"""
+        current_time = time.time()
+        
+        # Check if we should process with AI
+        should_process_ai = (
+            self.processing_mode == "transform" and
+            len(self.audio_buffer) >= self.chunk_size and
+            (current_time - self.last_ai_time) >= self.ai_processing_interval
+        )
+        
+        if should_process_ai:
+            try:
+                with self.buffer_lock:
+                    # Take a chunk for AI processing
+                    ai_chunk = self.audio_buffer[:self.chunk_size].copy()
+                    self.audio_buffer = self.audio_buffer[self.chunk_size:]
+                
+                # Process with AI
+                processed_chunk = self.apply_ai_separation(ai_chunk)
+                
+                # Replace the corresponding section in processed buffer
+                with self.buffer_lock:
+                    # Ensure we have a processed buffer
+                    if len(self.processed_buffer) < len(ai_chunk):
+                        self.processed_buffer = np.zeros_like(self.audio_buffer)
+                    
+                    # Replace the processed section
+                    replace_length = min(len(processed_chunk), len(self.processed_buffer))
+                    self.processed_buffer[:replace_length] = processed_chunk[:replace_length]
+                
+                self.last_ai_time = current_time
+                logger.info(f">>> AI processing completed - buffer updated")
+                
+            except Exception as e:
+                logger.error(f"Real-time processing error: {e}")
     
     def start_processing(self):
-        """Start audio processing with manually selected devices"""
+        """Start audio processing with FIXED real-time handling"""
         if self.is_processing:
             return
         
@@ -207,70 +210,95 @@ class AudioProcessor:
         
         self.is_processing = True
         self.audio_buffer = np.array([], dtype=np.float32)
-        self.last_processed_time = time.time()
+        self.processed_buffer = np.array([], dtype=np.float32)
+        self.last_ai_time = time.time()
         
-        # Audio processing callback
-        def audio_callback(outdata, frames, time_info, status):
+        def input_callback(indata, frames, time_info, status):
             if status:
-                if status.output_underflow:
-                    logger.debug("Output underflow")
+                logger.debug(f"Input status: {status}")
+            
+            if self.is_processing:
+                try:
+                    # Get audio input (convert to mono)
+                    if indata.ndim > 1:
+                        audio_input = indata[:, 0]  # Use first channel
+                    else:
+                        audio_input = indata.flatten()
+                    
+                    # Add to buffer with lock
+                    with self.buffer_lock:
+                        self.audio_buffer = np.concatenate([self.audio_buffer, audio_input])
+                        
+                        # For pass-through mode, keep processed buffer in sync
+                        if self.processing_mode == "pass_through":
+                            self.processed_buffer = self.audio_buffer.copy()
+                    
+                    # Keep buffer manageable (max 3 seconds)
+                    max_buffer_size = 3 * self.sample_rate
+                    with self.buffer_lock:
+                        if len(self.audio_buffer) > max_buffer_size:
+                            self.audio_buffer = self.audio_buffer[-max_buffer_size:]
+                        if len(self.processed_buffer) > max_buffer_size:
+                            self.processed_buffer = self.processed_buffer[-max_buffer_size:]
+                    
+                    # Process audio if in transform mode
+                    if self.processing_mode == "transform":
+                        self.process_audio_realtime()
+                    
+                    # Log occasionally
+                    if np.random.random() < 0.02:  # 2% chance to log
+                        volume = np.sqrt(np.mean(audio_input**2))
+                        if volume > 0.01:
+                            mode = "PASS-THROUGH" if self.processing_mode == "pass_through" else "AI TRANSFORM"
+                            with self.buffer_lock:
+                                buffer_size = len(self.audio_buffer)
+                            logger.info(f">>> Input: {volume:.3f} | Mode: {mode} | Buffer: {buffer_size}")
+                            
+                except Exception as e:
+                    logger.error(f"Input callback error: {e}")
+        
+        def output_callback(outdata, frames, time_info, status):
+            if status:
+                logger.debug(f"Output status: {status}")
             
             if not self.is_processing:
                 outdata.fill(0)
                 return
             
             try:
-                # Get audio from buffer (filled by input stream)
-                if len(self.audio_buffer) >= frames:
-                    # We have enough data, process and output
-                    chunk_to_process = self.audio_buffer[:frames]
-                    self.audio_buffer = self.audio_buffer[frames:]
+                with self.buffer_lock:
+                    # Determine which buffer to use
+                    if self.processing_mode == "pass_through" or len(self.processed_buffer) < frames:
+                        # Use original audio buffer for pass-through or if no processed data
+                        source_buffer = self.audio_buffer
+                    else:
+                        # Use processed buffer for AI transform
+                        source_buffer = self.processed_buffer
+                
+                # Output audio
+                if len(source_buffer) >= frames:
+                    outdata[:, 0] = source_buffer[:frames]
                     
-                    # Process audio (either transform or pass-through)
-                    processed_audio = self.process_audio_chunk(chunk_to_process)
-                    
-                    # Output processed audio
-                    outdata[:, 0] = processed_audio[:frames]
-                    
-                    # Copy to other channels
-                    if outdata.shape[1] > 1:
-                        for ch in range(1, outdata.shape[1]):
-                            outdata[:, ch] = outdata[:, 0]
-                            
+                    # Remove used audio from buffers
+                    with self.buffer_lock:
+                        self.audio_buffer = self.audio_buffer[frames:]
+                        if len(self.processed_buffer) >= frames:
+                            self.processed_buffer = self.processed_buffer[frames:]
+                        else:
+                            self.processed_buffer = np.array([], dtype=np.float32)
                 else:
                     # Not enough data, output silence
                     outdata.fill(0)
                     logger.debug("Buffer underflow - outputting silence")
+                
+                # Copy to other channels
+                if outdata.shape[1] > 1:
+                    for ch in range(1, outdata.shape[1]):
+                        outdata[:, ch] = outdata[:, 0]
                         
             except Exception as e:
                 logger.error(f"Output callback error: {e}")
                 outdata.fill(0)
-        
-        # Input callback to capture from input device
-        def input_callback(indata, frames, time_info, status):
-            if status:
-                logger.debug(f"Input status: {status}")
-            
-            if self.is_processing:
-                # Add incoming audio to buffer
-                if indata.ndim > 1:
-                    audio_input = indata[:, 0]  # Use first channel
-                else:
-                    audio_input = indata.flatten()
-                
-                self.audio_buffer = np.concatenate([self.audio_buffer, audio_input])
-                
-                # Keep buffer manageable (max 5 seconds)
-                max_buffer_size = 5 * self.sample_rate
-                if len(self.audio_buffer) > max_buffer_size:
-                    self.audio_buffer = self.audio_buffer[-max_buffer_size:]
-                
-                # Log buffer status occasionally
-                if len(self.audio_buffer) > self.sample_rate and np.random.random() < 0.01:
-                    volume = np.sqrt(np.mean(audio_input**2))
-                    mode = "PASS-THROUGH" if self.processing_mode == "pass_through" else "AI TRANSFORM"
-                    if volume > 0.01:
-                        logger.info(f">>> Input audio: {volume:.3f} | Mode: {mode} | Buffer: {len(self.audio_buffer)} samples")
         
         try:
             # Get device info for logging
@@ -279,7 +307,9 @@ class AudioProcessor:
             output_name = devices[self.output_device]['name'] if self.output_device < len(devices) else f"Device {self.output_device}"
             
             mode_text = "PASS-THROUGH" if self.processing_mode == "pass_through" else "AI TRANSFORM"
-            logger.info(f"Starting streams - Mode: {mode_text}, Input: {input_name}, Output: {output_name}")
+            logger.info(f"Starting streams - Mode: {mode_text}")
+            logger.info(f"Input: {input_name} (Device {self.input_device})")
+            logger.info(f"Output: {output_name} (Device {self.output_device})")
             
             # Start INPUT stream
             self.input_stream = sd.InputStream(
@@ -293,7 +323,7 @@ class AudioProcessor:
             
             # Start OUTPUT stream
             self.output_stream = sd.OutputStream(
-                callback=audio_callback,
+                callback=output_callback,
                 samplerate=self.sample_rate,
                 blocksize=1024,
                 device=self.output_device,
@@ -306,15 +336,12 @@ class AudioProcessor:
             self.input_stream.start()
             self.output_stream.start()
             
-            mode_text = "PASS-THROUGH" if self.processing_mode == "pass_through" else "AI TRANSFORM"
-            logger.info(f">>> {mode_text} MODE STARTED!")
-            logger.info(f">>> Input: {input_name} (Device {self.input_device})")
-            logger.info(f">>> Output: {output_name} (Device {self.output_device})")
+            logger.info(f">>> {mode_text} MODE STARTED SUCCESSFULLY!")
             
             if self.processing_mode == "pass_through":
-                logger.info(">>> Audio is passing through unchanged - verify routing works")
+                logger.info(">>> Audio passing through unchanged - verify routing")
             else:
-                logger.info(">>> Play audio and move slider for AI separation!")
+                logger.info(">>> AI separation active - move slider for vocal/music control!")
             
         except Exception as e:
             logger.error(f"Error starting audio streams: {e}")
@@ -341,6 +368,10 @@ class AudioProcessor:
             except Exception as e:
                 logger.error(f"Error stopping output stream: {e}")
         
+        # Clear buffers
+        self.audio_buffer = np.array([], dtype=np.float32)
+        self.processed_buffer = np.array([], dtype=np.float32)
+        
         logger.info(">>> Processing stopped")
     
     def set_music_ratio(self, ratio):
@@ -349,10 +380,10 @@ class AudioProcessor:
         self.music_ratio = max(0.0, min(1.0, ratio))
         
         # Log mode changes
-        if abs(old_ratio - self.music_ratio) > 0.2:
-            if self.music_ratio < 0.2:
-                logger.info(">>> SWITCHED TO VOCAL MODE")
-            elif self.music_ratio > 0.8:
-                logger.info(">>> SWITCHED TO MUSIC MODE")
+        if abs(old_ratio - self.music_ratio) > 0.1:
+            if self.music_ratio < 0.1:
+                logger.info(">>> SWITCHED TO VOCAL MODE - Expecting mostly vocals")
+            elif self.music_ratio > 0.9:
+                logger.info(">>> SWITCHED TO MUSIC MODE - Expecting mostly music")
             else:
-                logger.info(">>> SWITCHED TO BALANCED MODE")
+                logger.info(f">>> SWITCHED TO BALANCED MODE - Ratio: {self.music_ratio:.1f}")

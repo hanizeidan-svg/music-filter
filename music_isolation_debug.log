@@ -2482,3 +2482,273 @@ ImportError: Failed to intialize FFmpeg extension. Tried versions: ['6', '5', '4
 2025-11-15 09:07:45,561 - audio_processor - INFO - >>> SWITCHED TO VOCAL MODE
 2025-11-15 09:08:46,178 - audio_processor - INFO - >>> Processing stopped
 2025-11-15 09:08:46,179 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:24:41,331 - root - INFO - Starting Music Isolation Application
+2025-11-15 09:24:41,349 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:24:41,755 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:24:41,757 - ui_main - INFO - Auto-selected input: 1: CABLE Output (VB-Audio Virtual  (2 in)
+2025-11-15 09:24:41,758 - ui_main - INFO - Auto-selected output: 11: Microsoft Sound Mapper - Output (2 out)
+2025-11-15 09:24:41,758 - ui_main - INFO - Loaded 58 input devices and 49 output devices
+2025-11-15 09:24:42,204 - root - INFO - Application started successfully
+2025-11-15 09:24:59,917 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:25:00,289 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:25:00,290 - audio_processor - INFO - Devices set - Input: 1, Output: 57
+2025-11-15 09:25:00,290 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:25:00,291 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH
+2025-11-15 09:25:00,291 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:25:00,291 - audio_processor - INFO - Output: Speakers (Realtek(R) Audio) (Device 57)
+2025-11-15 09:25:00,571 - audio_processor - ERROR - Error starting audio streams: Error opening OutputStream: Invalid sample rate [PaErrorCode -9997]
+2025-11-15 09:25:00,573 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:25:07,526 - ui_main - INFO - Auto-selected input: 1: CABLE Output (VB-Audio Virtual  (2 in)
+2025-11-15 09:25:07,528 - ui_main - INFO - Auto-selected output: 11: Microsoft Sound Mapper - Output (2 out)
+2025-11-15 09:25:10,208 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:25:10,546 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:25:10,546 - audio_processor - INFO - Devices set - Input: 1, Output: 11
+2025-11-15 09:25:10,548 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:25:10,548 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH
+2025-11-15 09:25:10,549 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:25:10,549 - audio_processor - INFO - Output: Microsoft Sound Mapper - Output (Device 11)
+2025-11-15 09:25:10,562 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED SUCCESSFULLY!
+2025-11-15 09:25:10,562 - audio_processor - INFO - >>> Audio passing through unchanged - verify routing
+2025-11-15 09:25:10,706 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:25:12,474 - audio_processor - INFO - >>> Input: 0.161 | Mode: PASS-THROUGH | Buffer: 3072
+2025-11-15 09:25:13,633 - audio_processor - INFO - >>> Input: 0.202 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:25:13,823 - audio_processor - INFO - >>> Input: 0.161 | Mode: PASS-THROUGH | Buffer: 1024
+2025-11-15 09:25:17,393 - audio_processor - INFO - >>> Input: 0.166 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:25:18,840 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:25:18,841 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:25:35,512 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:25:35,852 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:25:35,852 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:25:35,852 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:25:35,853 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH
+2025-11-15 09:25:35,853 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:25:35,853 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:25:36,335 - audio_processor - INFO - >>> Input: 0.050 | Mode: PASS-THROUGH | Buffer: 6144
+2025-11-15 09:25:36,572 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED SUCCESSFULLY!
+2025-11-15 09:25:36,572 - audio_processor - INFO - >>> Audio passing through unchanged - verify routing
+2025-11-15 09:25:36,845 - audio_processor - INFO - >>> Input: 0.033 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:25:40,694 - audio_processor - INFO - >>> Input: 0.047 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:25:42,135 - audio_processor - INFO - >>> Input: 0.040 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:25:51,000 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:25:51,001 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:25:52,394 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:25:52,764 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:25:52,766 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:25:52,766 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:25:52,768 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM
+2025-11-15 09:25:52,768 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:25:52,768 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:25:52,864 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED SUCCESSFULLY!
+2025-11-15 09:25:52,864 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:25:52,864 - audio_processor - INFO - >>> AI separation active - move slider for vocal/music control!
+2025-11-15 09:25:52,876 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:25:52,900 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:25:53,652 - audio_processor - INFO - >>> Input: 0.070 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:25:55,411 - audio_processor - INFO - >>> Input: 0.037 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:25:57,922 - audio_processor - INFO - >>> Input: 0.050 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:25:58,522 - audio_processor - INFO - >>> Input: 0.040 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:25:58,662 - audio_processor - INFO - >>> Input: 0.039 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:00,754 - audio_processor - INFO - >>> Input: 0.039 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:26:01,452 - audio_processor - INFO - >>> Input: 0.064 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:02,053 - audio_processor - INFO - >>> Input: 0.028 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:02,753 - audio_processor - INFO - >>> Input: 0.049 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:03,025 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:26:03,027 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:26:05,526 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:26:05,855 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:26:05,857 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:26:05,857 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:26:05,858 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM
+2025-11-15 09:26:05,858 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:26:05,859 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:26:05,958 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED SUCCESSFULLY!
+2025-11-15 09:26:05,958 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:26:05,958 - audio_processor - INFO - >>> AI separation active - move slider for vocal/music control!
+2025-11-15 09:26:05,971 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:26:05,994 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:26:07,207 - audio_processor - INFO - >>> Input: 0.020 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:08,227 - audio_processor - INFO - >>> Input: 0.046 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:26:09,158 - audio_processor - INFO - >>> Input: 0.030 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:10,647 - audio_processor - INFO - >>> Input: 0.021 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:12,037 - audio_processor - INFO - >>> Input: 0.034 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:13,387 - audio_processor - INFO - >>> Input: 0.092 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:14,497 - audio_processor - INFO - >>> Input: 0.074 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:15,567 - audio_processor - INFO - >>> Input: 0.025 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:16,778 - audio_processor - INFO - >>> Input: 0.039 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:19,747 - audio_processor - INFO - >>> Input: 0.035 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:20,818 - audio_processor - INFO - >>> Input: 0.052 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:23,928 - audio_processor - INFO - >>> Input: 0.045 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:29,268 - audio_processor - INFO - >>> Input: 0.075 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:37,908 - audio_processor - INFO - >>> Input: 0.015 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:41,059 - audio_processor - INFO - >>> Input: 0.048 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:26:46,499 - audio_processor - INFO - >>> Input: 0.029 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:48,601 - audio_processor - INFO - >>> SWITCHED TO VOCAL MODE - Expecting mostly vocals
+2025-11-15 09:26:49,928 - audio_processor - INFO - >>> Input: 0.028 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:50,070 - audio_processor - INFO - >>> Input: 0.035 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:51,049 - audio_processor - INFO - >>> Input: 0.056 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:51,979 - audio_processor - INFO - >>> Input: 0.092 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:52,719 - audio_processor - INFO - >>> Input: 0.019 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:53,190 - audio_processor - INFO - >>> Input: 0.043 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:26:56,109 - audio_processor - INFO - >>> Input: 0.090 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:26:57,039 - audio_processor - INFO - >>> Input: 0.048 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:00,051 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:27:00,052 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:27:02,897 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:27:03,260 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:27:03,260 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:27:03,260 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:27:03,261 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM
+2025-11-15 09:27:03,261 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:27:03,262 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:27:03,358 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED SUCCESSFULLY!
+2025-11-15 09:27:03,358 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:03,358 - audio_processor - INFO - >>> AI separation active - move slider for vocal/music control!
+2025-11-15 09:27:03,371 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:03,394 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:03,765 - audio_processor - INFO - >>> Input: 0.056 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:04,656 - audio_processor - INFO - >>> Input: 0.011 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:05,856 - audio_processor - INFO - >>> Input: 0.093 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:06,466 - audio_processor - INFO - >>> Input: 0.040 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:27:06,975 - audio_processor - INFO - >>> Input: 0.089 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:27:07,115 - audio_processor - INFO - >>> Input: 0.041 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:15,936 - audio_processor - INFO - >>> Input: 0.077 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:27:16,216 - audio_processor - INFO - >>> Input: 0.097 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:27:17,746 - audio_processor - INFO - >>> Input: 0.022 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:27:18,116 - audio_processor - INFO - >>> Input: 0.091 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:27:18,997 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:27:18,998 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:27:20,874 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:27:21,207 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:27:21,207 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:27:21,208 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:27:21,209 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH
+2025-11-15 09:27:21,209 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:27:21,209 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:27:21,311 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED SUCCESSFULLY!
+2025-11-15 09:27:21,311 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:21,311 - audio_processor - INFO - >>> Audio passing through unchanged - verify routing
+2025-11-15 09:27:21,324 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:21,348 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:27:22,049 - audio_processor - INFO - >>> Input: 0.078 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:27:22,139 - audio_processor - INFO - >>> Input: 0.059 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:27:22,370 - audio_processor - INFO - >>> Input: 0.019 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:27:24,879 - audio_processor - INFO - >>> Input: 0.076 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:27:25,069 - audio_processor - INFO - >>> Input: 0.049 | Mode: PASS-THROUGH | Buffer: 1024
+2025-11-15 09:29:38,405 - audio_processor - INFO - >>> Input: 0.069 | Mode: PASS-THROUGH | Buffer: 2048
+2025-11-15 09:29:39,745 - audio_processor - INFO - >>> Input: 0.026 | Mode: PASS-THROUGH | Buffer: 3072
+2025-11-15 09:29:40,726 - audio_processor - INFO - >>> Input: 0.067 | Mode: PASS-THROUGH | Buffer: 1024
+2025-11-15 09:29:42,252 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:29:42,254 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:30:53,674 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:30:54,005 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:30:54,005 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:30:54,006 - audio_processor - INFO - Processing mode set to: pass_through
+2025-11-15 09:30:54,007 - audio_processor - INFO - Starting streams - Mode: PASS-THROUGH
+2025-11-15 09:30:54,007 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:30:54,007 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:30:54,727 - audio_processor - INFO - >>> PASS-THROUGH MODE STARTED SUCCESSFULLY!
+2025-11-15 09:30:54,727 - audio_processor - INFO - >>> Audio passing through unchanged - verify routing
+2025-11-15 09:30:55,881 - audio_processor - INFO - >>> Input: 0.061 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:00,711 - audio_processor - INFO - >>> Input: 0.027 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:00,752 - audio_processor - INFO - >>> Input: 0.026 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:00,992 - audio_processor - INFO - >>> Input: 0.035 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:01,642 - audio_processor - INFO - >>> Input: 0.039 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:02,051 - audio_processor - INFO - >>> Input: 0.081 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:02,431 - audio_processor - INFO - >>> Input: 0.045 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:02,662 - audio_processor - INFO - >>> Input: 0.058 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:03,961 - audio_processor - INFO - >>> Input: 0.013 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:05,351 - audio_processor - INFO - >>> Input: 0.088 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:05,681 - audio_processor - INFO - >>> Input: 0.060 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:06,752 - audio_processor - INFO - >>> Input: 0.054 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:09,111 - audio_processor - INFO - >>> Input: 0.022 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:09,722 - audio_processor - INFO - >>> Input: 0.042 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:11,712 - audio_processor - INFO - >>> Input: 0.069 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:12,092 - audio_processor - INFO - >>> Input: 0.063 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:14,972 - audio_processor - INFO - >>> Input: 0.015 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:16,171 - audio_processor - INFO - >>> Input: 0.066 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:20,442 - audio_processor - INFO - >>> Input: 0.013 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:20,541 - audio_processor - INFO - >>> Input: 0.035 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:21,752 - audio_processor - INFO - >>> Input: 0.089 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:23,053 - audio_processor - INFO - >>> Input: 0.031 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:24,252 - audio_processor - INFO - >>> Input: 0.054 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:26,992 - audio_processor - INFO - >>> Input: 0.035 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:27,462 - audio_processor - INFO - >>> Input: 0.107 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:27,742 - audio_processor - INFO - >>> Input: 0.063 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:28,852 - audio_processor - INFO - >>> Input: 0.012 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:28,852 - audio_processor - INFO - >>> Input: 0.012 | Mode: PASS-THROUGH | Buffer: 16384
+2025-11-15 09:31:31,922 - audio_processor - INFO - >>> Input: 0.038 | Mode: PASS-THROUGH | Buffer: 14336
+2025-11-15 09:31:32,052 - audio_processor - INFO - >>> Input: 0.028 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:32,754 - audio_processor - INFO - >>> Input: 0.045 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:34,844 - audio_processor - INFO - >>> Input: 0.081 | Mode: PASS-THROUGH | Buffer: 15360
+2025-11-15 09:31:37,166 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:31:37,168 - ui_main - INFO - Processing stopped by user
+2025-11-15 09:31:37,863 - audio_processor - INFO - Loading AI model...
+2025-11-15 09:31:38,171 - audio_processor - INFO - AI model loaded successfully!
+2025-11-15 09:31:38,173 - audio_processor - INFO - Devices set - Input: 1, Output: 70
+2025-11-15 09:31:38,173 - audio_processor - INFO - Processing mode set to: transform
+2025-11-15 09:31:38,173 - audio_processor - INFO - Starting streams - Mode: AI TRANSFORM
+2025-11-15 09:31:38,174 - audio_processor - INFO - Input: CABLE Output (VB-Audio Virtual  (Device 1)
+2025-11-15 09:31:38,174 - audio_processor - INFO - Output: Speakers 1 (Realtek HD Audio output with SST) (Device 70)
+2025-11-15 09:31:38,272 - audio_processor - INFO - >>> AI TRANSFORM MODE STARTED SUCCESSFULLY!
+2025-11-15 09:31:38,272 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:31:38,272 - audio_processor - INFO - >>> AI separation active - move slider for vocal/music control!
+2025-11-15 09:31:38,285 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:31:38,309 - audio_processor - DEBUG - Buffer underflow - outputting silence
+2025-11-15 09:31:38,541 - audio_processor - INFO - >>> Input: 0.096 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:31:39,151 - audio_processor - INFO - >>> Input: 0.089 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:40,682 - audio_processor - INFO - >>> Input: 0.035 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:44,950 - audio_processor - INFO - >>> Input: 0.101 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:48,162 - audio_processor - INFO - >>> Input: 0.023 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:48,251 - audio_processor - INFO - >>> Input: 0.041 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:31:50,711 - audio_processor - INFO - >>> Input: 0.090 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:31:54,433 - audio_processor - INFO - >>> Input: 0.046 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:55,081 - audio_processor - INFO - >>> Input: 0.010 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:31:55,731 - audio_processor - INFO - >>> Input: 0.026 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:31:57,032 - audio_processor - INFO - >>> Input: 0.022 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:31:59,443 - audio_processor - INFO - >>> Input: 0.035 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:31:59,491 - audio_processor - INFO - >>> Input: 0.038 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:31:59,722 - audio_processor - INFO - >>> Input: 0.060 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:00,002 - audio_processor - INFO - >>> Input: 0.019 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:00,882 - audio_processor - INFO - >>> Input: 0.077 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:01,252 - audio_processor - INFO - >>> Input: 0.027 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:03,021 - audio_processor - INFO - >>> Input: 0.036 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:03,112 - audio_processor - INFO - >>> Input: 0.022 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:03,112 - audio_processor - INFO - >>> Input: 0.062 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:04,322 - audio_processor - INFO - >>> Input: 0.041 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:07,762 - audio_processor - INFO - >>> Input: 0.087 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:07,852 - audio_processor - INFO - >>> Input: 0.038 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:14,912 - audio_processor - INFO - >>> Input: 0.051 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:15,373 - audio_processor - INFO - >>> Input: 0.019 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:15,601 - audio_processor - INFO - >>> Input: 0.031 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:16,022 - audio_processor - INFO - >>> Input: 0.024 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:17,412 - audio_processor - INFO - >>> Input: 0.090 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:19,552 - audio_processor - INFO - >>> Input: 0.055 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:22,292 - audio_processor - INFO - >>> Input: 0.024 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:24,803 - audio_processor - INFO - >>> Input: 0.063 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:25,592 - audio_processor - INFO - >>> Input: 0.037 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:26,053 - audio_processor - INFO - >>> Input: 0.085 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:26,053 - audio_processor - INFO - >>> Input: 0.075 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:29,302 - audio_processor - INFO - >>> Input: 0.027 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:32,972 - audio_processor - INFO - >>> Input: 0.077 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:33,533 - audio_processor - INFO - >>> Input: 0.051 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:34,833 - audio_processor - INFO - >>> Input: 0.038 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:35,573 - audio_processor - INFO - >>> Input: 0.041 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:35,763 - audio_processor - INFO - >>> Input: 0.016 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:40,315 - audio_processor - INFO - >>> Input: 0.079 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:40,633 - audio_processor - INFO - >>> Input: 0.081 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:42,174 - audio_processor - INFO - >>> Input: 0.083 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:43,283 - audio_processor - INFO - >>> Input: 0.028 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:44,633 - audio_processor - INFO - >>> Input: 0.096 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:48,623 - audio_processor - INFO - >>> Input: 0.033 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:49,093 - audio_processor - INFO - >>> Input: 0.038 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:51,184 - audio_processor - INFO - >>> Input: 0.044 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:55,453 - audio_processor - INFO - >>> Input: 0.035 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:32:55,914 - audio_processor - INFO - >>> Input: 0.016 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:32:57,404 - audio_processor - INFO - >>> Input: 0.048 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:57,863 - audio_processor - INFO - >>> Input: 0.052 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:32:59,164 - audio_processor - INFO - >>> Input: 0.076 | Mode: AI TRANSFORM | Buffer: 3072
+2025-11-15 09:33:01,493 - audio_processor - INFO - >>> Input: 0.022 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:33:02,974 - audio_processor - INFO - >>> Input: 0.047 | Mode: AI TRANSFORM | Buffer: 1024
+2025-11-15 09:33:04,505 - audio_processor - INFO - >>> Input: 0.011 | Mode: AI TRANSFORM | Buffer: 2048
+2025-11-15 09:33:11,195 - audio_processor - INFO - >>> Processing stopped
+2025-11-15 09:33:11,196 - ui_main - INFO - Processing stopped by user

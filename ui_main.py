@@ -1,11 +1,13 @@
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                             QSlider, QLabel, QPushButton, QComboBox, QGroupBox,
                             QMessageBox, QFrame, QRadioButton, QButtonGroup,
-                            QTextEdit, QScrollArea, QGridLayout, QSplitter)
+                            QTextEdit, QScrollArea, QGridLayout, QSplitter,
+                            QProgressBar, QFileDialog)
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont, QPalette, QColor
 import sounddevice as sd
 import logging
+import os
 
 from audio_processor import AudioProcessor
 
@@ -21,13 +23,11 @@ class ParameterSlider(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(2, 2, 2, 2)
         
-        # Parameter label
         self.label = QLabel(f"{self.param_name}: {initial_value}")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setStyleSheet("font-weight: bold; font-size: 9pt;")
         layout.addWidget(self.label)
         
-        # Slider
         self.slider = QSlider(Qt.Vertical)
         self.slider.setRange(0, 1000)
         self.slider.setValue(initial_value)
@@ -52,17 +52,18 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.audio_processor = None
         self.param_sliders = {}
+        self.recording_timer = QTimer()
+        self.recording_timer.timeout.connect(self.update_recording_status)
         self.init_ui()
         self.populate_audio_devices()
     
     def init_ui(self):
-        self.setWindowTitle("Audio Processing Lab - Custom Transformations")
-        self.setGeometry(100, 100, 1200, 800)
+        self.setWindowTitle("Audio Processing Lab - With Recording")
+        self.setGeometry(100, 100, 1200, 900)
         
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         
-        # Main splitter
         main_splitter = QSplitter(Qt.Horizontal)
         
         # Left panel - Controls
@@ -75,6 +76,61 @@ class MainWindow(QMainWindow):
         title.setAlignment(Qt.AlignCenter)
         title.setStyleSheet("color: #2c3e50; margin: 10px;")
         left_layout.addWidget(title)
+        
+        # Recording Controls
+        recording_group = QGroupBox("🎤 Recording Controls")
+        recording_layout = QVBoxLayout(recording_group)
+        
+        # Recording buttons
+        record_btn_layout = QHBoxLayout()
+        
+        self.record_btn = QPushButton("🔴 START RECORDING")
+        self.record_btn.clicked.connect(self.start_recording)
+        self.record_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #dc3545;
+                color: white;
+                font-weight: bold;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            QPushButton:hover { background-color: #c82333; }
+            QPushButton:disabled { background-color: #6c757d; }
+        """)
+        
+        self.stop_record_btn = QPushButton("⏹ STOP RECORDING")
+        self.stop_record_btn.clicked.connect(self.stop_recording)
+        self.stop_record_btn.setEnabled(False)
+        self.stop_record_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #6c757d;
+                color: white;
+                font-weight: bold;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            QPushButton:hover { background-color: #5a6268; }
+            QPushButton:disabled { background-color: #6c757d; }
+        """)
+        
+        record_btn_layout.addWidget(self.record_btn)
+        record_btn_layout.addWidget(self.stop_record_btn)
+        recording_layout.addLayout(record_btn_layout)
+        
+        # Recording status
+        self.recording_status = QLabel("Not recording")
+        self.recording_status.setAlignment(Qt.AlignCenter)
+        self.recording_status.setStyleSheet("padding: 8px; background-color: #f8f9fa; border-radius: 3px; font-size: 9pt;")
+        recording_layout.addWidget(self.recording_status)
+        
+        # Recording progress
+        self.recording_progress = QProgressBar()
+        self.recording_progress.setRange(0, 3600)  # Up to 1 hour
+        self.recording_progress.setValue(0)
+        self.recording_progress.setFormat("Recording: %v seconds")
+        recording_layout.addWidget(self.recording_progress)
+        
+        left_layout.addWidget(recording_group)
         
         # Processing Mode
         mode_group = QGroupBox("Processing Mode")
@@ -102,7 +158,6 @@ class MainWindow(QMainWindow):
         device_group = QGroupBox("Audio Devices")
         device_layout = QVBoxLayout(device_group)
         
-        # Input Device
         device_layout.addWidget(QLabel("INPUT Device:"))
         self.input_combo = QComboBox()
         self.input_combo.setToolTip("Audio source (e.g., CABLE Output)")
@@ -110,13 +165,11 @@ class MainWindow(QMainWindow):
         
         device_layout.addWidget(QLabel(""))  # Spacer
         
-        # Output Device
         device_layout.addWidget(QLabel("OUTPUT Device:"))
         self.output_combo = QComboBox()
         self.output_combo.setToolTip("Audio output (e.g., your speakers)")
         device_layout.addWidget(self.output_combo)
         
-        # Auto-detect button
         cable_btn = QPushButton("Auto-Detect Virtual Cable")
         cable_btn.clicked.connect(self.auto_detect_virtual_cable)
         cable_btn.setStyleSheet("background-color: #17a2b8; color: white; padding: 5px;")
@@ -178,27 +231,23 @@ class MainWindow(QMainWindow):
         function_group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 12pt; }")
         function_layout = QVBoxLayout(function_group)
         
-        # Function description
         desc = QLabel("Use 'x' for audio data, parameters A-P (0-1000). Examples:")
         desc.setStyleSheet("color: #6c757d; font-size: 9pt;")
         function_layout.addWidget(desc)
         
-        # Example functions
         examples = QLabel(
-            "x * A/1000.0 | np.sin(x * B/100) | x * np.sin(x * C/10) | x + (x**3 * D/100000)"
+            "x * A/500.0 | np.sin(x * B/100) | x * np.sin(x * C/10) | x + (x**3 * D/100000)"
         )
         examples.setStyleSheet("color: #17a2b8; font-size: 9pt; font-family: monospace; background-color: #f8f9fa; padding: 5px;")
         examples.setWordWrap(True)
         function_layout.addWidget(examples)
         
-        # Function text area
         self.function_edit = QTextEdit()
-        self.function_edit.setPlainText("x * A/500.0")  # Default function
+        self.function_edit.setPlainText("x * A/500.0")
         self.function_edit.setStyleSheet("font-family: 'Courier New'; font-size: 10pt;")
         self.function_edit.setMaximumHeight(100)
         function_layout.addWidget(self.function_edit)
         
-        # Apply function button
         apply_btn = QPushButton("Apply Function")
         apply_btn.clicked.connect(self.apply_custom_function)
         apply_btn.setStyleSheet("background-color: #6f42c1; color: white; font-weight: bold; padding: 8px;")
@@ -210,9 +259,8 @@ class MainWindow(QMainWindow):
         params_group = QGroupBox("Parameters A-P (0-1000)")
         params_layout = QGridLayout(params_group)
         
-        # Create 16 parameter sliders
         for i in range(16):
-            param_name = chr(65 + i)  # A-P
+            param_name = chr(65 + i)
             slider = ParameterSlider(param_name)
             slider.set_callback(self.on_parameter_changed)
             self.param_sliders[param_name] = slider
@@ -220,20 +268,99 @@ class MainWindow(QMainWindow):
         
         right_layout.addWidget(params_group)
         
-        # Add panels to splitter
         main_splitter.addWidget(left_panel)
         main_splitter.addWidget(right_panel)
         main_splitter.setSizes([400, 800])
         
-        # Main layout
         main_layout = QVBoxLayout(central_widget)
         main_layout.addWidget(main_splitter)
         
-        # Connect signals
         self.mode_button_group.buttonClicked.connect(self.on_mode_changed)
     
+    def start_recording(self):
+        """Start recording audio streams"""
+        if not self.audio_processor or not self.audio_processor.is_processing:
+            QMessageBox.warning(self, "Recording Error", "Please start audio processing first!")
+            return
+        
+        try:
+            self.audio_processor.start_recording()
+            self.record_btn.setEnabled(False)
+            self.stop_record_btn.setEnabled(True)
+            self.recording_timer.start(1000)  # Update every second
+            self.recording_status.setText("🔴 RECORDING - Capturing input and output streams")
+            self.recording_status.setStyleSheet("color: #dc3545; background-color: #f8d7da; padding: 8px; border-radius: 3px; font-size: 9pt;")
+            
+        except Exception as e:
+            logger.error(f"Error starting recording: {e}")
+            QMessageBox.critical(self, "Recording Error", f"Failed to start recording: {e}")
+    
+    def stop_recording(self):
+        """Stop recording and save files"""
+        if not self.audio_processor:
+            return
+        
+        try:
+            # Stop recording
+            input_data, output_data = self.audio_processor.stop_recording()
+            
+            # Stop timer
+            self.recording_timer.stop()
+            self.recording_progress.setValue(0)
+            
+            # Reset UI
+            self.record_btn.setEnabled(True)
+            self.stop_record_btn.setEnabled(False)
+            self.recording_status.setText("Not recording")
+            self.recording_status.setStyleSheet("padding: 8px; background-color: #f8f9fa; border-radius: 3px; font-size: 9pt;")
+            
+            # Ask for save location
+            if len(input_data) > 0 or len(output_data) > 0:
+                options = QFileDialog.Options()
+                filename, _ = QFileDialog.getSaveFileName(
+                    self, "Save Recording", "", "WAV Files (*.wav);;All Files (*)", options=options)
+                
+                if filename:
+                    # Remove .wav extension if present
+                    if filename.lower().endswith('.wav'):
+                        filename = filename[:-4]
+                    
+                    # Save files
+                    input_file, output_file = self.audio_processor.save_recording(
+                        input_data, output_data, filename)
+                    
+                    if input_file and output_file:
+                        QMessageBox.information(self, "Recording Saved", 
+                                              f"Input stream saved as: {input_file}\n"
+                                              f"Output stream saved as: {output_file}")
+                    else:
+                        QMessageBox.warning(self, "Save Error", "Failed to save recording files")
+            else:
+                QMessageBox.warning(self, "No Data", "No audio data was recorded")
+                
+        except Exception as e:
+            logger.error(f"Error stopping recording: {e}")
+            QMessageBox.critical(self, "Recording Error", f"Failed to stop recording: {e}")
+    
+    def update_recording_status(self):
+        """Update recording progress and status"""
+        if self.audio_processor:
+            status = self.audio_processor.get_recording_status()
+            if status['is_recording']:
+                seconds = int(status['duration'])
+                self.recording_progress.setValue(seconds)
+                
+                input_sec = status['input_samples'] / self.audio_processor.sample_rate
+                output_sec = status['output_samples'] / self.audio_processor.sample_rate
+                
+                self.recording_status.setText(
+                    f"🔴 RECORDING - {seconds}s | "
+                    f"Input: {input_sec:.1f}s | Output: {output_sec:.1f}s"
+                )
+    
+    # ... (rest of the methods remain the same as previous version)
+    
     def on_mode_changed(self):
-        """Handle processing mode change"""
         mode = self.get_processing_mode()
         if mode == "custom_lab":
             self.status.setText("CUSTOM LAB mode - Use function editor and parameters A-P")
@@ -243,21 +370,17 @@ class MainWindow(QMainWindow):
             self.status.setText("PASS-THROUGH mode - Audio unchanged")
     
     def on_parameter_changed(self, param_name, value):
-        """Handle parameter slider changes"""
         if self.audio_processor and self.audio_processor.is_processing:
             params = {param_name: value}
             self.audio_processor.set_custom_parameters(params)
-            logger.info(f"Parameter {param_name} changed to {value}")
     
     def apply_custom_function(self):
-        """Apply the custom function from the editor"""
         function_code = self.function_edit.toPlainText()
         if self.audio_processor:
             self.audio_processor.set_custom_function(function_code)
             self.status.setText(f"Function applied: {function_code}")
     
     def populate_audio_devices(self):
-        """Populate audio device dropdowns"""
         try:
             from audio_processor import AudioProcessor
             temp_processor = AudioProcessor()
@@ -281,15 +404,12 @@ class MainWindow(QMainWindow):
             self.status.setText(f"Error loading devices: {e}")
     
     def auto_detect_virtual_cable(self):
-        """Auto-detect virtual cable devices"""
         try:
-            # Find virtual cable input
             for i in range(self.input_combo.count()):
                 if any(cable in self.input_combo.itemText(i).lower() for cable in ['cable', 'vb-audio']):
                     self.input_combo.setCurrentIndex(i)
                     break
             
-            # Find speakers output
             for i in range(self.output_combo.count()):
                 text = self.output_combo.itemText(i).lower()
                 if not any(cable in text for cable in ['cable', 'vb-audio']):
@@ -303,7 +423,6 @@ class MainWindow(QMainWindow):
             logger.error(f"Auto-detect error: {e}")
     
     def get_processing_mode(self):
-        """Get current processing mode"""
         buttons = self.mode_button_group.buttons()
         for btn in buttons:
             if btn.isChecked():
@@ -316,7 +435,6 @@ class MainWindow(QMainWindow):
         return "custom_lab"
     
     def get_selected_devices(self):
-        """Get selected input and output devices"""
         if self.input_combo.currentIndex() == -1 or self.output_combo.currentIndex() == -1:
             return None, None
         return self.input_combo.currentData(), self.output_combo.currentData()
@@ -348,11 +466,9 @@ class MainWindow(QMainWindow):
             self.audio_processor.set_devices(input_device, output_device)
             self.audio_processor.set_processing_mode(processing_mode)
             
-            # Set initial parameters
             initial_params = {name: slider.get_value() for name, slider in self.param_sliders.items()}
             self.audio_processor.set_custom_parameters(initial_params)
             
-            # Set custom function if in lab mode
             if processing_mode == "custom_lab":
                 self.audio_processor.set_custom_function(self.function_edit.toPlainText())
             

@@ -8,6 +8,9 @@ import os
 import time
 import warnings
 import threading
+from queue import Queue
+import soundfile as sf
+from datetime import datetime
 
 # Suppress all warnings
 warnings.filterwarnings("ignore")
@@ -37,201 +40,19 @@ class AudioProcessor:
         self.input_stream = None
         
         # Custom lab parameters
-        self.custom_params = {chr(65 + i): 500 for i in range(16)}  # A-P: 0-1000, default 500
-        self.custom_function = "x"  # Default: pass-through
+        self.custom_params = {chr(65 + i): 500 for i in range(16)}
+        self.custom_function = "x"
         self.compiled_function = None
         
-        # Predefined functions
-        self.predefined_functions = {
-            'multieffect': self.multieffect,
-            'spectral': self.spectral,
-            'vocal': self.vocal,
-            'simplefx': self.simplefx
-        }
+        # Recording functionality
+        self.is_recording = False
+        self.recorded_input = []
+        self.recorded_output = []
+        self.recording_start_time = None
+        self.recording_lock = threading.Lock()
         
+        # AI model (optional)
         self.load_model()
-    
-    # ================= PREDEFINED FUNCTIONS =================
-    
-    def multieffect(self, x, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P):
-        """Multi-Effect Processor: Comprehensive effects chain"""
-        x = x * (A/500.0)  # Input gain
-        
-        # Bit crusher
-        bit_depth = max(1, int(B / 31.25) + 1)
-        quantization_levels = 2 ** bit_depth
-        x = np.round(x * (quantization_levels/2)) / (quantization_levels/2)
-        
-        # Distortion
-        distortion = C/1000.0
-        x = np.tanh(x * (1 + distortion * 10)) / (1 + distortion)
-        
-        # Low-pass filter
-        cutoff = 20 + (D/1000.0) * 19980
-        nyquist = 44100/2
-        normalized_cutoff = cutoff / nyquist
-        filtered = np.zeros_like(x)
-        for i in range(1, len(x)):
-            filtered[i] = normalized_cutoff * x[i] + (1 - normalized_cutoff) * filtered[i-1]
-        x = filtered
-        
-        # High-pass filter
-        hpf_cutoff = 20 + (E/1000.0) * 4980
-        hpf_normalized = hpf_cutoff / nyquist
-        hpf_filtered = np.zeros_like(x)
-        for i in range(1, len(x)):
-            hpf_filtered[i] = 0.5 * (x[i] - x[i-1] + (1 - hpf_normalized) * hpf_filtered[i-1])
-        x = hpf_filtered
-        
-        # Tremolo
-        tremolo_rate = 0.1 + (F/1000.0) * 9.9
-        tremolo_depth = 0.5
-        t = np.arange(len(x)) / 44100.0
-        tremolo = 1 - tremolo_depth * 0.5 * (1 + np.sin(2 * np.pi * tremolo_rate * t))
-        x = x * tremolo
-        
-        # Chorus
-        chorus_rate = 0.1 + (G/1000.0) * 4.9
-        chorus_depth = 5
-        chorus_delay = np.sin(2 * np.pi * chorus_rate * t) * chorus_depth
-        chorus_out = np.zeros_like(x)
-        for i in range(len(x)):
-            delay_idx = int(i - chorus_delay[i])
-            if delay_idx >= 0 and delay_idx < len(x):
-                chorus_out[i] = 0.7 * x[i] + 0.3 * x[delay_idx]
-        x = chorus_out
-        
-        # Continue with remaining effects...
-        # [Include the rest of the multieffect implementation]
-        
-        # Output gain
-        x = x * (P/500.0)
-        return x
-    
-    def spectral(self, x, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P):
-        """Spectral Manipulator: Frequency domain effects"""
-        # Spectral shift
-        spectral_shift = (A - 500) / 2.0
-        
-        # Spectral tilt
-        tilt = (B - 500) / 500.0
-        
-        # Process in blocks (simplified)
-        block_size = min(512, len(x))
-        if block_size < 32:
-            return x
-            
-        processed = np.zeros_like(x)
-        
-        for i in range(0, len(x) - block_size, block_size//2):
-            block = x[i:i+block_size]
-            window = np.hanning(len(block))
-            windowed = block * window
-            
-            # Apply spectral processing
-            # Low-mid boost
-            low_mid_gain = D/500.0
-            filtered_lm = np.zeros_like(windowed)
-            for j in range(1, len(windowed)):
-                filtered_lm[j] = 0.1 * windowed[j] + 0.9 * filtered_lm[j-1] * 0.5
-            
-            # Mid boost
-            mid_gain = E/500.0
-            filtered_mid = np.zeros_like(windowed)
-            for j in range(2, len(windowed)):
-                filtered_mid[j] = 0.3 * windowed[j] - 0.3 * windowed[j-2] + 1.4 * filtered_mid[j-1] - 0.7 * filtered_mid[j-2]
-            
-            # High boost
-            high_gain = F/500.0
-            filtered_high = np.zeros_like(windowed)
-            for j in range(1, len(windowed)):
-                filtered_high[j] = 0.5 * (windowed[j] - windowed[j-1] + 0.9 * filtered_high[j-1])
-            
-            combined = (filtered_lm * low_mid_gain + 
-                       filtered_mid * mid_gain + 
-                       filtered_high * high_gain)
-            
-            # Output saturation
-            output_gain = P/500.0
-            final = np.tanh(combined * output_gain)
-            
-            processed[i:i+block_size] += final * window
-        
-        return processed
-    
-    def vocal(self, x, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P):
-        """Vocal Processor: Voice-specific effects"""
-        x = x * (A/500.0)  # Input gain
-        
-        # De-esser
-        deess_threshold = B/1000.0
-        sibilance = np.zeros_like(x)
-        for i in range(1, len(x)):
-            sibilance[i] = 0.5 * (x[i] - x[i-1] + 0.9 * sibilance[i-1])
-        x = np.where(np.abs(sibilance) > deess_threshold, x * 0.5, x)
-        
-        # Presence boost
-        presence_gain = G/500.0
-        presence_boost = np.zeros_like(x)
-        for i in range(2, len(x)):
-            presence_boost[i] = 0.5 * x[i] - 0.5 * x[i-2] + 1.8 * presence_boost[i-1] - 0.81 * presence_boost[i-2]
-        x = x + presence_boost * presence_gain
-        
-        # Compression
-        vocal_comp_threshold = K/1000.0
-        vocal_comp_ratio = 3.0
-        compressed_vocal = np.zeros_like(x)
-        for i in range(len(x)):
-            if abs(x[i]) > vocal_comp_threshold:
-                compressed_vocal[i] = np.sign(x[i]) * (vocal_comp_threshold + (abs(x[i]) - vocal_comp_threshold) / vocal_comp_ratio)
-            else:
-                compressed_vocal[i] = x[i]
-        x = compressed_vocal
-        
-        # Output gain
-        output_gain = P/500.0
-        x = np.tanh(x * output_gain)
-        
-        return x
-    
-    def simplefx(self, x, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P):
-        """SimpleFX: Minimalist multi-effect"""
-        x = x * (A/500.0)  # Input gain
-        
-        # Drive
-        drive = B/500.0
-        x = np.tanh(x * (1 + drive))
-        
-        # Low-pass filter
-        cutoff = 100 + (C/1000.0) * 19900
-        alpha = cutoff / 44100.0
-        filtered = np.zeros_like(x)
-        for i in range(1, len(x)):
-            filtered[i] = alpha * x[i] + (1 - alpha) * filtered[i-1]
-        x = filtered
-        
-        # Tremolo
-        tremolo_depth = E/1000.0
-        tremolo_rate = 3
-        t = np.arange(len(x)) / 44100.0
-        tremolo = 1 - tremolo_depth * 0.5 * (1 + np.sin(2 * np.pi * tremolo_rate * t))
-        x = x * tremolo
-        
-        # Delay
-        delay_feedback = G/1000.0
-        delay_time = 0.2
-        delay_samples = int(44100 * delay_time)
-        if delay_samples < len(x):
-            for i in range(delay_samples, len(x)):
-                x[i] += x[i - delay_samples] * delay_feedback
-        
-        # Output gain
-        output_gain = P/500.0
-        x = np.tanh(x * output_gain)
-        
-        return x
-    
-    # ================= PROCESSING METHODS =================
     
     def set_processing_mode(self, mode):
         """Set processing mode: 'pass_through', 'ai_transform', or 'custom_lab'"""
@@ -249,39 +70,28 @@ class AudioProcessor:
         self.compile_custom_function()
     
     def compile_custom_function(self):
-        """Compile the custom function with predefined functions available"""
+        """Compile the custom function for performance"""
         try:
             func_code = self.custom_function.strip()
             if not func_code:
                 func_code = "x"
             
-            # Create safe environment with predefined functions and parameters
             safe_dict = {
                 'np': np,
                 'sin': np.sin, 'cos': np.cos, 'tan': np.tan,
                 'exp': np.exp, 'log': np.log, 'log10': np.log10,
-                'sqrt': np.sqrt, 'abs': np.abs, 
-                'arcsin': np.arcsin, 'arccos': np.arccos, 'arctan': np.arctan,
+                'sqrt': np.sqrt, 'abs': np.abs, 'arcsin': np.arcsin, 'arccos': np.arccos, 'arctan': np.arctan,
                 'sinh': np.sinh, 'cosh': np.cosh, 'tanh': np.tanh,
-                'pi': np.pi, 'e': np.e,
-                
-                # Predefined audio functions
-                'multieffect': self.multieffect,
-                'spectral': self.spectral, 
-                'vocal': self.vocal,
-                'simplefx': self.simplefx
+                'pi': np.pi, 'e': np.e
             }
             
-            # Add parameters
             safe_dict.update(self.custom_params)
             
-            # Create the function
             function_body = f"""
 def transform_audio(x):
     return {func_code}
 """
             
-            # Compile and execute
             exec_globals = {}
             exec(function_body, safe_dict, exec_globals)
             self.compiled_function = exec_globals['transform_audio']
@@ -290,7 +100,6 @@ def transform_audio(x):
             
         except Exception as e:
             logger.error(f"Error compiling custom function: {e}")
-            # Fallback to pass-through
             self.compiled_function = lambda x: x
     
     def apply_custom_transform(self, audio_data):
@@ -299,10 +108,8 @@ def transform_audio(x):
             return audio_data
         
         try:
-            # Apply the custom function with all parameters
             result = self.compiled_function(audio_data)
             
-            # Ensure proper output
             if not isinstance(result, np.ndarray):
                 result = np.array(result, dtype=np.float32)
             
@@ -313,7 +120,6 @@ def transform_audio(x):
                     logger.warning(f"Shape mismatch: input {audio_data.shape}, output {result.shape}")
                     return audio_data
             
-            # Prevent clipping
             max_val = np.max(np.abs(result))
             if max_val > 1.0:
                 result = result / max_val
@@ -324,7 +130,80 @@ def transform_audio(x):
             logger.error(f"Error applying custom transform: {e}")
             return audio_data
     
-    # [Rest of the class remains the same - get_audio_devices, set_devices, load_model, start_processing, etc.]
+    # Recording Methods
+    def start_recording(self):
+        """Start recording input and output streams"""
+        with self.recording_lock:
+            self.is_recording = True
+            self.recorded_input = []
+            self.recorded_output = []
+            self.recording_start_time = time.time()
+            logger.info(">>> Recording STARTED - capturing input and output streams")
+    
+    def stop_recording(self):
+        """Stop recording and return recorded data"""
+        with self.recording_lock:
+            self.is_recording = False
+            recording_duration = time.time() - self.recording_start_time
+            logger.info(f">>> Recording STOPPED - duration: {recording_duration:.1f}s")
+            
+            # Convert to numpy arrays
+            input_data = np.concatenate(self.recorded_input) if self.recorded_input else np.array([], dtype=np.float32)
+            output_data = np.concatenate(self.recorded_output) if self.recorded_output else np.array([], dtype=np.float32)
+            
+            return input_data, output_data
+    
+    def save_recording(self, input_data, output_data, filename_prefix=None):
+        """Save recorded data to WAV files"""
+        try:
+            if filename_prefix is None:
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                filename_prefix = f"recording_{timestamp}"
+            
+            input_filename = f"{filename_prefix}_input.wav"
+            output_filename = f"{filename_prefix}_output.wav"
+            
+            # Save input stream
+            if len(input_data) > 0:
+                sf.write(input_filename, input_data, self.sample_rate)
+                logger.info(f"Saved input recording: {input_filename} ({len(input_data)} samples)")
+            else:
+                logger.warning("No input data to save")
+            
+            # Save output stream
+            if len(output_data) > 0:
+                sf.write(output_filename, output_data, self.sample_rate)
+                logger.info(f"Saved output recording: {output_filename} ({len(output_data)} samples)")
+            else:
+                logger.warning("No output data to save")
+            
+            return input_filename, output_filename
+            
+        except Exception as e:
+            logger.error(f"Error saving recording: {e}")
+            return None, None
+    
+    def get_recording_status(self):
+        """Get current recording status and statistics"""
+        with self.recording_lock:
+            if not self.is_recording:
+                return {
+                    'is_recording': False,
+                    'duration': 0,
+                    'input_samples': 0,
+                    'output_samples': 0
+                }
+            
+            duration = time.time() - self.recording_start_time
+            input_samples = sum(len(chunk) for chunk in self.recorded_input)
+            output_samples = sum(len(chunk) for chunk in self.recorded_output)
+            
+            return {
+                'is_recording': True,
+                'duration': duration,
+                'input_samples': input_samples,
+                'output_samples': output_samples
+            }
     
     def get_audio_devices(self):
         """Get list of all audio devices with their capabilities"""
@@ -363,6 +242,47 @@ def transform_audio(x):
             logger.warning(f"AI model not available: {e}")
             self.model = None
     
+    def ensure_stereo(self, audio_data):
+        """Convert to stereo for Demucs"""
+        if audio_data.ndim == 1:
+            return np.column_stack((audio_data, audio_data))
+        return audio_data
+    
+    def apply_ai_separation(self, audio_data):
+        """Apply AI separation (for ai_transform mode)"""
+        if self.model is None or len(audio_data) < 1000:
+            return audio_data
+        
+        try:
+            target_length = min(len(audio_data), 44100)
+            process_data = audio_data[:target_length]
+            
+            stereo_audio = self.ensure_stereo(process_data)
+            audio_tensor = torch.from_numpy(stereo_audio.T).float().unsqueeze(0)
+            
+            with torch.no_grad():
+                sources = apply_model(self.model, audio_tensor, progress=False)
+            
+            vocals = sources[0, 3].numpy()
+            music = (sources[0, 0] + sources[0, 1] + sources[0, 2]).numpy() / 3.0
+            
+            vocals_mono = np.mean(vocals.T, axis=1)
+            music_mono = np.mean(music.T, axis=1)
+            
+            ratio = self.custom_params.get('A', 500) / 1000.0
+            result = (vocals_mono * (1 - ratio)) + (music_mono * ratio)
+            
+            if len(result) < len(audio_data):
+                result = np.pad(result, (0, len(audio_data) - len(result)))
+            else:
+                result = result[:len(audio_data)]
+            
+            return result
+            
+        except Exception as e:
+            logger.error(f"AI processing error: {e}")
+            return audio_data
+    
     def start_processing(self):
         """Start audio processing"""
         if self.is_processing:
@@ -380,19 +300,27 @@ def transform_audio(x):
             
             if self.is_processing:
                 try:
+                    # Get audio input (convert to mono)
                     if indata.ndim > 1:
                         audio_input = indata[:, 0]
                     else:
                         audio_input = indata.flatten()
                     
+                    # Add to buffer
                     with self.buffer_lock:
                         self.audio_buffer = np.concatenate([self.audio_buffer, audio_input])
                     
+                    # Record input stream if recording is active
+                    with self.recording_lock:
+                        if self.is_recording:
+                            self.recorded_input.append(audio_input.copy())
+                    
+                    # Keep buffer manageable
                     max_buffer_size = 2 * self.sample_rate
                     with self.buffer_lock:
                         if len(self.audio_buffer) > max_buffer_size:
                             self.audio_buffer = self.audio_buffer[-max_buffer_size:]
-                            
+                    
                 except Exception as e:
                     logger.error(f"Input callback error: {e}")
         
@@ -421,8 +349,15 @@ def transform_audio(x):
                 else:  # custom_lab
                     processed_chunk = self.apply_custom_transform(audio_chunk)
                 
+                # Record output stream if recording is active
+                with self.recording_lock:
+                    if self.is_recording:
+                        self.recorded_output.append(processed_chunk.copy())
+                
+                # Output processed audio
                 outdata[:, 0] = processed_chunk[:frames]
                 
+                # Copy to other channels
                 if outdata.shape[1] > 1:
                     for ch in range(1, outdata.shape[1]):
                         outdata[:, ch] = outdata[:, 0]
@@ -432,6 +367,7 @@ def transform_audio(x):
                 outdata.fill(0)
         
         try:
+            # Get device info
             devices = sd.query_devices()
             input_name = devices[self.input_device]['name'] if self.input_device < len(devices) else f"Device {self.input_device}"
             output_name = devices[self.output_device]['name'] if self.output_device < len(devices) else f"Device {self.output_device}"
@@ -440,6 +376,7 @@ def transform_audio(x):
             logger.info(f"Input: {input_name} (Device {self.input_device})")
             logger.info(f"Output: {output_name} (Device {self.output_device})")
             
+            # Start streams
             self.input_stream = sd.InputStream(
                 callback=input_callback,
                 samplerate=self.sample_rate,
@@ -472,6 +409,10 @@ def transform_audio(x):
     def stop_processing(self):
         """Stop processing"""
         self.is_processing = False
+        
+        # Stop recording if active
+        if self.is_recording:
+            self.stop_recording()
         
         if self.input_stream:
             try:
